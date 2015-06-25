@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  # s.homepage     = "http://EXAMPLE/StickerFactory"
+  s.homepage     = "http://908.dp.ua"
 
 
   s.license      = "'Apache License, Version 2.0'"
@@ -26,10 +26,11 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
 
 
-  s.source       = { :git => "http://EXAMPLE/StickerFactory.git", :tag => "0.0.1" }
+  s.source       = "/"
 
-  s.source_files  = "SDK", "Classes/**/*.{h,m}"
+  s.source_files  = "StickerFactory/SDK" 
 
 
-  s.dependency = 'SDWebImage'
+  s.dependency  'SDWebImage', '~> 3.7'
+
 end
