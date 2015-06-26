@@ -9,11 +9,10 @@
 #import "STKUtility.h"
 #import <UIKit/UIKit.h>
 
-#if DEBUG
-NSString *const STKUtilityAPIUrl = @"http://work.stk.908.vc/stk/";
-#else
+
 NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
-#endif
+
+
 @implementation STKUtility
 
 
