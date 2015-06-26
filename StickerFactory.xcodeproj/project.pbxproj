@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5E901B3D376200EBB034 /* STKStickersManager.m */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
 		6EF264601B3C0F830099A657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645F1B3C0F830099A657 /* ViewController.m */; };
@@ -14,8 +15,6 @@
 		6EF264651B3C0F830099A657 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EF264641B3C0F830099A657 /* Images.xcassets */; };
 		6EF264681B3C0F830099A657 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EF264661B3C0F830099A657 /* LaunchScreen.xib */; };
 		6EF264741B3C0F830099A657 /* StickerFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264731B3C0F830099A657 /* StickerFactoryTests.m */; };
-		6EF264931B3C15950099A657 /* NSString+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2648D1B3C15950099A657 /* NSString+Stickers.m */; };
-		6EF264941B3C15950099A657 /* STKLinksHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264901B3C15950099A657 /* STKLinksHelper.m */; };
 		6EF264951B3C15950099A657 /* UIImageView+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264921B3C15950099A657 /* UIImageView+Stickers.m */; };
 		DF71B99FAA77DDC25C0F577E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280EB363112837B81F052E19 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -34,6 +33,8 @@
 		1AA04EB236AD472CD61382DF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		280EB363112837B81F052E19 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickersManager.h; path = StickerFactory/SDK/STKStickersManager.h; sourceTree = "<group>"; };
+		6EDC5E901B3D376200EBB034 /* STKStickersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersManager.m; path = StickerFactory/SDK/STKStickersManager.m; sourceTree = "<group>"; };
 		6EF264541B3C0F830099A657 /* StickerFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,11 +48,7 @@
 		6EF2646D1B3C0F830099A657 /* StickerFactoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickerFactoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264721B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264731B3C0F830099A657 /* StickerFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerFactoryTests.m; sourceTree = "<group>"; };
-		6EF2648C1B3C15950099A657 /* NSString+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Stickers.h"; path = "StickerFactory/SDK/NSString+Stickers.h"; sourceTree = "<group>"; };
-		6EF2648D1B3C15950099A657 /* NSString+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Stickers.m"; path = "StickerFactory/SDK/NSString+Stickers.m"; sourceTree = "<group>"; };
 		6EF2648E1B3C15950099A657 /* StickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StickerFactory.h; path = StickerFactory/SDK/StickerFactory.h; sourceTree = "<group>"; };
-		6EF2648F1B3C15950099A657 /* STKLinksHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKLinksHelper.h; path = StickerFactory/SDK/STKLinksHelper.h; sourceTree = "<group>"; };
-		6EF264901B3C15950099A657 /* STKLinksHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKLinksHelper.m; path = StickerFactory/SDK/STKLinksHelper.m; sourceTree = "<group>"; };
 		6EF264911B3C15950099A657 /* UIImageView+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Stickers.h"; path = "StickerFactory/SDK/UIImageView+Stickers.h"; sourceTree = "<group>"; };
 		6EF264921B3C15950099A657 /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Stickers.m"; path = "StickerFactory/SDK/UIImageView+Stickers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,11 +154,9 @@
 		6EF2647D1B3C0FB70099A657 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				6EF2648C1B3C15950099A657 /* NSString+Stickers.h */,
-				6EF2648D1B3C15950099A657 /* NSString+Stickers.m */,
+				6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */,
+				6EDC5E901B3D376200EBB034 /* STKStickersManager.m */,
 				6EF2648E1B3C15950099A657 /* StickerFactory.h */,
-				6EF2648F1B3C15950099A657 /* STKLinksHelper.h */,
-				6EF264901B3C15950099A657 /* STKLinksHelper.m */,
 				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
 				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
 			);
@@ -305,11 +300,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF264601B3C0F830099A657 /* ViewController.m in Sources */,
-				6EF264931B3C15950099A657 /* NSString+Stickers.m in Sources */,
+				6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */,
 				6EF264951B3C15950099A657 /* UIImageView+Stickers.m in Sources */,
 				6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */,
 				6EF2645A1B3C0F830099A657 /* main.m in Sources */,
-				6EF264941B3C15950099A657 /* STKLinksHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STKStickersManager.h"
+#import "UIImageView+Stickers.h"
 
-//! Project version number for StickerFactory.
 
-//! Project version string for StickerFactory.
-
-// In this header, you should import all the public headers of your framework using statements like #import <StickerFactory/PublicHeader.h>
 
 
 

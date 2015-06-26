@@ -7,7 +7,6 @@
 //
 
 #import "UIImageView+Stickers.h"
-#import "STKLinksHelper.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 
 @implementation UIImageView (Stickers)
