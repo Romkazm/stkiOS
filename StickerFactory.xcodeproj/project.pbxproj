@@ -48,7 +48,7 @@
 		6EF2646D1B3C0F830099A657 /* StickerFactoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickerFactoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264721B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264731B3C0F830099A657 /* StickerFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerFactoryTests.m; sourceTree = "<group>"; };
-		6EF2648E1B3C15950099A657 /* StickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StickerFactory.h; path = StickerFactory/SDK/StickerFactory.h; sourceTree = "<group>"; };
+		6EF2648E1B3C15950099A657 /* STKStickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerFactory.h; path = StickerFactory/SDK/STKStickerFactory.h; sourceTree = "<group>"; };
 		6EF264911B3C15950099A657 /* UIImageView+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Stickers.h"; path = "StickerFactory/SDK/UIImageView+Stickers.h"; sourceTree = "<group>"; };
 		6EF264921B3C15950099A657 /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Stickers.m"; path = "StickerFactory/SDK/UIImageView+Stickers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +156,7 @@
 			children = (
 				6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */,
 				6EDC5E901B3D376200EBB034 /* STKStickersManager.m */,
-				6EF2648E1B3C15950099A657 /* StickerFactory.h */,
+				6EF2648E1B3C15950099A657 /* STKStickerFactory.h */,
 				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
 				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
 			);
