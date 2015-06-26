@@ -42,7 +42,8 @@
                                       }];
     } else {
         if (failure) {
-            failure(nil, @"It's not a sticker");
+            NSError *error = [NSError errorWithDomain:@"It's not a sticker" code:999 userInfo:nil];
+            failure(error, @"It's not a sticker");
         }
         NSLog(@"It's not a sticker");
     }

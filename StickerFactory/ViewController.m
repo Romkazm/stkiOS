@@ -11,7 +11,8 @@
 #import "STKStickersManager.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *categoryStickerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *methodImageView;
 @property (strong, nonatomic) STKStickersManager *stickerManager;
 
 
@@ -30,13 +31,27 @@
     [super viewDidAppear:animated];
     
     NSString *testString = @"[[pinkgorilla_anger]]";
+    
+    //Есть возможность отображать стикер с помощью категрии, но необходимо сначала проверить стикер ли это
     if ([STKStickersManager isStickerMessage:testString]) {
-        [self.imageView stk_setStickerWithMessage:testString completion:^(NSError *error, UIImage *stickerImage) {
+        [self.categoryStickerImageView stk_setStickerWithMessage:testString completion:^(NSError *error, UIImage *stickerImage) {
             
         }];
     } else {
         NSLog(@"Sticker not found");
     }
+    
+    //Можно загрузить методом напрямую(Если это не стикер, вызовется failure блок)
+    __weak typeof(self) weakSelf = self;
+    [self.stickerManager getStickerForMessage:testString progress:nil success:^(UIImage *sticker) {
+        
+        weakSelf.methodImageView.image = sticker;
+        
+    } failure:^(NSError *error, NSString *errorMessage) {
+        NSLog(@"Something went wrong");
+    }];
+    
+    
 }
 
 
