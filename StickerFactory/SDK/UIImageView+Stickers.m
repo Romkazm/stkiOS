@@ -8,7 +8,7 @@
 
 #import "UIImageView+Stickers.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-#import "STKStickersManager.h"
+#import "STKUtility.h"
 
 @implementation UIImageView (Stickers)
 
@@ -42,7 +42,7 @@
 - (void) stk_setStickerWithMessage:(NSString *)stickerMessage placeholder:(UIImage *)placeholder progress:(STKDownloadingProgressBlock)progressBlock completion:(STKCompletionBlock)completion {
     
     
-    NSURL *stickerUrl = [STKStickersManager imageUrlForStikerMessage:stickerMessage];
+    NSURL *stickerUrl = [STKUtility imageUrlForStikerMessage:stickerMessage];
     
     [self sd_setImageWithURL:stickerUrl placeholderImage:placeholder options:SDWebImageHighPriority progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
        
