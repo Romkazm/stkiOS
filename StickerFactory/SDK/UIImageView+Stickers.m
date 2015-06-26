@@ -12,9 +12,6 @@
 
 @implementation UIImageView (Stickers)
 
-
-
-
 #pragma mark - Builder
 
 - (void) stk_setStickerWithMessage:(NSString *)stickerMessage completion:(STKCompletionBlock)completion {
