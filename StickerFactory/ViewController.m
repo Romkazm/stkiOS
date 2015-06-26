@@ -29,7 +29,7 @@
     
     [super viewDidAppear:animated];
     
-    NSString *testString = @"[[pinkGorilla_anger]]";
+    NSString *testString = @"[[pinkgorilla_anger]]";
     if ([STKStickersManager isStickerMessage:testString]) {
         [self.imageView stk_setStickerWithMessage:testString completion:^(NSError *error, UIImage *stickerImage) {
             
