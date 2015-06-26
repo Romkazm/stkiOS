@@ -3,13 +3,14 @@
 //  StickerFactory
 //
 //  Created by Vadim Degterev on 25.06.15.
-//  Copyright (c) 2015 908. All rights reserved.
+//  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
 #import "STKStickersManager.h"
 #import <SDWebImageManager.h>
+#import "STKUtility.h"
 
-static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
+//Server url
 
 
 @interface STKStickersManager()
@@ -23,7 +24,7 @@ static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
 - (void)getStickerForMessage:(NSString *)message progress:(void (^)(NSInteger, NSInteger))progress success:(void (^)(UIImage *))success failure:(void (^)(NSError *, NSString *))failure {
     
     if ([self.class isStickerMessage:message]) {
-        NSURL *stickerUrl = [self.class imageUrlForStikerMessage:message];
+        NSURL *stickerUrl = [STKUtility imageUrlForStikerMessage:message];
         
         [self.imageManager downloadImageWithURL:stickerUrl
                                         options:0
@@ -61,56 +62,13 @@ static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
 }
 
 
+
+
 #pragma mark - Properties
 
 - (SDWebImageManager *)imageManager {
     
     return [SDWebImageManager sharedManager];
-}
-
-#pragma mark - Names
-
-+ (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage {
-    
-    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
-    NSString *packNameAndStickerName = [stickerMessage stringByTrimmingCharactersInSet:characterSet];
-    
-    NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
-    NSString *packName = [separaredStickerNames firstObject];
-    NSString *stickerName = [separaredStickerNames lastObject];
-    
-    NSString *dimension = [self scaleString];
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%@.png", packName, stickerName, dimension];
-    
-    NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:kAPIUrl]];
-    
-    return url;
-    
-}
-
-+ (NSString*) scaleString {
-    
-    NSInteger sclaFactor =  (NSInteger)[[UIScreen mainScreen]scale];
-    
-    NSString *dimension = nil;
-    
-    //Android style scale factor
-    switch (sclaFactor) {
-            case 1:
-            dimension = @"mdpi";
-            break;
-            case 2:
-            dimension = @"xhdpi";
-            break;
-            case 3:
-            dimension = @"xxhdpi";
-            break;
-            
-        default:
-            break;
-    }
-    return dimension;
 }
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5E901B3D376200EBB034 /* STKStickersManager.m */; };
+		6EDC5EC61B3D637C00EBB034 /* STKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EC51B3D637C00EBB034 /* STKUtility.m */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
 		6EF264601B3C0F830099A657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645F1B3C0F830099A657 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickersManager.h; path = StickerFactory/SDK/STKStickersManager.h; sourceTree = "<group>"; };
 		6EDC5E901B3D376200EBB034 /* STKStickersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersManager.m; path = StickerFactory/SDK/STKStickersManager.m; sourceTree = "<group>"; };
+		6EDC5EC41B3D637C00EBB034 /* STKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUtility.h; path = StickerFactory/SDK/STKUtility.h; sourceTree = "<group>"; };
+		6EDC5EC51B3D637C00EBB034 /* STKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUtility.m; path = StickerFactory/SDK/STKUtility.m; sourceTree = "<group>"; };
 		6EF264541B3C0F830099A657 /* StickerFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				6EF2648E1B3C15950099A657 /* STKStickerFactory.h */,
 				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
 				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
+				6EDC5EC41B3D637C00EBB034 /* STKUtility.h */,
+				6EDC5EC51B3D637C00EBB034 /* STKUtility.m */,
 			);
 			name = SDK;
 			path = ..;
@@ -211,7 +216,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = 908;
+				ORGANIZATIONNAME = "908 Inc";
 				TargetAttributes = {
 					6EF264531B3C0F830099A657 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -300,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF264601B3C0F830099A657 /* ViewController.m in Sources */,
+				6EDC5EC61B3D637C00EBB034 /* STKUtility.m in Sources */,
 				6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */,
 				6EF264951B3C15950099A657 /* UIImageView+Stickers.m in Sources */,
 				6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */,

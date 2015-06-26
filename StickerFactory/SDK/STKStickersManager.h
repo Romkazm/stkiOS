@@ -3,7 +3,7 @@
 //  StickerFactory
 //
 //  Created by Vadim Degterev on 25.06.15.
-//  Copyright (c) 2015 908. All rights reserved.
+//  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,15 +17,7 @@
                       success:(void(^)(UIImage *sticker))success
                       failure:(void(^)(NSError *error, NSString *errorMessage)) failure;
 
-
-
-
-
 + (BOOL) isStickerMessage:(NSString*) message;
-
-//Get image url for stiker messa([[packName_stickerName]])
-+ (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage;
-
 
 
 @end
