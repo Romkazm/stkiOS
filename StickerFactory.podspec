@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "StickerFactory"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Stickers Factory"
   s.homepage     = "https://github.com/908Inc/stkiOS"
   s.license      = "'Apache License, Version 2.0'"
