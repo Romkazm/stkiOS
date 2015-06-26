@@ -31,8 +31,6 @@ typedef void(^STKDownloadingProgressBlock)(NSInteger receivedSize, NSInteger exp
 
 
 
-
-
 - (void) stk_cancelStickerLoading;
 
 @end

@@ -23,7 +23,7 @@ static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
 - (void)getStickerForMessage:(NSString *)message progress:(void (^)(NSInteger, NSInteger))progress success:(void (^)(UIImage *))success failure:(void (^)(NSError *, NSString *))failure {
     
     if ([self.class isStickerMessage:message]) {
-        NSURL *stickerUrl = [self urlForStikerMessage:message];
+        NSURL *stickerUrl = [self.class imageUrlForStikerMessage:message];
         
         [self.imageManager downloadImageWithURL:stickerUrl
                                         options:0
@@ -70,7 +70,7 @@ static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
 
 #pragma mark - Names
 
-- (NSURL*) urlForStikerMessage:(NSString *)stickerMessage {
++ (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage {
     
     NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
     NSString *packNameAndStickerName = [stickerMessage stringByTrimmingCharactersInSet:characterSet];
@@ -89,7 +89,7 @@ static NSString* const  kAPIUrl = @"http://work.stk.908.vc/stk/";
     
 }
 
-- (NSString*) scaleString {
++ (NSString*) scaleString {
     
     NSInteger sclaFactor =  (NSInteger)[[UIScreen mainScreen]scale];
     
