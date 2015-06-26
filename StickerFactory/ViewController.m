@@ -48,7 +48,7 @@
         weakSelf.methodImageView.image = sticker;
         
     } failure:^(NSError *error, NSString *errorMessage) {
-        NSLog(@"Something went wrong");
+        NSLog(@"Error : %@", error.localizedDescription);
     }];
     
     
