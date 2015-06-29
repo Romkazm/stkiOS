@@ -13,11 +13,15 @@ typedef void(^STKDownloadingProgressBlock)(NSInteger receivedSize, NSInteger exp
 
 @interface UIImageView (Stickers)
 
+// default is white
+@property (strong, nonatomic) UIColor *stickerDefaultPlaceholderColor;
+
 - (void) stk_setStickerWithMessage:(NSString*)stickerMessage
                      completion:(STKCompletionBlock) completion;
 
 - (void) stk_setStickerWithMessage:(NSString*)stickerMessage
                     placeholder:(UIImage*)placeholder;
+
 
 - (void) stk_setStickerWithMessage:(NSString*)stickerMessage
                     placeholder:(UIImage*)placeholder
@@ -28,6 +32,7 @@ typedef void(^STKDownloadingProgressBlock)(NSInteger receivedSize, NSInteger exp
                     placeholder:(UIImage *)placeholder
                        progress:(STKDownloadingProgressBlock)progressBlock
                      completion:(STKCompletionBlock)completion;
+
 
 
 

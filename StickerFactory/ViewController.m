@@ -39,7 +39,11 @@
     
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator stk_defaultPersistentsStoreCoordinator];
     
-    NSString *testString = @"[[pinkgorilla_bigSmile]]";
+  
+
+    NSString *testString = @"[[pinkgorilla_bigsSmile]]";
+    
+    self.categoryStickerImageView.stickerDefaultPlaceholderColor = [UIColor redColor];
     
     //Есть возможность отображать стикер с помощью категрии, но необходимо сначала проверить стикер ли это
     if ([STKStickersManager isStickerMessage:testString]) {

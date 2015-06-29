@@ -14,6 +14,8 @@
 		6EDC5ED71B4139E600EBB034 /* StickerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5ED51B4139E600EBB034 /* StickerModel.xcdatamodeld */; };
 		6EDC5EDD1B41406000EBB034 /* NSManagedObjectContext+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EDC1B41406000EBB034 /* NSManagedObjectContext+Additions.m */; };
 		6EDC5EE31B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EE21B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m */; };
+		6EDC5EE61B418AD700EBB034 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC5EE51B418AD700EBB034 /* Media.xcassets */; };
+		6EDC5EE91B418D8A00EBB034 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EE81B418D8A00EBB034 /* UIImage+Tint.m */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
 		6EF264601B3C0F830099A657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645F1B3C0F830099A657 /* ViewController.m */; };
@@ -51,6 +53,9 @@
 		6EDC5EDC1B41406000EBB034 /* NSManagedObjectContext+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+Additions.m"; path = "StickerFactory/SDK/CoreDataService/NSManagedObjectContext+Additions.m"; sourceTree = "<group>"; };
 		6EDC5EE11B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPersistentStoreCoordinator+Additions.h"; path = "StickerFactory/SDK/CoreDataService/NSPersistentStoreCoordinator+Additions.h"; sourceTree = "<group>"; };
 		6EDC5EE21B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPersistentStoreCoordinator+Additions.m"; path = "StickerFactory/SDK/CoreDataService/NSPersistentStoreCoordinator+Additions.m"; sourceTree = "<group>"; };
+		6EDC5EE51B418AD700EBB034 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = StickerFactory/SDK/Media.xcassets; sourceTree = "<group>"; };
+		6EDC5EE71B418D8A00EBB034 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "StickerFactory/SDK/UIImage+Tint.h"; sourceTree = "<group>"; };
+		6EDC5EE81B418D8A00EBB034 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "StickerFactory/SDK/UIImage+Tint.m"; sourceTree = "<group>"; };
 		6EF264541B3C0F830099A657 /* StickerFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -226,6 +231,13 @@
 				6EF2648E1B3C15950099A657 /* STKStickerFactory.h */,
 				6EDC5EE41B4173D600EBB034 /* Core */,
 				6EDC5ECA1B41305500EBB034 /* CoreDataService */,
+				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
+				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
+				6EDC5EC41B3D637C00EBB034 /* STKUtility.h */,
+				6EDC5EC51B3D637C00EBB034 /* STKUtility.m */,
+				6EDC5EE71B418D8A00EBB034 /* UIImage+Tint.h */,
+				6EDC5EE81B418D8A00EBB034 /* UIImage+Tint.m */,
+				6EDC5EE51B418AD700EBB034 /* Media.xcassets */,
 			);
 			name = SDK;
 			path = ..;
@@ -315,6 +327,7 @@
 			files = (
 				6EF264631B3C0F830099A657 /* Main.storyboard in Resources */,
 				6EF264681B3C0F830099A657 /* LaunchScreen.xib in Resources */,
+				6EDC5EE61B418AD700EBB034 /* Media.xcassets in Resources */,
 				6EF264651B3C0F830099A657 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +382,7 @@
 				6EDC5EE31B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m in Sources */,
 				6EF264601B3C0F830099A657 /* ViewController.m in Sources */,
 				6EDC5ECD1B41309200EBB034 /* STKCoreDataService.m in Sources */,
+				6EDC5EE91B418D8A00EBB034 /* UIImage+Tint.m in Sources */,
 				6EDC5EC61B3D637C00EBB034 /* STKUtility.m in Sources */,
 				6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */,
 				6EF264951B3C15950099A657 /* UIImageView+Stickers.m in Sources */,

@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name            = 'StickerFactory'
-  s.version         = '0.0.2'
+  s.version         = '0.0.4'
   s.platform        = :ios, '6.0'
   s.summary         = 'Stickers Factory lib'
   s.description     = 'Sticker Factory for iOS'
@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.source_files    = "StickerFactory/SDK/*"
   s.requires_arc    = true 
   s.dependency       'SDWebImage', '~> 3.0'
+  s.resource_bundles = { 'Media' => 'StickerFactory/SDK/*.xcassets' }
 
 end
