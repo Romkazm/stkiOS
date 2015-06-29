@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.source_files    = "StickerFactory/SDK/*"
   s.requires_arc    = true 
   s.dependency       'SDWebImage', '~> 3.0'
-
+  s.resource_bundles = { 'Media' => 'StickerFactory/SDK/*.xcassets' }
+  
 end
