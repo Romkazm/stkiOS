@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "UIImageView+Stickers.h"
 #import "STKStickersManager.h"
+#import "NSManagedObjectContext+Additions.h"
+#import "STKCoreDataService.h"
+#import "NSPersistentStoreCoordinator+Additions.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *categoryStickerImageView;
@@ -24,11 +27,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.stickerManager = [STKStickersManager new];
+    
+    [STKCoreDataService setupCoreData];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
+    
+    NSManagedObjectContext *context = [NSManagedObjectContext stk_defaultContext];
+    
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator stk_defaultPersistentsStoreCoordinator];
     
     NSString *testString = @"[[pinkgorilla_bigSmile]]";
     

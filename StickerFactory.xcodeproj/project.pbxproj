@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5E901B3D376200EBB034 /* STKStickersManager.m */; };
 		6EDC5EC61B3D637C00EBB034 /* STKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EC51B3D637C00EBB034 /* STKUtility.m */; };
+		6EDC5ECD1B41309200EBB034 /* STKCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5ECC1B41309200EBB034 /* STKCoreDataService.m */; };
+		6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDC5ECF1B41328000EBB034 /* CoreData.framework */; };
+		6EDC5ED71B4139E600EBB034 /* StickerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5ED51B4139E600EBB034 /* StickerModel.xcdatamodeld */; };
+		6EDC5EDD1B41406000EBB034 /* NSManagedObjectContext+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EDC1B41406000EBB034 /* NSManagedObjectContext+Additions.m */; };
+		6EDC5EE31B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC5EE21B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
 		6EF264601B3C0F830099A657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645F1B3C0F830099A657 /* ViewController.m */; };
@@ -38,6 +43,14 @@
 		6EDC5E901B3D376200EBB034 /* STKStickersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersManager.m; path = StickerFactory/SDK/STKStickersManager.m; sourceTree = "<group>"; };
 		6EDC5EC41B3D637C00EBB034 /* STKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUtility.h; path = StickerFactory/SDK/STKUtility.h; sourceTree = "<group>"; };
 		6EDC5EC51B3D637C00EBB034 /* STKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUtility.m; path = StickerFactory/SDK/STKUtility.m; sourceTree = "<group>"; };
+		6EDC5ECB1B41309200EBB034 /* STKCoreDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKCoreDataService.h; path = StickerFactory/SDK/CoreDataService/STKCoreDataService.h; sourceTree = "<group>"; };
+		6EDC5ECC1B41309200EBB034 /* STKCoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKCoreDataService.m; path = StickerFactory/SDK/CoreDataService/STKCoreDataService.m; sourceTree = "<group>"; };
+		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6EDC5ED61B4139E600EBB034 /* StickerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StickerModel.xcdatamodel; sourceTree = "<group>"; };
+		6EDC5EDB1B41406000EBB034 /* NSManagedObjectContext+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+Additions.h"; path = "StickerFactory/SDK/CoreDataService/NSManagedObjectContext+Additions.h"; sourceTree = "<group>"; };
+		6EDC5EDC1B41406000EBB034 /* NSManagedObjectContext+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+Additions.m"; path = "StickerFactory/SDK/CoreDataService/NSManagedObjectContext+Additions.m"; sourceTree = "<group>"; };
+		6EDC5EE11B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPersistentStoreCoordinator+Additions.h"; path = "StickerFactory/SDK/CoreDataService/NSPersistentStoreCoordinator+Additions.h"; sourceTree = "<group>"; };
+		6EDC5EE21B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPersistentStoreCoordinator+Additions.m"; path = "StickerFactory/SDK/CoreDataService/NSPersistentStoreCoordinator+Additions.m"; sourceTree = "<group>"; };
 		6EF264541B3C0F830099A657 /* StickerFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */,
 				DF71B99FAA77DDC25C0F577E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +92,7 @@
 		47FB3E470E9D34BB5596AC37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EDC5ECF1B41328000EBB034 /* CoreData.framework */,
 				280EB363112837B81F052E19 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -90,6 +105,57 @@
 				5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6EDC5ECA1B41305500EBB034 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				6EDC5ED11B4138B800EBB034 /* Models */,
+				6EDC5ECB1B41309200EBB034 /* STKCoreDataService.h */,
+				6EDC5ECC1B41309200EBB034 /* STKCoreDataService.m */,
+				6EDC5EDB1B41406000EBB034 /* NSManagedObjectContext+Additions.h */,
+				6EDC5EDC1B41406000EBB034 /* NSManagedObjectContext+Additions.m */,
+				6EDC5EE11B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.h */,
+				6EDC5EE21B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m */,
+			);
+			name = CoreDataService;
+			sourceTree = "<group>";
+		};
+		6EDC5ED11B4138B800EBB034 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6EDC5ED51B4139E600EBB034 /* StickerModel.xcdatamodeld */,
+				6EDC5ED91B413A5200EBB034 /* Machine */,
+				6EDC5ED81B413A4400EBB034 /* Human */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6EDC5ED81B413A4400EBB034 /* Human */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Human;
+			sourceTree = "<group>";
+		};
+		6EDC5ED91B413A5200EBB034 /* Machine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Machine;
+			sourceTree = "<group>";
+		};
+		6EDC5EE41B4173D600EBB034 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */,
+				6EDC5E901B3D376200EBB034 /* STKStickersManager.m */,
+				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
+				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
+				6EDC5EC41B3D637C00EBB034 /* STKUtility.h */,
+				6EDC5EC51B3D637C00EBB034 /* STKUtility.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		6EF2644B1B3C0F830099A657 = {
@@ -157,13 +223,9 @@
 		6EF2647D1B3C0FB70099A657 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				6EDC5E8F1B3D376200EBB034 /* STKStickersManager.h */,
-				6EDC5E901B3D376200EBB034 /* STKStickersManager.m */,
 				6EF2648E1B3C15950099A657 /* STKStickerFactory.h */,
-				6EF264911B3C15950099A657 /* UIImageView+Stickers.h */,
-				6EF264921B3C15950099A657 /* UIImageView+Stickers.m */,
-				6EDC5EC41B3D637C00EBB034 /* STKUtility.h */,
-				6EDC5EC51B3D637C00EBB034 /* STKUtility.m */,
+				6EDC5EE41B4173D600EBB034 /* Core */,
+				6EDC5ECA1B41305500EBB034 /* CoreDataService */,
 			);
 			name = SDK;
 			path = ..;
@@ -304,12 +366,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDC5EE31B41687200EBB034 /* NSPersistentStoreCoordinator+Additions.m in Sources */,
 				6EF264601B3C0F830099A657 /* ViewController.m in Sources */,
+				6EDC5ECD1B41309200EBB034 /* STKCoreDataService.m in Sources */,
 				6EDC5EC61B3D637C00EBB034 /* STKUtility.m in Sources */,
 				6EDC5E911B3D376200EBB034 /* STKStickersManager.m in Sources */,
 				6EF264951B3C15950099A657 /* UIImageView+Stickers.m in Sources */,
 				6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */,
 				6EF2645A1B3C0F830099A657 /* main.m in Sources */,
+				6EDC5ED71B4139E600EBB034 /* StickerModel.xcdatamodeld in Sources */,
+				6EDC5EDD1B41406000EBB034 /* NSManagedObjectContext+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +586,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6EDC5ED51B4139E600EBB034 /* StickerModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6EDC5ED61B4139E600EBB034 /* StickerModel.xcdatamodel */,
+			);
+			currentVersion = 6EDC5ED61B4139E600EBB034 /* StickerModel.xcdatamodel */;
+			name = StickerModel.xcdatamodeld;
+			path = StickerFactory/SDK/CoreDataService/Models/StickerModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6EF2644C1B3C0F830099A657 /* Project object */;
 }
