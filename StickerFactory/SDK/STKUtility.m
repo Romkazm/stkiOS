@@ -24,8 +24,8 @@ NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
     NSString *packNameAndStickerName = [stickerMessage stringByTrimmingCharactersInSet:characterSet];
     
     NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
-    NSString *packName = [separaredStickerNames firstObject];
-    NSString *stickerName = [separaredStickerNames lastObject];
+    NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
+    NSString *stickerName = [[separaredStickerNames lastObject] lowercaseString];
     
     NSString *dimension = [self scaleString];
     
