@@ -8,7 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface NSPersistentStoreCoordinator (Additions)
+@interface NSPersistentStoreCoordinator (STKAdditions)
 
 + (NSPersistentStoreCoordinator *)stk_defaultPersistentsStoreCoordinator;
 

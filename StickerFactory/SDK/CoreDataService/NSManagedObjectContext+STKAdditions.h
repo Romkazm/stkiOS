@@ -8,9 +8,12 @@
 
 #import <CoreData/CoreData.h>
 
-@interface NSManagedObjectContext (Additions)
+@interface NSManagedObjectContext (STKAdditions)
 
 + (NSManagedObjectContext*) stk_defaultContext;
+
++ (NSManagedObjectContext*) stk_backgroundContext;
+
 + (void)stk_setupContextStackWithPersistanceStore:(NSPersistentStoreCoordinator*) coordinator;
 
 @end

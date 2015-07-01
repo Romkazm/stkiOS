@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
-#import "NSManagedObjectContext+Additions.h"
-#import "NSPersistentStoreCoordinator+Additions.h"
+#import "NSManagedObjectContext+STKAdditions.h"
+#import "NSPersistentStoreCoordinator+STKAdditions.h"
 
 static NSManagedObjectContext *mainContext;
 static NSManagedObjectContext *backgroundContext;

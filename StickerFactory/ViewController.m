@@ -9,14 +9,17 @@
 #import "ViewController.h"
 #import "UIImageView+Stickers.h"
 #import "STKStickersManager.h"
-#import "NSManagedObjectContext+Additions.h"
+#import "NSManagedObjectContext+STKAdditions.h"
 #import "STKCoreDataService.h"
-#import "NSPersistentStoreCoordinator+Additions.h"
+#import "NSPersistentStoreCoordinator+STKAdditions.h"
+#import "STKAnalyticService.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *categoryStickerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *methodImageView;
 @property (strong, nonatomic) STKStickersManager *stickerManager;
+
+@property (assign, nonatomic) NSInteger testCounter;
 
 
 @end
@@ -35,11 +38,12 @@
     
     [super viewDidAppear:animated];
     
+    
     NSManagedObjectContext *context = [NSManagedObjectContext stk_defaultContext];
     
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator stk_defaultPersistentsStoreCoordinator];
     
-  
+    [self testCoreDataPerformance];
 
     NSString *testString = @"[[pinkgorilla_bigsSmile]]";
     
@@ -65,6 +69,17 @@
     }];
     
     
+}
+
+- (void) testCoreDataPerformance {
+    STKAnalyticService *service = [STKAnalyticService sharedService];
+
+    [service sendEventWithCategory:STKAnalyticMessageCategory action:STKAnalyticActionCheck label:@"Stickers count" value:1];
+    self.testCounter++;
+    
+    NSLog(@"%ld", (long)self.testCounter);
+    
+    [self performSelector:@selector(testCoreDataPerformance) withObject:nil afterDelay:0.1];
 }
 
 

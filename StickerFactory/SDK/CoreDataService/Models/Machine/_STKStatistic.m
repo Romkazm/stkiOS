@@ -56,22 +56,22 @@ const struct STKStatisticAttributes STKStatisticAttributes = {
 
 @dynamic value;
 
-- (int16_t)valueValue {
+- (int64_t)valueValue {
 	NSNumber *result = [self value];
-	return [result shortValue];
+	return [result longLongValue];
 }
 
-- (void)setValueValue:(int16_t)value_ {
-	[self setValue:[NSNumber numberWithShort:value_]];
+- (void)setValueValue:(int64_t)value_ {
+	[self setValue:[NSNumber numberWithLongLong:value_]];
 }
 
-- (int16_t)primitiveValueValue {
+- (int64_t)primitiveValueValue {
 	NSNumber *result = [self primitiveValue];
-	return [result shortValue];
+	return [result longLongValue];
 }
 
-- (void)setPrimitiveValueValue:(int16_t)value_ {
-	[self setPrimitiveValue:[NSNumber numberWithShort:value_]];
+- (void)setPrimitiveValueValue:(int64_t)value_ {
+	[self setPrimitiveValue:[NSNumber numberWithLongLong:value_]];
 }
 
 @end

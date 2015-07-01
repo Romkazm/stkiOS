@@ -9,6 +9,7 @@
 #import "STKStickersManager.h"
 #import <SDWebImageManager.h>
 #import "STKUtility.h"
+#import "STKAnalyticService.h"
 
 //Server url
 
@@ -58,6 +59,16 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexPattern];
     
     BOOL isStickerMessage = [predicate evaluateWithObject:message];
+    
+    STKAnalyticService *service = [STKAnalyticService sharedService];
+    
+    if (isStickerMessage) {
+        
+        [service sendEventWithCategory:STKAnalyticMessageCategory action:STKAnalyticActionCheck label:@"Stickers count" value:1];
+        
+    } else {
+        [service sendEventWithCategory:STKAnalyticMessageCategory action:STKAnalyticActionCheck label:@"Events count" value:1];
+    }
     
     return isStickerMessage;
 }

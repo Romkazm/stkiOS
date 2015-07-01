@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
-#import "NSPersistentStoreCoordinator+Additions.h"
+#import "NSPersistentStoreCoordinator+STKAdditions.h"
 
 static NSPersistentStoreCoordinator *defaultCoordinator;
 
-@implementation NSPersistentStoreCoordinator (Additions)
+@implementation NSPersistentStoreCoordinator (STKAdditions)
 
 + (NSPersistentStoreCoordinator *)stk_defaultPersistentsStoreCoordinator {
     
@@ -29,7 +29,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator;
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSURL *documentsURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"DataModel.sqlite"];
+        NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"StickerModel.sqlite"];
         
         
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

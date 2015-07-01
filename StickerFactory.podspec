@@ -11,8 +11,10 @@ Pod::Spec.new do |s|
   s.author          = "908 Inc."
   s.source          = { :git => 'https://github.com/908Inc/stkiOS.git', :tag => s.version }
   s.source_files    = "StickerFactory/SDK/*"
+  s.framework       = 'CoreData'
   s.requires_arc    = true 
   s.dependency       'SDWebImage', '~> 3.0'
+  s.dependency       'AFNetworking', '~> 2.0'
   s.resources       = 'StickerFactory/SDK/Media.xcassets'
 
 end

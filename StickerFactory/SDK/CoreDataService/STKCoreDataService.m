@@ -8,8 +8,8 @@
 
 #import "STKCoreDataService.h"
 #import <CoreData/CoreData.h>
-#import "NSManagedObjectContext+Additions.h"
-#import "NSPersistentStoreCoordinator+Additions.h"
+#import "NSManagedObjectContext+STKAdditions.h"
+#import "NSPersistentStoreCoordinator+STKAdditions.h"
 
 @implementation STKCoreDataService
 
