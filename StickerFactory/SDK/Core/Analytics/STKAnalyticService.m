@@ -77,46 +77,41 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                         value:(NSInteger)value
 {
     
-//    if ([action isEqualToString:STKAnalyticActionCheck]) {
-//        [self.checkEntity sendCheckEventWithCategory:category action:action label:label value:value];
-//    } else {
-        __weak typeof(self) weakSelf = self;
-        [self.backgroundContext performBlock:^{
-            
-            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStatistic entityName]];
-            request.fetchLimit = 1;
-            
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStatisticAttributes.label ascending:YES];
-            request.sortDescriptors = @[sortDescriptor];
-            
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
-            request.predicate = predicate;
-            
-            NSArray *objects = [weakSelf.backgroundContext executeFetchRequest:request error:nil];
-            
-            if (objects.count > 0) {
-                STKStatistic *fetchedStatistic = objects.firstObject;
-                NSInteger tempValue = fetchedStatistic.value.integerValue;
-                tempValue += value;
-                fetchedStatistic.value = @(tempValue);
-            } else {
-                STKStatistic *statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
-                statistic.category = category;
-                statistic.action = action;
-                statistic.label = label;
-                statistic.time = [NSDate date];
-                statistic.value = @(value);
-            }
-            
-            NSError *error = nil;
-            weakSelf.objectCounter++;
-            if (weakSelf.objectCounter == kMemoryCacheObjectsCount) {
-                [weakSelf.backgroundContext save:&error];
-                weakSelf.objectCounter = 0;
-            }
-        }];
-//    }
-
+    __weak typeof(self) weakSelf = self;
+    [self.backgroundContext performBlock:^{
+        
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStatistic entityName]];
+        request.fetchLimit = 1;
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStatisticAttributes.label ascending:YES];
+        request.sortDescriptors = @[sortDescriptor];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
+        request.predicate = predicate;
+        
+        NSArray *objects = [weakSelf.backgroundContext executeFetchRequest:request error:nil];
+        
+        if (objects.count > 0) {
+            STKStatistic *fetchedStatistic = objects.firstObject;
+            NSInteger tempValue = fetchedStatistic.value.integerValue;
+            tempValue += value;
+            fetchedStatistic.value = @(tempValue);
+        } else {
+            STKStatistic *statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
+            statistic.category = category;
+            statistic.action = action;
+            statistic.label = label;
+            statistic.time = [NSDate date];
+            statistic.value = @(value);
+        }
+        
+        NSError *error = nil;
+        weakSelf.objectCounter++;
+        if (weakSelf.objectCounter == kMemoryCacheObjectsCount) {
+            [weakSelf.backgroundContext save:&error];
+            weakSelf.objectCounter = 0;
+        }
+    }];
     
 }
 
@@ -125,7 +120,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
 #pragma mark - Notifications
 
 - (void)applicationWillResignActive:(NSNotification*) notification {
-        
+    
     [self sendEventsFromDatabase];
     
 }
