@@ -96,12 +96,13 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
             NSInteger tempValue = fetchedStatistic.value.integerValue;
             tempValue += value;
             fetchedStatistic.value = @(tempValue);
+            fetchedStatistic.timeValue = [[NSDate date] timeIntervalSince1970];
         } else {
             STKStatistic *statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
             statistic.category = category;
             statistic.action = action;
             statistic.label = label;
-            statistic.time = [NSDate date];
+            statistic.timeValue = [[NSDate date] timeIntervalSince1970];
             statistic.value = @(value);
         }
         

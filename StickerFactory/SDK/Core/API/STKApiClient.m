@@ -9,7 +9,8 @@
 #import "STKApiClient.h"
 #import <AFNetworking.h>
 
-NSString *const kBaseApiUrl = @"http://stk.908.vc:80/api/v1";
+NSString *const STKApiVersion = @"v1";
+NSString *const STKBaseApiUrl = @"http://stk.908.vc/api";
 
 @implementation STKApiClient
 
@@ -17,7 +18,8 @@ NSString *const kBaseApiUrl = @"http://stk.908.vc:80/api/v1";
 {
     self = [super init];
     if (self) {
-        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseApiUrl]];
+        NSString *baseUrl = [NSString stringWithFormat:@"%@/%@", STKBaseApiUrl, STKApiVersion];
+        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
     }
     return self;
 }

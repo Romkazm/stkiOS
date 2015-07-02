@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+//Api credentials
+extern NSString *const STKApiVersion;
+extern NSString *const STKBaseApiUrl;
+
+//
+
 @class AFHTTPSessionManager;
 
 @interface STKApiClient : NSObject

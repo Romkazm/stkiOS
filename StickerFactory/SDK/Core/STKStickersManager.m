@@ -10,6 +10,7 @@
 #import <SDWebImageManager.h>
 #import "STKUtility.h"
 #import "STKAnalyticService.h"
+#import "STKApiKeyManager.h"
 
 //Server url
 
@@ -74,7 +75,11 @@
 }
 
 
+#pragma mark - ApiKey
 
++(void)initWitApiKey:(NSString *)apiKey {
+    [STKApiKeyManager setApiKey:apiKey];
+}
 
 #pragma mark - Properties
 

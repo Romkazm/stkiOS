@@ -37,6 +37,11 @@ const struct STKStatisticAttributes STKStatisticAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"timeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"time"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"valueValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"value"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -53,6 +58,24 @@ const struct STKStatisticAttributes STKStatisticAttributes = {
 @dynamic label;
 
 @dynamic time;
+
+- (double)timeValue {
+	NSNumber *result = [self time];
+	return [result doubleValue];
+}
+
+- (void)setTimeValue:(double)value_ {
+	[self setTime:[NSNumber numberWithDouble:value_]];
+}
+
+- (double)primitiveTimeValue {
+	NSNumber *result = [self primitiveTime];
+	return [result doubleValue];
+}
+
+- (void)setPrimitiveTimeValue:(double)value_ {
+	[self setPrimitiveTime:[NSNumber numberWithDouble:value_]];
+}
 
 @dynamic value;
 

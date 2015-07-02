@@ -29,7 +29,12 @@
     if (self.value) {
         [dictionary setObject:self.value forKey:STKStatisticAttributes.value];
     }
-    return dictionary;
+    
+    
+    
+    NSDictionary *resultDictionary = [NSDictionary dictionaryWithDictionary:dictionary];
+    
+    return resultDictionary;
     
 }
 

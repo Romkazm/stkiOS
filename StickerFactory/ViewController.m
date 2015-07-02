@@ -68,7 +68,6 @@
         NSLog(@"Error : %@", error.localizedDescription);
     }];
     
-    
 }
 
 - (void) testCoreDataPerformance {

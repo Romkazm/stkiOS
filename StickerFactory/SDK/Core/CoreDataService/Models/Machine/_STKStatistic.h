@@ -32,7 +32,11 @@ extern const struct STKStatisticAttributes {
 
 //- (BOOL)validateLabel:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSDate* time;
+@property (nonatomic, strong) NSNumber* time;
+
+@property (atomic) double timeValue;
+- (double)timeValue;
+- (void)setTimeValue:(double)value_;
 
 //- (BOOL)validateTime:(id*)value_ error:(NSError**)error_;
 
@@ -57,8 +61,11 @@ extern const struct STKStatisticAttributes {
 - (NSString*)primitiveLabel;
 - (void)setPrimitiveLabel:(NSString*)value;
 
-- (NSDate*)primitiveTime;
-- (void)setPrimitiveTime:(NSDate*)value;
+- (NSNumber*)primitiveTime;
+- (void)setPrimitiveTime:(NSNumber*)value;
+
+- (double)primitiveTimeValue;
+- (void)setPrimitiveTimeValue:(double)value_;
 
 - (NSNumber*)primitiveValue;
 - (void)setPrimitiveValue:(NSNumber*)value;

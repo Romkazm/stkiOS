@@ -12,6 +12,8 @@
 
 @interface STKStickersManager : NSObject
 
++ (void) initWitApiKey:(NSString*) apiKey;
+
 - (void) getStickerForMessage:(NSString*) message
                      progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize)) progress
                       success:(void(^)(UIImage *sticker))success
