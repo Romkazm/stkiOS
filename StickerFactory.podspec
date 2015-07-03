@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license         = "Apache License, Version 2.0"
   s.author          = "908 Inc."
   s.source          = { :git => 'https://github.com/908Inc/stkiOS.git', :tag => s.version }
-  s.source_files    = "StickerFactory/SDK/Core/*.{h,m,xcdatamodeld}"
+  s.source_files    = "StickerFactory/SDK/Core/*"
   s.framework       = 'CoreData'
   s.requires_arc    = true 
   s.dependency       'SDWebImage', '~> 3.0'
