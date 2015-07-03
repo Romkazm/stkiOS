@@ -18,9 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    [STKStickersManager initWitApiKey:@"f06190d9d63cd2f4e7b124612f63c56c"];
-    //work
-    [STKStickersManager initWitApiKey:@"e97053c35aee6bf117a8247138c9225c"];
+#warning API_KEI
+//    [STKStickersManager initWitApiKey:@"API_KEY"];
 
     
     return YES;
