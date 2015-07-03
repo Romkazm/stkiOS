@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E1EB3B61B44291E00338B2B /* STKStickersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EB3AF1B44291E00338B2B /* STKStickersManager.m */; };
-		6E1EB3B71B44291E00338B2B /* STKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EB3B11B44291E00338B2B /* STKUtility.m */; };
-		6E1EB3B81B44291E00338B2B /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EB3B31B44291E00338B2B /* UIImage+Tint.m */; };
-		6E1EB3B91B44291E00338B2B /* UIImageView+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EB3B51B44291E00338B2B /* UIImageView+Stickers.m */; };
-		6EADF3451B46B1DD008005E9 /* NSManagedObject+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF33C1B46B1DD008005E9 /* NSManagedObject+STKAdditions.m */; };
-		6EADF3461B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF33E1B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.m */; };
-		6EADF3471B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3401B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */; };
-		6EADF3481B46B1DD008005E9 /* StickerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3411B46B1DD008005E9 /* StickerModel.xcdatamodeld */; };
-		6EADF3491B46B1DD008005E9 /* STKCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3441B46B1DD008005E9 /* STKCoreDataService.m */; };
-		6EADF34C1B46B1F0008005E9 /* STKStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF34B1B46B1F0008005E9 /* STKStatistic.m */; };
-		6EADF34F1B46B20C008005E9 /* _STKStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF34E1B46B20C008005E9 /* _STKStatistic.m */; };
-		6EADF3541B46B244008005E9 /* STKApiKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3511B46B244008005E9 /* STKApiKeyManager.m */; };
-		6EADF3551B46B244008005E9 /* STKUUIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3531B46B244008005E9 /* STKUUIDManager.m */; };
-		6EADF3581B46B2D1008005E9 /* STKAnalyticService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3571B46B2D1008005E9 /* STKAnalyticService.m */; };
-		6EADF35D1B46B2E3008005E9 /* STKAnalyticsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF35A1B46B2E3008005E9 /* STKAnalyticsAPIClient.m */; };
-		6EADF35E1B46B2E3008005E9 /* STKApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF35C1B46B2E3008005E9 /* STKApiClient.m */; };
+		6EADF3611B46B3CE008005E9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EADF35F1B46B3CE008005E9 /* Media.xcassets */; };
+		6EADF3661B46B3FD008005E9 /* STKApiKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3631B46B3FD008005E9 /* STKApiKeyManager.m */; };
+		6EADF3671B46B3FD008005E9 /* STKUUIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3651B46B3FD008005E9 /* STKUUIDManager.m */; };
+		6EADF36A1B46B40F008005E9 /* STKAnalyticService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3691B46B40F008005E9 /* STKAnalyticService.m */; };
+		6EADF36F1B46B41E008005E9 /* STKAnalyticsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF36C1B46B41E008005E9 /* STKAnalyticsAPIClient.m */; };
+		6EADF3701B46B41E008005E9 /* STKApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF36E1B46B41E008005E9 /* STKApiClient.m */; };
+		6EADF37B1B46B43D008005E9 /* NSManagedObject+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3721B46B43D008005E9 /* NSManagedObject+STKAdditions.m */; };
+		6EADF37C1B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3741B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.m */; };
+		6EADF37D1B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3761B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */; };
+		6EADF37E1B46B43D008005E9 /* StickerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3771B46B43D008005E9 /* StickerModel.xcdatamodeld */; };
+		6EADF37F1B46B43D008005E9 /* STKCoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF37A1B46B43D008005E9 /* STKCoreDataService.m */; };
+		6EADF3821B46B44D008005E9 /* _STKStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3811B46B44D008005E9 /* _STKStatistic.m */; };
+		6EADF3851B46B45A008005E9 /* STKStatistic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3841B46B45A008005E9 /* STKStatistic.m */; };
+		6EADF38E1B46B475008005E9 /* STKStickersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3871B46B475008005E9 /* STKStickersManager.m */; };
+		6EADF38F1B46B475008005E9 /* STKUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3891B46B475008005E9 /* STKUtility.m */; };
+		6EADF3901B46B475008005E9 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF38B1B46B475008005E9 /* UIImage+Tint.m */; };
+		6EADF3911B46B475008005E9 /* UIImageView+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */; };
 		6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDC5ECF1B41328000EBB034 /* CoreData.framework */; };
-		6EDC5EE61B418AD700EBB034 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC5EE51B418AD700EBB034 /* Media.xcassets */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
 		6EF264601B3C0F830099A657 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645F1B3C0F830099A657 /* ViewController.m */; };
@@ -49,39 +49,40 @@
 		1AA04EB236AD472CD61382DF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		280EB363112837B81F052E19 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		6E1EB3AE1B44291E00338B2B /* STKStickersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickersManager.h; path = StickerFactory/SDK/Core/STKStickersManager.h; sourceTree = "<group>"; };
-		6E1EB3AF1B44291E00338B2B /* STKStickersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersManager.m; path = StickerFactory/SDK/Core/STKStickersManager.m; sourceTree = "<group>"; };
-		6E1EB3B01B44291E00338B2B /* STKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUtility.h; path = StickerFactory/SDK/Core/STKUtility.h; sourceTree = "<group>"; };
-		6E1EB3B11B44291E00338B2B /* STKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUtility.m; path = StickerFactory/SDK/Core/STKUtility.m; sourceTree = "<group>"; };
-		6E1EB3B21B44291E00338B2B /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "StickerFactory/SDK/Core/UIImage+Tint.h"; sourceTree = "<group>"; };
-		6E1EB3B31B44291E00338B2B /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "StickerFactory/SDK/Core/UIImage+Tint.m"; sourceTree = "<group>"; };
-		6E1EB3B41B44291E00338B2B /* UIImageView+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Stickers.h"; path = "StickerFactory/SDK/Core/UIImageView+Stickers.h"; sourceTree = "<group>"; };
-		6E1EB3B51B44291E00338B2B /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Stickers.m"; path = "StickerFactory/SDK/Core/UIImageView+Stickers.m"; sourceTree = "<group>"; };
-		6EADF33B1B46B1DD008005E9 /* NSManagedObject+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+STKAdditions.h"; path = "StickerFactory/SDK/Core/NSManagedObject+STKAdditions.h"; sourceTree = "<group>"; };
-		6EADF33C1B46B1DD008005E9 /* NSManagedObject+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+STKAdditions.m"; path = "StickerFactory/SDK/Core/NSManagedObject+STKAdditions.m"; sourceTree = "<group>"; };
-		6EADF33D1B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+STKAdditions.h"; path = "StickerFactory/SDK/Core/NSManagedObjectContext+STKAdditions.h"; sourceTree = "<group>"; };
-		6EADF33E1B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+STKAdditions.m"; path = "StickerFactory/SDK/Core/NSManagedObjectContext+STKAdditions.m"; sourceTree = "<group>"; };
-		6EADF33F1B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPersistentStoreCoordinator+STKAdditions.h"; path = "StickerFactory/SDK/Core/NSPersistentStoreCoordinator+STKAdditions.h"; sourceTree = "<group>"; };
-		6EADF3401B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPersistentStoreCoordinator+STKAdditions.m"; path = "StickerFactory/SDK/Core/NSPersistentStoreCoordinator+STKAdditions.m"; sourceTree = "<group>"; };
-		6EADF3421B46B1DD008005E9 /* StickerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StickerModel.xcdatamodel; sourceTree = "<group>"; };
-		6EADF3431B46B1DD008005E9 /* STKCoreDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKCoreDataService.h; path = StickerFactory/SDK/Core/STKCoreDataService.h; sourceTree = "<group>"; };
-		6EADF3441B46B1DD008005E9 /* STKCoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKCoreDataService.m; path = StickerFactory/SDK/Core/STKCoreDataService.m; sourceTree = "<group>"; };
-		6EADF34A1B46B1F0008005E9 /* STKStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStatistic.h; path = StickerFactory/SDK/Core/STKStatistic.h; sourceTree = "<group>"; };
-		6EADF34B1B46B1F0008005E9 /* STKStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStatistic.m; path = StickerFactory/SDK/Core/STKStatistic.m; sourceTree = "<group>"; };
-		6EADF34D1B46B20C008005E9 /* _STKStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _STKStatistic.h; path = StickerFactory/SDK/Core/_STKStatistic.h; sourceTree = "<group>"; };
-		6EADF34E1B46B20C008005E9 /* _STKStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _STKStatistic.m; path = StickerFactory/SDK/Core/_STKStatistic.m; sourceTree = "<group>"; };
-		6EADF3501B46B244008005E9 /* STKApiKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKApiKeyManager.h; path = StickerFactory/SDK/Core/STKApiKeyManager.h; sourceTree = "<group>"; };
-		6EADF3511B46B244008005E9 /* STKApiKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKApiKeyManager.m; path = StickerFactory/SDK/Core/STKApiKeyManager.m; sourceTree = "<group>"; };
-		6EADF3521B46B244008005E9 /* STKUUIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUUIDManager.h; path = StickerFactory/SDK/Core/STKUUIDManager.h; sourceTree = "<group>"; };
-		6EADF3531B46B244008005E9 /* STKUUIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUUIDManager.m; path = StickerFactory/SDK/Core/STKUUIDManager.m; sourceTree = "<group>"; };
-		6EADF3561B46B2D1008005E9 /* STKAnalyticService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKAnalyticService.h; path = StickerFactory/SDK/Core/STKAnalyticService.h; sourceTree = "<group>"; };
-		6EADF3571B46B2D1008005E9 /* STKAnalyticService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKAnalyticService.m; path = StickerFactory/SDK/Core/STKAnalyticService.m; sourceTree = "<group>"; };
-		6EADF3591B46B2E3008005E9 /* STKAnalyticsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKAnalyticsAPIClient.h; path = StickerFactory/SDK/Core/STKAnalyticsAPIClient.h; sourceTree = "<group>"; };
-		6EADF35A1B46B2E3008005E9 /* STKAnalyticsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKAnalyticsAPIClient.m; path = StickerFactory/SDK/Core/STKAnalyticsAPIClient.m; sourceTree = "<group>"; };
-		6EADF35B1B46B2E3008005E9 /* STKApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKApiClient.h; path = StickerFactory/SDK/Core/STKApiClient.h; sourceTree = "<group>"; };
-		6EADF35C1B46B2E3008005E9 /* STKApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKApiClient.m; path = StickerFactory/SDK/Core/STKApiClient.m; sourceTree = "<group>"; };
+		6EADF35F1B46B3CE008005E9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = StickerFactory/SDK/Media.xcassets; sourceTree = "<group>"; };
+		6EADF3601B46B3CE008005E9 /* STKStickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerFactory.h; path = StickerFactory/SDK/STKStickerFactory.h; sourceTree = "<group>"; };
+		6EADF3621B46B3FD008005E9 /* STKApiKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKApiKeyManager.h; path = StickerFactory/SDK/STKApiKeyManager.h; sourceTree = "<group>"; };
+		6EADF3631B46B3FD008005E9 /* STKApiKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKApiKeyManager.m; path = StickerFactory/SDK/STKApiKeyManager.m; sourceTree = "<group>"; };
+		6EADF3641B46B3FD008005E9 /* STKUUIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUUIDManager.h; path = StickerFactory/SDK/STKUUIDManager.h; sourceTree = "<group>"; };
+		6EADF3651B46B3FD008005E9 /* STKUUIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUUIDManager.m; path = StickerFactory/SDK/STKUUIDManager.m; sourceTree = "<group>"; };
+		6EADF3681B46B40F008005E9 /* STKAnalyticService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKAnalyticService.h; path = StickerFactory/SDK/STKAnalyticService.h; sourceTree = "<group>"; };
+		6EADF3691B46B40F008005E9 /* STKAnalyticService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKAnalyticService.m; path = StickerFactory/SDK/STKAnalyticService.m; sourceTree = "<group>"; };
+		6EADF36B1B46B41E008005E9 /* STKAnalyticsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKAnalyticsAPIClient.h; path = StickerFactory/SDK/STKAnalyticsAPIClient.h; sourceTree = "<group>"; };
+		6EADF36C1B46B41E008005E9 /* STKAnalyticsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKAnalyticsAPIClient.m; path = StickerFactory/SDK/STKAnalyticsAPIClient.m; sourceTree = "<group>"; };
+		6EADF36D1B46B41E008005E9 /* STKApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKApiClient.h; path = StickerFactory/SDK/STKApiClient.h; sourceTree = "<group>"; };
+		6EADF36E1B46B41E008005E9 /* STKApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKApiClient.m; path = StickerFactory/SDK/STKApiClient.m; sourceTree = "<group>"; };
+		6EADF3711B46B43D008005E9 /* NSManagedObject+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+STKAdditions.h"; path = "StickerFactory/SDK/NSManagedObject+STKAdditions.h"; sourceTree = "<group>"; };
+		6EADF3721B46B43D008005E9 /* NSManagedObject+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+STKAdditions.m"; path = "StickerFactory/SDK/NSManagedObject+STKAdditions.m"; sourceTree = "<group>"; };
+		6EADF3731B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+STKAdditions.h"; path = "StickerFactory/SDK/NSManagedObjectContext+STKAdditions.h"; sourceTree = "<group>"; };
+		6EADF3741B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+STKAdditions.m"; path = "StickerFactory/SDK/NSManagedObjectContext+STKAdditions.m"; sourceTree = "<group>"; };
+		6EADF3751B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSPersistentStoreCoordinator+STKAdditions.h"; path = "StickerFactory/SDK/NSPersistentStoreCoordinator+STKAdditions.h"; sourceTree = "<group>"; };
+		6EADF3761B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSPersistentStoreCoordinator+STKAdditions.m"; path = "StickerFactory/SDK/NSPersistentStoreCoordinator+STKAdditions.m"; sourceTree = "<group>"; };
+		6EADF3781B46B43D008005E9 /* StickerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StickerModel.xcdatamodel; sourceTree = "<group>"; };
+		6EADF3791B46B43D008005E9 /* STKCoreDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKCoreDataService.h; path = StickerFactory/SDK/STKCoreDataService.h; sourceTree = "<group>"; };
+		6EADF37A1B46B43D008005E9 /* STKCoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKCoreDataService.m; path = StickerFactory/SDK/STKCoreDataService.m; sourceTree = "<group>"; };
+		6EADF3801B46B44D008005E9 /* _STKStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _STKStatistic.h; path = StickerFactory/SDK/_STKStatistic.h; sourceTree = "<group>"; };
+		6EADF3811B46B44D008005E9 /* _STKStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _STKStatistic.m; path = StickerFactory/SDK/_STKStatistic.m; sourceTree = "<group>"; };
+		6EADF3831B46B45A008005E9 /* STKStatistic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStatistic.h; path = StickerFactory/SDK/STKStatistic.h; sourceTree = "<group>"; };
+		6EADF3841B46B45A008005E9 /* STKStatistic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStatistic.m; path = StickerFactory/SDK/STKStatistic.m; sourceTree = "<group>"; };
+		6EADF3861B46B475008005E9 /* STKStickersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickersManager.h; path = StickerFactory/SDK/STKStickersManager.h; sourceTree = "<group>"; };
+		6EADF3871B46B475008005E9 /* STKStickersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersManager.m; path = StickerFactory/SDK/STKStickersManager.m; sourceTree = "<group>"; };
+		6EADF3881B46B475008005E9 /* STKUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKUtility.h; path = StickerFactory/SDK/STKUtility.h; sourceTree = "<group>"; };
+		6EADF3891B46B475008005E9 /* STKUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKUtility.m; path = StickerFactory/SDK/STKUtility.m; sourceTree = "<group>"; };
+		6EADF38A1B46B475008005E9 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Tint.h"; path = "StickerFactory/SDK/UIImage+Tint.h"; sourceTree = "<group>"; };
+		6EADF38B1B46B475008005E9 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Tint.m"; path = "StickerFactory/SDK/UIImage+Tint.m"; sourceTree = "<group>"; };
+		6EADF38C1B46B475008005E9 /* UIImageView+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Stickers.h"; path = "StickerFactory/SDK/UIImageView+Stickers.h"; sourceTree = "<group>"; };
+		6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Stickers.m"; path = "StickerFactory/SDK/UIImageView+Stickers.m"; sourceTree = "<group>"; };
 		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6EDC5EE51B418AD700EBB034 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = StickerFactory/SDK/Media.xcassets; sourceTree = "<group>"; };
 		6EF264541B3C0F830099A657 /* StickerFactory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerFactory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,7 +96,6 @@
 		6EF2646D1B3C0F830099A657 /* StickerFactoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickerFactoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264721B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264731B3C0F830099A657 /* StickerFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerFactoryTests.m; sourceTree = "<group>"; };
-		6EF2648E1B3C15950099A657 /* STKStickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerFactory.h; path = StickerFactory/SDK/STKStickerFactory.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,10 +139,10 @@
 		6E1EB3CF1B4429F500338B2B /* IdentityService */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF3501B46B244008005E9 /* STKApiKeyManager.h */,
-				6EADF3511B46B244008005E9 /* STKApiKeyManager.m */,
-				6EADF3521B46B244008005E9 /* STKUUIDManager.h */,
-				6EADF3531B46B244008005E9 /* STKUUIDManager.m */,
+				6EADF3621B46B3FD008005E9 /* STKApiKeyManager.h */,
+				6EADF3631B46B3FD008005E9 /* STKApiKeyManager.m */,
+				6EADF3641B46B3FD008005E9 /* STKUUIDManager.h */,
+				6EADF3651B46B3FD008005E9 /* STKUUIDManager.m */,
 			);
 			name = IdentityService;
 			sourceTree = "<group>";
@@ -150,8 +150,8 @@
 		6EC5F8661B428083004D04CA /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF3561B46B2D1008005E9 /* STKAnalyticService.h */,
-				6EADF3571B46B2D1008005E9 /* STKAnalyticService.m */,
+				6EADF3681B46B40F008005E9 /* STKAnalyticService.h */,
+				6EADF3691B46B40F008005E9 /* STKAnalyticService.m */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
@@ -159,10 +159,10 @@
 		6EC5F86F1B42BA43004D04CA /* API */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF3591B46B2E3008005E9 /* STKAnalyticsAPIClient.h */,
-				6EADF35A1B46B2E3008005E9 /* STKAnalyticsAPIClient.m */,
-				6EADF35B1B46B2E3008005E9 /* STKApiClient.h */,
-				6EADF35C1B46B2E3008005E9 /* STKApiClient.m */,
+				6EADF36B1B46B41E008005E9 /* STKAnalyticsAPIClient.h */,
+				6EADF36C1B46B41E008005E9 /* STKAnalyticsAPIClient.m */,
+				6EADF36D1B46B41E008005E9 /* STKApiClient.h */,
+				6EADF36E1B46B41E008005E9 /* STKApiClient.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -178,15 +178,15 @@
 		6EDC5ED11B4138B800EBB034 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF33B1B46B1DD008005E9 /* NSManagedObject+STKAdditions.h */,
-				6EADF33C1B46B1DD008005E9 /* NSManagedObject+STKAdditions.m */,
-				6EADF33D1B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.h */,
-				6EADF33E1B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.m */,
-				6EADF33F1B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.h */,
-				6EADF3401B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */,
-				6EADF3411B46B1DD008005E9 /* StickerModel.xcdatamodeld */,
-				6EADF3431B46B1DD008005E9 /* STKCoreDataService.h */,
-				6EADF3441B46B1DD008005E9 /* STKCoreDataService.m */,
+				6EADF3711B46B43D008005E9 /* NSManagedObject+STKAdditions.h */,
+				6EADF3721B46B43D008005E9 /* NSManagedObject+STKAdditions.m */,
+				6EADF3731B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.h */,
+				6EADF3741B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.m */,
+				6EADF3751B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.h */,
+				6EADF3761B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m */,
+				6EADF3771B46B43D008005E9 /* StickerModel.xcdatamodeld */,
+				6EADF3791B46B43D008005E9 /* STKCoreDataService.h */,
+				6EADF37A1B46B43D008005E9 /* STKCoreDataService.m */,
 				6EDC5ED91B413A5200EBB034 /* Machine */,
 				6EDC5ED81B413A4400EBB034 /* Human */,
 			);
@@ -196,8 +196,8 @@
 		6EDC5ED81B413A4400EBB034 /* Human */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF34A1B46B1F0008005E9 /* STKStatistic.h */,
-				6EADF34B1B46B1F0008005E9 /* STKStatistic.m */,
+				6EADF3831B46B45A008005E9 /* STKStatistic.h */,
+				6EADF3841B46B45A008005E9 /* STKStatistic.m */,
 			);
 			name = Human;
 			sourceTree = "<group>";
@@ -205,8 +205,8 @@
 		6EDC5ED91B413A5200EBB034 /* Machine */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF34D1B46B20C008005E9 /* _STKStatistic.h */,
-				6EADF34E1B46B20C008005E9 /* _STKStatistic.m */,
+				6EADF3801B46B44D008005E9 /* _STKStatistic.h */,
+				6EADF3811B46B44D008005E9 /* _STKStatistic.m */,
 			);
 			name = Machine;
 			sourceTree = "<group>";
@@ -214,15 +214,15 @@
 		6EDC5EE41B4173D600EBB034 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				6EADF3861B46B475008005E9 /* STKStickersManager.h */,
+				6EADF3871B46B475008005E9 /* STKStickersManager.m */,
+				6EADF3881B46B475008005E9 /* STKUtility.h */,
+				6EADF3891B46B475008005E9 /* STKUtility.m */,
+				6EADF38A1B46B475008005E9 /* UIImage+Tint.h */,
+				6EADF38B1B46B475008005E9 /* UIImage+Tint.m */,
+				6EADF38C1B46B475008005E9 /* UIImageView+Stickers.h */,
+				6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */,
 				6E1EB3CF1B4429F500338B2B /* IdentityService */,
-				6E1EB3AE1B44291E00338B2B /* STKStickersManager.h */,
-				6E1EB3AF1B44291E00338B2B /* STKStickersManager.m */,
-				6E1EB3B01B44291E00338B2B /* STKUtility.h */,
-				6E1EB3B11B44291E00338B2B /* STKUtility.m */,
-				6E1EB3B21B44291E00338B2B /* UIImage+Tint.h */,
-				6E1EB3B31B44291E00338B2B /* UIImage+Tint.m */,
-				6E1EB3B41B44291E00338B2B /* UIImageView+Stickers.h */,
-				6E1EB3B51B44291E00338B2B /* UIImageView+Stickers.m */,
 				6EC5F8661B428083004D04CA /* Analytics */,
 				6EC5F86F1B42BA43004D04CA /* API */,
 				6EDC5ECA1B41305500EBB034 /* CoreDataService */,
@@ -295,9 +295,9 @@
 		6EF2647D1B3C0FB70099A657 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				6EF2648E1B3C15950099A657 /* STKStickerFactory.h */,
+				6EADF35F1B46B3CE008005E9 /* Media.xcassets */,
+				6EADF3601B46B3CE008005E9 /* STKStickerFactory.h */,
 				6EDC5EE41B4173D600EBB034 /* Core */,
-				6EDC5EE51B418AD700EBB034 /* Media.xcassets */,
 			);
 			name = SDK;
 			path = ..;
@@ -387,7 +387,7 @@
 			files = (
 				6EF264631B3C0F830099A657 /* Main.storyboard in Resources */,
 				6EF264681B3C0F830099A657 /* LaunchScreen.xib in Resources */,
-				6EDC5EE61B418AD700EBB034 /* Media.xcassets in Resources */,
+				6EADF3611B46B3CE008005E9 /* Media.xcassets in Resources */,
 				6EF264651B3C0F830099A657 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,25 +439,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EADF3461B46B1DD008005E9 /* NSManagedObjectContext+STKAdditions.m in Sources */,
-				6EADF3581B46B2D1008005E9 /* STKAnalyticService.m in Sources */,
-				6EADF34F1B46B20C008005E9 /* _STKStatistic.m in Sources */,
+				6EADF3901B46B475008005E9 /* UIImage+Tint.m in Sources */,
+				6EADF36A1B46B40F008005E9 /* STKAnalyticService.m in Sources */,
+				6EADF3661B46B3FD008005E9 /* STKApiKeyManager.m in Sources */,
 				6EF264601B3C0F830099A657 /* ViewController.m in Sources */,
-				6EADF3541B46B244008005E9 /* STKApiKeyManager.m in Sources */,
-				6E1EB3B81B44291E00338B2B /* UIImage+Tint.m in Sources */,
-				6E1EB3B71B44291E00338B2B /* STKUtility.m in Sources */,
-				6EADF3481B46B1DD008005E9 /* StickerModel.xcdatamodeld in Sources */,
-				6EADF3551B46B244008005E9 /* STKUUIDManager.m in Sources */,
-				6EADF3451B46B1DD008005E9 /* NSManagedObject+STKAdditions.m in Sources */,
-				6EADF3471B46B1DD008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m in Sources */,
-				6EADF34C1B46B1F0008005E9 /* STKStatistic.m in Sources */,
-				6E1EB3B61B44291E00338B2B /* STKStickersManager.m in Sources */,
-				6EADF35E1B46B2E3008005E9 /* STKApiClient.m in Sources */,
-				6EADF35D1B46B2E3008005E9 /* STKAnalyticsAPIClient.m in Sources */,
+				6EADF3911B46B475008005E9 /* UIImageView+Stickers.m in Sources */,
+				6EADF37F1B46B43D008005E9 /* STKCoreDataService.m in Sources */,
+				6EADF38E1B46B475008005E9 /* STKStickersManager.m in Sources */,
+				6EADF3851B46B45A008005E9 /* STKStatistic.m in Sources */,
+				6EADF37C1B46B43D008005E9 /* NSManagedObjectContext+STKAdditions.m in Sources */,
+				6EADF3821B46B44D008005E9 /* _STKStatistic.m in Sources */,
+				6EADF3671B46B3FD008005E9 /* STKUUIDManager.m in Sources */,
+				6EADF3701B46B41E008005E9 /* STKApiClient.m in Sources */,
+				6EADF37D1B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m in Sources */,
+				6EADF36F1B46B41E008005E9 /* STKAnalyticsAPIClient.m in Sources */,
 				6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */,
-				6EADF3491B46B1DD008005E9 /* STKCoreDataService.m in Sources */,
-				6E1EB3B91B44291E00338B2B /* UIImageView+Stickers.m in Sources */,
+				6EADF37B1B46B43D008005E9 /* NSManagedObject+STKAdditions.m in Sources */,
 				6EF2645A1B3C0F830099A657 /* main.m in Sources */,
+				6EADF38F1B46B475008005E9 /* STKUtility.m in Sources */,
+				6EADF37E1B46B43D008005E9 /* StickerModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,14 +670,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6EADF3411B46B1DD008005E9 /* StickerModel.xcdatamodeld */ = {
+		6EADF3771B46B43D008005E9 /* StickerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6EADF3421B46B1DD008005E9 /* StickerModel.xcdatamodel */,
+				6EADF3781B46B43D008005E9 /* StickerModel.xcdatamodel */,
 			);
-			currentVersion = 6EADF3421B46B1DD008005E9 /* StickerModel.xcdatamodel */;
+			currentVersion = 6EADF3781B46B43D008005E9 /* StickerModel.xcdatamodel */;
 			name = StickerModel.xcdatamodeld;
-			path = StickerFactory/SDK/Core/StickerModel.xcdatamodeld;
+			path = StickerFactory/SDK/StickerModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
