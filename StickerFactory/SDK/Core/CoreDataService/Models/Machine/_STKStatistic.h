@@ -34,9 +34,9 @@ extern const struct STKStatisticAttributes {
 
 @property (nonatomic, strong) NSNumber* time;
 
-@property (atomic) double timeValue;
-- (double)timeValue;
-- (void)setTimeValue:(double)value_;
+@property (atomic) int64_t timeValue;
+- (int64_t)timeValue;
+- (void)setTimeValue:(int64_t)value_;
 
 //- (BOOL)validateTime:(id*)value_ error:(NSError**)error_;
 
@@ -64,8 +64,8 @@ extern const struct STKStatisticAttributes {
 - (NSNumber*)primitiveTime;
 - (void)setPrimitiveTime:(NSNumber*)value;
 
-- (double)primitiveTimeValue;
-- (void)setPrimitiveTimeValue:(double)value_;
+- (int64_t)primitiveTimeValue;
+- (void)setPrimitiveTimeValue:(int64_t)value_;
 
 - (NSNumber*)primitiveValue;
 - (void)setPrimitiveValue:(NSNumber*)value;

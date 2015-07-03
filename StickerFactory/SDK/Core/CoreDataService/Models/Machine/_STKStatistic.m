@@ -59,22 +59,22 @@ const struct STKStatisticAttributes STKStatisticAttributes = {
 
 @dynamic time;
 
-- (double)timeValue {
+- (int64_t)timeValue {
 	NSNumber *result = [self time];
-	return [result doubleValue];
+	return [result longLongValue];
 }
 
-- (void)setTimeValue:(double)value_ {
-	[self setTime:[NSNumber numberWithDouble:value_]];
+- (void)setTimeValue:(int64_t)value_ {
+	[self setTime:[NSNumber numberWithLongLong:value_]];
 }
 
-- (double)primitiveTimeValue {
+- (int64_t)primitiveTimeValue {
 	NSNumber *result = [self primitiveTime];
-	return [result doubleValue];
+	return [result longLongValue];
 }
 
-- (void)setPrimitiveTimeValue:(double)value_ {
-	[self setPrimitiveTime:[NSNumber numberWithDouble:value_]];
+- (void)setPrimitiveTimeValue:(int64_t)value_ {
+	[self setPrimitiveTime:[NSNumber numberWithLongLong:value_]];
 }
 
 @dynamic value;

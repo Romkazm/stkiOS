@@ -38,14 +38,8 @@
     
     [super viewDidAppear:animated];
     
-    
-    NSManagedObjectContext *context = [NSManagedObjectContext stk_defaultContext];
-    
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator stk_defaultPersistentsStoreCoordinator];
-    
-    [self testCoreDataPerformance];
 
-    NSString *testString = @"[[pinkgorilla_bigsSmile]]";
+    NSString *testString = @"[[pinkgorilla_bigSmile]]";
     
     self.categoryStickerImageView.stickerDefaultPlaceholderColor = [UIColor redColor];
     
@@ -68,17 +62,6 @@
         NSLog(@"Error : %@", error.localizedDescription);
     }];
     
-}
-
-- (void) testCoreDataPerformance {
-    STKAnalyticService *service = [STKAnalyticService sharedService];
-
-    [service sendEventWithCategory:STKAnalyticMessageCategory action:STKAnalyticActionCheck label:@"Stickers count" value:1];
-    self.testCounter++;
-    
-    NSLog(@"%ld", (long)self.testCounter);
-    
-    [self performSelector:@selector(testCoreDataPerformance) withObject:nil afterDelay:0.1];
 }
 
 

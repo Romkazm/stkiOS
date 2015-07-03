@@ -12,12 +12,19 @@
 #import "NSManagedObjectContext+STKAdditions.h"
 #import "STKAnalyticsAPIClient.h"
 #import "NSManagedObject+STKAdditions.h"
+#import <GAI.h>
+#import <GAIDictionaryBuilder.h>
+#import <GAIFields.h>
 
 //Categories
 NSString *const STKAnalyticMessageCategory = @"message";
 
 //Actions
 NSString *const STKAnalyticActionCheck = @"check";
+
+//labels
+NSString *const STKStickersCountLabel = @"Stickers count";
+NSString *const STKEventsCountLabel = @"Events count";
 
 
 static const NSInteger kMemoryCacheObjectsCount = 20;
@@ -27,6 +34,10 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
 @property (assign, nonatomic) NSInteger objectCounter;
 @property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
 @property (strong, nonatomic) STKAnalyticsAPIClient *analyticsApiClient;
+@property (strong, nonatomic) id<GAITracker> tracker;
+
+@property (assign, nonatomic) NSInteger stickersEventCounter;
+@property (assign, nonatomic) NSInteger messageEventCounter;
 
 @end
 
@@ -50,6 +61,17 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     if (self) {
         
         self.analyticsApiClient = [STKAnalyticsAPIClient new];
+        
+        // 1
+        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        
+        // 2
+        [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+        
+        // 3
+        [GAI sharedInstance].dispatchInterval = 0;
+        // 4
+        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-80"];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillResignActive:)
@@ -74,7 +96,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
 - (void)sendEventWithCategory:(NSString*)category
                        action:(NSString*)action
                         label:(NSString*)label
-                        value:(NSInteger)value
+                        value:(NSNumber*)value
 {
     
     __weak typeof(self) weakSelf = self;
@@ -91,21 +113,24 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
         NSArray *objects = [weakSelf.backgroundContext executeFetchRequest:request error:nil];
         
+        
+        STKStatistic *statistic = nil;
         if (objects.count > 0) {
-            STKStatistic *fetchedStatistic = objects.firstObject;
-            NSInteger tempValue = fetchedStatistic.value.integerValue;
-            tempValue += value;
-            fetchedStatistic.value = @(tempValue);
-            fetchedStatistic.timeValue = [[NSDate date] timeIntervalSince1970];
+            statistic = objects.firstObject;
+            NSInteger tempValue = statistic.value.integerValue;
+            tempValue += value.integerValue;
+            statistic.value = @(tempValue);
+            
         } else {
-            STKStatistic *statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
-            statistic.category = category;
-            statistic.action = action;
-            statistic.label = label;
-            statistic.timeValue = [[NSDate date] timeIntervalSince1970];
-            statistic.value = @(value);
+            statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
+            statistic.value = value;
         }
         
+        statistic.category = category;
+        statistic.action = action;
+        statistic.label = label;
+        statistic.timeValue = ((NSInteger)[[NSDate date] timeIntervalSince1970]);;
+    
         NSError *error = nil;
         weakSelf.objectCounter++;
         if (weakSelf.objectCounter == kMemoryCacheObjectsCount) {
@@ -114,6 +139,40 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         }
     }];
     
+//    if ([label isEqualToString:STKEventsCountLabel]) {
+//        self.messageEventCounter++;
+//        if (self.messageEventCounter == kMemoryCacheObjectsCount) {
+//            [self sendGoogleAnalyticsEventWithCategory:category
+//                                                action:action
+//                                                 label:label
+//                                                 value:@(self.messageEventCounter)];
+//            self.messageEventCounter = 0;
+//        }
+//    } else if ([label isEqualToString:STKStickersCountLabel]) {
+//        if (self.stickersEventCounter == kMemoryCacheObjectsCount) {
+//            [self sendGoogleAnalyticsEventWithCategory:category
+//                                                action:action
+//                                                 label:label
+//                                                 value:@(self.stickersEventCounter)];
+//            self.stickersEventCounter = 0;
+//        }
+//    }
+    
+}
+
+#pragma mark - Google analytic
+
+- (void) sendGoogleAnalyticsEventWithCategory:(NSString*)category
+                                       action:(NSString*)action
+                                        label:(NSString*)label
+                                        value:(NSNumber*)value
+{
+    if (value.integerValue > 0) {
+        NSDictionary*buildedDictionary = [[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build];
+        [self.tracker send:buildedDictionary];
+        [[GAI sharedInstance] dispatch];
+    }
+
 }
 
 
@@ -146,6 +205,10 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     }
     
     NSArray *events = [STKStatistic stk_findAllInContext:self.backgroundContext];
+    
+    for (STKStatistic *statistic in events) {
+        [self sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
+    }
     
     [self.analyticsApiClient sendStatistics:events success:^(id response) {
         

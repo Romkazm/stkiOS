@@ -15,6 +15,10 @@ extern NSString *const STKAnalyticMessageCategory;
 //Actions
 extern NSString *const STKAnalyticActionCheck;
 
+//Labels
+extern NSString *const STKStickersCountLabel;
+extern NSString *const STKEventsCountLabel;
+
 
 @interface STKAnalyticService : NSObject
 
@@ -23,6 +27,6 @@ extern NSString *const STKAnalyticActionCheck;
 - (void)sendEventWithCategory:(NSString*)category
                        action:(NSString*)action
                         label:(NSString*)label
-                        value:(NSInteger)value;
+                        value:(NSNumber*)value;
 
 @end
