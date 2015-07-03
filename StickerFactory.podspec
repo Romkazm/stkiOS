@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.dependency       'SDWebImage', '~> 3.0'
   s.dependency       'AFNetworking', '~> 2.0'
   s.dependency        'GoogleAnalytics', '~> 3.0'
-  s.resources       = ['StickerFactory/SDK/Media.xcassets', 'StickerFactory/SDK/StickerModel.xcdatamodeld', 'StickerFactory/SDK/StickerModel.xcdatamodeld/*.xcdatamodel' ]
+  s.resources       = ['StickerFactory/SDK/Media.xcassets', 'StickerFactory/SDK/*.{xcdatamodeld}' ]
 
 end
