@@ -10,7 +10,7 @@
 #import <AFNetworking.h>
 
 NSString *const STKApiVersion = @"v1";
-NSString *const STKBaseApiUrl = @"http://work.stk.908.vc/api";
+NSString *const STKBaseApiUrl = @"http://stk.908.vc/api";
 
 @implementation STKApiClient
 
