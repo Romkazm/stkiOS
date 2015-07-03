@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name            = 'StickerFactory'
-  s.version         = '0.0.4'
+  s.version         = '0.0.5'
   s.platform        = :ios, '6.0'
   s.summary         = 'Stickers Factory lib'
   s.description     = 'Sticker Factory for iOS'
@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.requires_arc    = true 
   s.dependency       'SDWebImage', '~> 3.0'
   s.dependency       'AFNetworking', '~> 2.0'
+  s.dependency        'GoogleAnalytics', '~> 3.0'
   s.resources       = 'StickerFactory/SDK/Media.xcassets'
 
 end
