@@ -38,7 +38,7 @@
     
     [super viewDidAppear:animated];
     
-
+    
     NSString *testString = @"[[pinkgorilla_bigSmile]]";
     
     self.categoryStickerImageView.stickerDefaultPlaceholderColor = [UIColor redColor];
@@ -48,19 +48,19 @@
         [self.categoryStickerImageView stk_setStickerWithMessage:testString completion:^(NSError *error, UIImage *stickerImage) {
             
         }];
+        
+        //Можно загрузить методом напрямую(Если это не стикер, вызовется failure блок)
+        __weak typeof(self) weakSelf = self;
+        [self.stickerManager getStickerForMessage:testString progress:nil success:^(UIImage *sticker) {
+            
+            weakSelf.methodImageView.image = sticker;
+            
+        } failure:^(NSError *error, NSString *errorMessage) {
+            NSLog(@"Error : %@", error.localizedDescription);
+        }];
     } else {
         NSLog(@"Sticker not found");
     }
-    
-    //Можно загрузить методом напрямую(Если это не стикер, вызовется failure блок)
-    __weak typeof(self) weakSelf = self;
-    [self.stickerManager getStickerForMessage:testString progress:nil success:^(UIImage *sticker) {
-        
-        weakSelf.methodImageView.image = sticker;
-        
-    } failure:^(NSError *error, NSString *errorMessage) {
-        NSLog(@"Error : %@", error.localizedDescription);
-    }];
     
 }
 
