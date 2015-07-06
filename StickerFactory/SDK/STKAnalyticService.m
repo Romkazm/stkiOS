@@ -65,13 +65,17 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         // 1
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         
-        // 2
-        [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
-        
         // 3
         [GAI sharedInstance].dispatchInterval = 0;
+        
+        
+        
         // 4
         self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-80"];
+        
+#if DEBUG
+        [GAI sharedInstance].dryRun = YES;
+#endif
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillResignActive:)
@@ -99,6 +103,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                         value:(NSNumber*)value
 {
     
+#ifndef DEBUG
     __weak typeof(self) weakSelf = self;
     [self.backgroundContext performBlock:^{
         
@@ -139,24 +144,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         }
     }];
     
-//    if ([label isEqualToString:STKEventsCountLabel]) {
-//        self.messageEventCounter++;
-//        if (self.messageEventCounter == kMemoryCacheObjectsCount) {
-//            [self sendGoogleAnalyticsEventWithCategory:category
-//                                                action:action
-//                                                 label:label
-//                                                 value:@(self.messageEventCounter)];
-//            self.messageEventCounter = 0;
-//        }
-//    } else if ([label isEqualToString:STKStickersCountLabel]) {
-//        if (self.stickersEventCounter == kMemoryCacheObjectsCount) {
-//            [self sendGoogleAnalyticsEventWithCategory:category
-//                                                action:action
-//                                                 label:label
-//                                                 value:@(self.stickersEventCounter)];
-//            self.stickersEventCounter = 0;
-//        }
-//    }
+#endif
     
 }
 
