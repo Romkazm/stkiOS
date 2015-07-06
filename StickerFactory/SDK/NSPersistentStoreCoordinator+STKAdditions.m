@@ -23,7 +23,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator;
         
         NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
         
-
+        
         
         defaultCoordinator = coordinator;
         
@@ -32,24 +32,24 @@ static NSPersistentStoreCoordinator *defaultCoordinator;
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"StickerModel.sqlite"];
         
         
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSError *error = nil;
-            
-            // Adding the journalling mode recommended by apple
-            NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
-            [sqliteOptions setObject:@"WAL" forKey:@"journal_mode"];
-            
-            NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                                     [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                                     sqliteOptions, NSSQLitePragmasOption,
-                                     nil];
-            
-            NSPersistentStore *store = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
-            
-            
-            NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
-//        });
+        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSError *error = nil;
+        
+        // Adding the journalling mode recommended by apple
+        NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
+        [sqliteOptions setObject:@"WAL" forKey:@"journal_mode"];
+        
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+                                 sqliteOptions, NSSQLitePragmasOption,
+                                 nil];
+        
+        NSPersistentStore *store = [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+        
+        
+        NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
+        //        });
         
     }
     
