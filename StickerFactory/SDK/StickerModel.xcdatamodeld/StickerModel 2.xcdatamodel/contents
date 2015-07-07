@@ -7,11 +7,11 @@
         <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0.0" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="STKSticker" syncable="YES">
+    <entity name="STKSticker" representedClassName="STKSticker" syncable="YES">
         <attribute name="stickerName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="stickerPack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STKStickerPack" inverseName="stickers" inverseEntity="STKStickerPack" syncable="YES"/>
     </entity>
-    <entity name="STKStickerPack" syncable="YES">
+    <entity name="STKStickerPack" representedClassName="STKStickerPack" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packTitle" optional="YES" attributeType="String" syncable="YES"/>
