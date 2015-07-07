@@ -4,6 +4,7 @@
 #import "_STKSticker.h"
 
 const struct STKStickerAttributes STKStickerAttributes = {
+	.stickerMessage = @"stickerMessage",
 	.stickerName = @"stickerName",
 };
 
@@ -39,6 +40,8 @@ const struct STKStickerRelationships STKStickerRelationships = {
 
 	return keyPaths;
 }
+
+@dynamic stickerMessage;
 
 @dynamic stickerName;
 

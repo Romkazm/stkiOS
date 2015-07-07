@@ -16,6 +16,7 @@
 		6E776D7A1B4BF5FF0001FBB6 /* _STKStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D781B4BF5FF0001FBB6 /* _STKStickerPack.m */; };
 		6E776D7F1B4BF6150001FBB6 /* STKSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D7C1B4BF6150001FBB6 /* STKSticker.m */; };
 		6E776D801B4BF6150001FBB6 /* STKStickerPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D7E1B4BF6150001FBB6 /* STKStickerPack.m */; };
+		6E776D841B4BF7AA0001FBB6 /* STKStickersMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D831B4BF7AA0001FBB6 /* STKStickersMapper.m */; };
 		6EADF3611B46B3CE008005E9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EADF35F1B46B3CE008005E9 /* Media.xcassets */; };
 		6EADF3661B46B3FD008005E9 /* STKApiKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3631B46B3FD008005E9 /* STKApiKeyManager.m */; };
 		6EADF3671B46B3FD008005E9 /* STKUUIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3651B46B3FD008005E9 /* STKUUIDManager.m */; };
@@ -79,6 +80,8 @@
 		6E776D7C1B4BF6150001FBB6 /* STKSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKSticker.m; path = StickerFactory/SDK/STKSticker.m; sourceTree = "<group>"; };
 		6E776D7D1B4BF6150001FBB6 /* STKStickerPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerPack.h; path = StickerFactory/SDK/STKStickerPack.h; sourceTree = "<group>"; };
 		6E776D7E1B4BF6150001FBB6 /* STKStickerPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickerPack.m; path = StickerFactory/SDK/STKStickerPack.m; sourceTree = "<group>"; };
+		6E776D821B4BF7AA0001FBB6 /* STKStickersMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickersMapper.h; path = StickerFactory/SDK/STKStickersMapper.h; sourceTree = "<group>"; };
+		6E776D831B4BF7AA0001FBB6 /* STKStickersMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickersMapper.m; path = StickerFactory/SDK/STKStickersMapper.m; sourceTree = "<group>"; };
 		6EADF35F1B46B3CE008005E9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = StickerFactory/SDK/Media.xcassets; sourceTree = "<group>"; };
 		6EADF3601B46B3CE008005E9 /* STKStickerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerFactory.h; path = StickerFactory/SDK/STKStickerFactory.h; sourceTree = "<group>"; };
 		6EADF3621B46B3FD008005E9 /* STKApiKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKApiKeyManager.h; path = StickerFactory/SDK/STKApiKeyManager.h; sourceTree = "<group>"; };
@@ -196,6 +199,15 @@
 			name = StickersPanel;
 			sourceTree = "<group>";
 		};
+		6E776D811B4BF6F70001FBB6 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				6E776D821B4BF7AA0001FBB6 /* STKStickersMapper.h */,
+				6E776D831B4BF7AA0001FBB6 /* STKStickersMapper.m */,
+			);
+			name = Mappers;
+			sourceTree = "<group>";
+		};
 		6EADF39C1B46D4F4008005E9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +229,7 @@
 		6EC5F86F1B42BA43004D04CA /* API */ = {
 			isa = PBXGroup;
 			children = (
+				6E776D811B4BF6F70001FBB6 /* Mappers */,
 				6EADF36B1B46B41E008005E9 /* STKAnalyticsAPIClient.h */,
 				6EADF36C1B46B41E008005E9 /* STKAnalyticsAPIClient.m */,
 				6EADF36D1B46B41E008005E9 /* STKApiClient.h */,
@@ -537,6 +550,7 @@
 				6EF2645A1B3C0F830099A657 /* main.m in Sources */,
 				6EADF38F1B46B475008005E9 /* STKUtility.m in Sources */,
 				6EADF37E1B46B43D008005E9 /* StickerModel.xcdatamodeld in Sources */,
+				6E776D841B4BF7AA0001FBB6 /* STKStickersMapper.m in Sources */,
 				6EADF3981B46D13F008005E9 /* STKChatViewController.m in Sources */,
 				6E776D721B4BEE110001FBB6 /* STKStickersApiClient.m in Sources */,
 				6E776D6E1B4BE2260001FBB6 /* STKStickerPanelHeader.m in Sources */,

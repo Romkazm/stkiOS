@@ -4,6 +4,7 @@
 #import <CoreData/CoreData.h>
 
 extern const struct STKStickerAttributes {
+	__unsafe_unretained NSString *stickerMessage;
 	__unsafe_unretained NSString *stickerName;
 } STKStickerAttributes;
 
@@ -22,6 +23,10 @@ extern const struct STKStickerRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) STKStickerID* objectID;
 
+@property (nonatomic, strong) NSString* stickerMessage;
+
+//- (BOOL)validateStickerMessage:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSString* stickerName;
 
 //- (BOOL)validateStickerName:(id*)value_ error:(NSError**)error_;
@@ -33,6 +38,9 @@ extern const struct STKStickerRelationships {
 @end
 
 @interface _STKSticker (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSString*)primitiveStickerMessage;
+- (void)setPrimitiveStickerMessage:(NSString*)value;
 
 - (NSString*)primitiveStickerName;
 - (void)setPrimitiveStickerName:(NSString*)value;

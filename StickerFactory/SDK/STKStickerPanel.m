@@ -10,11 +10,14 @@
 #import "STKStickerPanelLayout.h"
 #import "STKStickerPanelCell.h"
 #import "STKStickerPanelHeader.h"
+#import <CoreData/CoreData.h>
+#import "STKStickerPack.h"
 
 @interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) STKStickerPanelLayout *layout;
+@property (strong, nonatomic) NSArray *stickers;
 
 @end
 
@@ -34,6 +37,16 @@
     [self.collectionView registerClass:[STKStickerPanelCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
     [self.collectionView registerClass:[STKStickerPanelHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STKStickerPanelHeader"];
     
+    
+    
+}
+
+
+#pragma mark - Work with base
+
+- (void) reloadStickers {
+    
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[]]
     
     
 }

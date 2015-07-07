@@ -8,6 +8,7 @@
         <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="STKSticker" representedClassName="STKSticker" syncable="YES">
+        <attribute name="stickerMessage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stickerName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="stickerPack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="STKStickerPack" inverseName="stickers" inverseEntity="STKStickerPack" syncable="YES"/>
     </entity>
@@ -21,6 +22,6 @@
     <elements>
         <element name="STKStatistic" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="STKStickerPack" positionX="-54" positionY="27" width="128" height="120"/>
-        <element name="STKSticker" positionX="-36" positionY="54" width="128" height="75"/>
+        <element name="STKSticker" positionX="-36" positionY="54" width="128" height="90"/>
     </elements>
 </model>
