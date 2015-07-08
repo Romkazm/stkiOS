@@ -32,7 +32,6 @@ static NSPersistentStoreCoordinator *defaultCoordinator;
         NSURL *storeURL = [documentsURL URLByAppendingPathComponent:@"StickerModel.sqlite"];
         
         
-        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *error = nil;
         
         // Adding the journalling mode recommended by apple
@@ -49,7 +48,6 @@ static NSPersistentStoreCoordinator *defaultCoordinator;
         
         
         NSAssert(store != nil, @"Error initializing PSC: %@\n%@", [error localizedDescription], [error userInfo]);
-        //        });
         
     }
     

@@ -8,9 +8,11 @@
 
 #import "STKApiClient.h"
 #import <AFNetworking.h>
+#import "STKApiKeyManager.h"
+#import "STKUUIDManager.h"
 
 NSString *const STKApiVersion = @"v1";
-NSString *const STKBaseApiUrl = @"http://stk.908.vc/api";
+NSString *const STKBaseApiUrl = @"http://api.stickerpipe.com/api";
 
 @implementation STKApiClient
 
@@ -20,6 +22,18 @@ NSString *const STKBaseApiUrl = @"http://stk.908.vc/api";
     if (self) {
         NSString *baseUrl = [NSString stringWithFormat:@"%@/%@", STKBaseApiUrl, STKApiVersion];
         self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+        
+        
+        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+        
+        [serializer setValue:STKApiVersion forHTTPHeaderField:@"ApiVersion"];
+        [serializer setValue:@"iOS" forHTTPHeaderField:@"Platform"];
+        [serializer setValue:[STKUUIDManager generatedDeviceToken] forHTTPHeaderField:@"DeviceId"];
+        [serializer setValue:[STKApiKeyManager apiKey] forHTTPHeaderField:@"ApiKey"];
+        [serializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [serializer setValue:[[NSBundle mainBundle] bundleIdentifier] forHTTPHeaderField:@"Package"];
+        
+        self.sessionManager.requestSerializer = serializer;
     }
     return self;
 }

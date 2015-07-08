@@ -18,10 +18,19 @@
 
 @implementation STKStickerPanelCell
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.stickerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 80.0, 80.0)];
+        self.stickerImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:self.stickerImageView];
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
-    self.stickerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 40.0, 40.0)];
-    self.stickerImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:self.stickerImageView];
+
 }
 
 - (void)prepareForReuse {

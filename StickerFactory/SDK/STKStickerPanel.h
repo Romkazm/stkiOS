@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class STKStickerPanel;
+
+@protocol STKStickerPanelDelegate <NSObject>
+
+- (void) stickerPanel:(STKStickerPanel*)stickerPanel didSelectStickerWithMessage:(NSString*) stickerMessage;
+
+@end
+
 @interface STKStickerPanel : UIView
 
-
+@property (weak, nonatomic) id<STKStickerPanelDelegate> delegate;
 
 @end

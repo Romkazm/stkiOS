@@ -77,14 +77,74 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 
 @dynamic stickers;
 
-- (NSMutableSet*)stickersSet {
+- (NSMutableOrderedSet*)stickersSet {
 	[self willAccessValueForKey:@"stickers"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"stickers"];
+	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"stickers"];
 
 	[self didAccessValueForKey:@"stickers"];
 	return result;
 }
 
+@end
+
+@implementation _STKStickerPack (StickersCoreDataGeneratedAccessors)
+- (void)addStickers:(NSOrderedSet*)value_ {
+	[self.stickersSet unionOrderedSet:value_];
+}
+- (void)removeStickers:(NSOrderedSet*)value_ {
+	[self.stickersSet minusOrderedSet:value_];
+}
+- (void)addStickersObject:(STKSticker*)value_ {
+	[self.stickersSet addObject:value_];
+}
+- (void)removeStickersObject:(STKSticker*)value_ {
+	[self.stickersSet removeObject:value_];
+}
+- (void)insertObject:(STKSticker*)value inStickersAtIndex:(NSUInteger)idx {
+    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
+    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet insertObject:value atIndex:idx];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:@"stickers"];
+}
+- (void)removeObjectFromStickersAtIndex:(NSUInteger)idx {
+    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
+    [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet removeObjectAtIndex:idx];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@"stickers"];
+}
+- (void)insertStickers:(NSArray *)value atIndexes:(NSIndexSet *)indexes {
+    [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet insertObjects:value atIndexes:indexes];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:@"stickers"];
+}
+- (void)removeStickersAtIndexes:(NSIndexSet *)indexes {
+    [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet removeObjectsAtIndexes:indexes];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:@"stickers"];
+}
+- (void)replaceObjectInStickersAtIndex:(NSUInteger)idx withObject:(STKSticker*)value {
+    NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
+    [self willChange:NSKeyValueChangeReplacement valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet replaceObjectAtIndex:idx withObject:value];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeReplacement valuesAtIndexes:indexes forKey:@"stickers"];
+}
+- (void)replaceStickersAtIndexes:(NSIndexSet *)indexes withStickers:(NSArray *)value {
+    [self willChange:NSKeyValueChangeReplacement valuesAtIndexes:indexes forKey:@"stickers"];
+    NSMutableOrderedSet *tmpOrderedSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self stickers]];
+    [tmpOrderedSet replaceObjectsAtIndexes:indexes withObjects:value];
+    [self setPrimitiveValue:tmpOrderedSet forKey:@"stickers"];
+    [self didChange:NSKeyValueChangeReplacement valuesAtIndexes:indexes forKey:@"stickers"];
+}
 @end
 

@@ -9,6 +9,8 @@
 #import "STKStickersApiClient.h"
 #import <AFNetworking.h>
 #import "STKStickersMapper.h"
+#import "STKUUIDManager.h"
+#import "STKApiKeyManager.h"
 
 @interface STKStickersApiClient()
 
@@ -28,16 +30,22 @@
         self.completionQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
         self.sessionManager.completionQueue = self.completionQueue;
+
+        
+//        self.sessionManager.requestSerializer = serializer;
     }
     return self;
 }
 
 - (void)getStickersPackWithType:(NSString*)type
-                        success:(void (^)(id))success
-                        failure:(void (^)(NSError *))failure {
+                        success:(void (^)(id response))success
+                        failure:(void (^)(NSError *error))failure {
     
-    
-    NSDictionary *parameters = @{@"type" : type};
+    NSDictionary *parameters = nil;
+    if (type) {
+        parameters = @{@"type" : type};
+    }
+
     
     __weak typeof(self) weakSelf = self;
     
@@ -53,6 +61,8 @@
                          }
                      }
                      failure:^(NSURLSessionDataTask *task, NSError *error) {
+//                                 NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//                                 NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
                          if (failure) {
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  failure(error);

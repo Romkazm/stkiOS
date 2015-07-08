@@ -15,30 +15,6 @@
 
 @implementation STKAnalyticsAPIClient
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self addHeadersForRequestSerializer];
-    }
-    return self;
-}
-
-- (void) addHeadersForRequestSerializer {
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    
-    [serializer setValue:STKApiVersion forHTTPHeaderField:@"ApiVersion"];
-    [serializer setValue:@"iOS" forHTTPHeaderField:@"Platform"];
-    [serializer setValue:[STKUUIDManager generatedDeviceToken] forHTTPHeaderField:@"DeviceId"];
-    NSInteger scale = (NSInteger)[[UIScreen mainScreen] scale];
-    [serializer setValue:[NSString stringWithFormat:@"%ld",(long)scale] forHTTPHeaderField:@"Density"];
-    [serializer setValue:[STKApiKeyManager apiKey] forHTTPHeaderField:@"ApiKey"];
-    [serializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    self.sessionManager.requestSerializer = serializer;
-
-}
-
 
 - (void)sendStatistics:(NSArray *)statisticsArray success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     

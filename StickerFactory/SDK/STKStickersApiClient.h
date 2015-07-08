@@ -10,7 +10,7 @@
 
 @interface STKStickersApiClient : STKApiClient
 
-- (void)getStickersPackWithType:(NSString*)type success:(void (^)(id))success
-                        failure:(void (^)(NSError *))failure;
+- (void)getStickersPackWithType:(NSString*)type success:(void (^)(id response))success
+                        failure:(void (^)(NSError *error))failure;
 
 @end

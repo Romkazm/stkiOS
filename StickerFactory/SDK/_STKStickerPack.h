@@ -45,17 +45,24 @@ extern const struct STKStickerPackRelationships {
 
 //- (BOOL)validatePrice:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSSet *stickers;
+@property (nonatomic, strong) NSOrderedSet *stickers;
 
-- (NSMutableSet*)stickersSet;
+- (NSMutableOrderedSet*)stickersSet;
 
 @end
 
 @interface _STKStickerPack (StickersCoreDataGeneratedAccessors)
-- (void)addStickers:(NSSet*)value_;
-- (void)removeStickers:(NSSet*)value_;
+- (void)addStickers:(NSOrderedSet*)value_;
+- (void)removeStickers:(NSOrderedSet*)value_;
 - (void)addStickersObject:(STKSticker*)value_;
 - (void)removeStickersObject:(STKSticker*)value_;
+
+- (void)insertObject:(STKSticker*)value inStickersAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromStickersAtIndex:(NSUInteger)idx;
+- (void)insertStickers:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeStickersAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInStickersAtIndex:(NSUInteger)idx withObject:(STKSticker*)value;
+- (void)replaceStickersAtIndexes:(NSIndexSet *)indexes withStickers:(NSArray *)values;
 
 @end
 
@@ -76,7 +83,7 @@ extern const struct STKStickerPackRelationships {
 - (float)primitivePriceValue;
 - (void)setPrimitivePriceValue:(float)value_;
 
-- (NSMutableSet*)primitiveStickers;
-- (void)setPrimitiveStickers:(NSMutableSet*)value;
+- (NSMutableOrderedSet*)primitiveStickers;
+- (void)setPrimitiveStickers:(NSMutableOrderedSet*)value;
 
 @end

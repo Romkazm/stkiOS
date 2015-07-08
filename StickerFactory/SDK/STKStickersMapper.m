@@ -9,6 +9,7 @@
 #import "STKStickersMapper.h"
 #import <CoreData/CoreData.h>
 #import "NSManagedObjectContext+STKAdditions.h"
+#import "NSManagedObject+STKAdditions.h"
 #import "STKStickerPack.h"
 #import "STKSticker.h"
 
@@ -36,9 +37,14 @@
 }
 
 - (void) createModelsAndSaveFromStickerPacks:(NSArray*) stickerPacks {
+    
+//    [STKStickerPack stk_deleteAllInContext:self.backgroundContext];
+    
     for (NSDictionary *pack in stickerPacks) {
-        STKStickerPack *packModel = [NSEntityDescription insertNewObjectForEntityForName:[STKStickerPack entityName] inManagedObjectContext:self.backgroundContext];
-        packModel.packName = pack[@"pack_name"];
+        NSString *packName = pack[@"pack_name"];
+        
+        STKStickerPack *packModel = [STKStickerPack stk_objectWithUniqueAttribute:STKStickerPackAttributes.packName value:packName context:self.backgroundContext];
+        packModel.packName = packName;
         packModel.packTitle = pack[@"title"];
         packModel.artist = pack[@"artist"];
         packModel.price = pack[@"price"];
@@ -48,9 +54,9 @@
         if (stickersArray) {
             
             for (NSDictionary *sticker in stickersArray) {
-                
-                STKSticker *stickerModel = [NSEntityDescription insertNewObjectForEntityForName:[STKSticker entityName] inManagedObjectContext:self.backgroundContext];
-                NSString *stickerName = sticker[@"name"];
+                 NSString *stickerName = sticker[@"name"];
+                STKSticker *stickerModel = [STKSticker stk_objectWithUniqueAttribute:STKStickerAttributes.stickerName value:stickerName context:self.backgroundContext];
+               
                 stickerModel.stickerName = stickerName;
                 stickerModel.stickerMessage = [NSString stringWithFormat:@"[[%@_%@]]",packModel.packName, stickerName];
                 
@@ -58,6 +64,7 @@
                 
             }
         }
+        [STKStickerPack getRecentsPack];
     }
     
     [self.backgroundContext save:nil];

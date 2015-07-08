@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STKStickerPanelHeader : UICollectionReusableView
+@interface STKStickerPanelHeader : UIView
 
 @end

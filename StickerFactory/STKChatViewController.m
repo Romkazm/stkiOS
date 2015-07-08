@@ -8,8 +8,9 @@
 
 #import "STKChatViewController.h"
 #import "STKChatCell.h"
+#import "STKStickerPanel.h"
 
-@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
+@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerPanelDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
@@ -17,10 +18,12 @@
 @property (assign, nonatomic) BOOL isKeyboardShowed;
 
 
-@property (strong, nonatomic) NSArray *dataSource;
+@property (strong, nonatomic) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
+
+@property (strong, nonatomic) STKStickerPanel *stickerPanel;
 
 @end
 
@@ -29,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataSource = @[@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_china]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bike]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_dontknow]]"];
+    self.dataSource = [@[@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_china]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bike]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_dontknow]]"] mutableCopy];
     
     self.inputTextView.layer.cornerRadius = 7.0;
     self.inputTextView.layer.borderWidth = 1.0;
@@ -48,7 +51,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
+    [self scrollTableViewToBottom];
+}
+
+#pragma mark - UI Methods
+
+- (void) scrollTableViewToBottom {
     
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 
@@ -76,6 +87,7 @@
     }];
     
     self.isKeyboardShowed = YES;
+    [self scrollTableViewToBottom];
     
 }
 
@@ -103,9 +115,7 @@
         
     } else {
         buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
-        UIView *stickersView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 225)];
-        stickersView.backgroundColor = [UIColor redColor];
-        self.inputTextView.inputView = stickersView;
+        self.inputTextView.inputView = self.stickerPanel;
     }
     if (!self.isKeyboardShowed) {
         [self.inputTextView becomeFirstResponder];
@@ -137,12 +147,35 @@
     return cell;
 }
 
+#pragma mark - STKStickerPanelDelegate
+
+- (void)stickerPanel:(STKStickerPanel *)stickerPanel didSelectStickerWithMessage:(NSString *)stickerMessage {
+    
+    STKChatCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    [cell fillWithStickerMessage:stickerMessage];
+    [self.tableView beginUpdates];
+    [self.dataSource addObject:stickerMessage];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    [self scrollTableViewToBottom];
+    
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView  {
     self.textViewHeightConstraint.constant = textView.contentSize.height;
 }
 
+#pragma mark - Property
 
+- (STKStickerPanel *)stickerPanel {
+    if (!_stickerPanel) {
+        _stickerPanel = [[STKStickerPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 225.0)];
+        _stickerPanel.delegate = self;
+    }
+    return _stickerPanel;
+}
 
 @end

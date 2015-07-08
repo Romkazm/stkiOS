@@ -6,6 +6,7 @@
 extern const struct STKStickerAttributes {
 	__unsafe_unretained NSString *stickerMessage;
 	__unsafe_unretained NSString *stickerName;
+	__unsafe_unretained NSString *usedCount;
 } STKStickerAttributes;
 
 extern const struct STKStickerRelationships {
@@ -31,6 +32,14 @@ extern const struct STKStickerRelationships {
 
 //- (BOOL)validateStickerName:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSNumber* usedCount;
+
+@property (atomic) int64_t usedCountValue;
+- (int64_t)usedCountValue;
+- (void)setUsedCountValue:(int64_t)value_;
+
+//- (BOOL)validateUsedCount:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) STKStickerPack *stickerPack;
 
 //- (BOOL)validateStickerPack:(id*)value_ error:(NSError**)error_;
@@ -44,6 +53,12 @@ extern const struct STKStickerRelationships {
 
 - (NSString*)primitiveStickerName;
 - (void)setPrimitiveStickerName:(NSString*)value;
+
+- (NSNumber*)primitiveUsedCount;
+- (void)setPrimitiveUsedCount:(NSNumber*)value;
+
+- (int64_t)primitiveUsedCountValue;
+- (void)setPrimitiveUsedCountValue:(int64_t)value_;
 
 - (STKStickerPack*)primitiveStickerPack;
 - (void)setPrimitiveStickerPack:(STKStickerPack*)value;
