@@ -90,7 +90,11 @@
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMT-MU-Fai">
-                                        <rect key="frame" x="515" y="14" width="21" height="22"/>
+                                        <rect key="frame" x="498" y="8" width="38" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="4nM-oR-pP5"/>
+                                            <constraint firstAttribute="height" constant="32" id="93S-cP-0zM"/>
+                                        </constraints>
                                         <state key="normal" image="ShowStickersIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -102,9 +106,11 @@
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0Vq-z0-3vv"/>
+                                    <constraint firstItem="qMT-MU-Fai" firstAttribute="leading" secondItem="UEI-iu-DOR" secondAttribute="trailing" constant="-44" id="47u-j5-gSM"/>
                                     <constraint firstAttribute="centerY" secondItem="ig2-vE-R0S" secondAttribute="centerY" id="EKb-Cr-hHi"/>
                                     <constraint firstItem="UEI-iu-DOR" firstAttribute="top" secondItem="ala-hF-VUk" secondAttribute="top" constant="8" id="K0c-na-h6M"/>
                                     <constraint firstItem="qMT-MU-Fai" firstAttribute="top" secondItem="ala-hF-VUk" secondAttribute="top" constant="14" id="SZf-ik-e99"/>
+                                    <constraint firstItem="qMT-MU-Fai" firstAttribute="centerY" secondItem="UEI-iu-DOR" secondAttribute="centerY" id="TtU-yT-htY"/>
                                     <constraint firstAttribute="trailing" secondItem="ig2-vE-R0S" secondAttribute="trailing" constant="8" id="W2H-Dr-1wl"/>
                                     <constraint firstItem="UEI-iu-DOR" firstAttribute="leading" secondItem="ala-hF-VUk" secondAttribute="leading" constant="8" id="WVC-01-mtL"/>
                                     <constraint firstAttribute="bottom" secondItem="UEI-iu-DOR" secondAttribute="bottom" constant="8" id="cnP-ga-way"/>
@@ -115,6 +121,9 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="0Vq-z0-3vv"/>
+                                        <exclude reference="SZf-ik-e99"/>
+                                        <exclude reference="nM6-Fh-fUZ"/>
+                                        <exclude reference="xY3-Rf-vkO"/>
                                     </mask>
                                 </variation>
                             </view>

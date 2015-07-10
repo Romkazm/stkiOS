@@ -15,5 +15,6 @@ extern NSString* const  STKUtilityAPIUrl;
 //Get image url for stiker messa([[packName_stickerName]])
 + (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage;
 + (NSURL*) tabImageUrlForPackName:(NSString*) name;
++ (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
 
 @end

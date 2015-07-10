@@ -114,11 +114,11 @@
     UIImage *buttonImage = nil;
     
     if (self.inputTextView.inputView) {
-        buttonImage = [UIImage imageNamed:@"ShowKeyboadIcon"];
+        buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
         self.inputTextView.inputView = nil;
         
     } else {
-        buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
+        buttonImage = [UIImage imageNamed:@"ShowKeyboadIcon"];
         self.inputTextView.inputView = self.stickerPanel;
     }
     if (!self.isKeyboardShowed) {

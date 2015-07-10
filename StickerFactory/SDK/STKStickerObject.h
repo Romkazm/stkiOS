@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class STKSticker;
+@class STKSticker, STKStickerPackObject;
 
 @interface STKStickerObject : NSObject
 

@@ -25,7 +25,6 @@
         for (STKSticker *sticker in stickerPack.stickers) {
             
             STKStickerObject *stickerObject = [[STKStickerObject alloc] initWithSticker:sticker];
-            
             [stickersArray addObject:stickerObject];
         }
         self.stickers = [NSArray arrayWithArray:stickersArray];

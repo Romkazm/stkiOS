@@ -14,6 +14,8 @@
 #import "STKStickerObject.h"
 #import "STKStickerPackObject.h"
 #import "STKSticker.h"
+#import "STKAnalyticService.h"
+#import "STKUtility.h"
 
 @interface STKStickersDataModel()
 
@@ -81,6 +83,11 @@
 }
 
 - (void)incrementStickerUsedCount:(STKStickerObject *)sticker {
+    
+    NSArray *trimmedPackNameAndStickerName = [STKUtility trimmedPackNameAndStickerNameWithMessage:sticker.stickerMessage];
+    
+    
+    [[STKAnalyticService sharedService] sendEventWithCategory:STKAnalyticStickerCategory action:trimmedPackNameAndStickerName.firstObject label:sticker.stickerName value:nil];
     
     __weak typeof(self) weakSelf = self;
     

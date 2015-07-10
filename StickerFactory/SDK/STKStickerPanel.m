@@ -67,7 +67,7 @@ typedef enum {
         
         [self addSubview:self.headerView];
         
-        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(frame) - CGRectGetHeight(self.headerView.frame)) collectionViewLayout:self.flowLayout];
+        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetHeight(self.headerView.frame)) collectionViewLayout:self.flowLayout];
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         self.collectionView.delaysContentTouches = NO;
@@ -99,22 +99,27 @@ typedef enum {
     return self;
 }
 
+- (void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    self.scrollDirection = STKStickerPanelScrollDirectionTop;
+    [self.collectionView setContentOffset:CGPointZero];
+}
+
 - (void) willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     self.currentDisplayedSection = 0;
     if (newSuperview) {
+
         [self reloadStickers];
     }
 }
 
-
-#pragma mark - UI methods
-
-- (void) configureConstraints {
-    
-    
+- (void)layoutSubviews {
+    self.collectionView.frame = CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetHeight(self.headerView.frame));
+    self.headerView.frame = CGRectMake(0, 0, self.frame.size.width, 44.0);
 }
 
+#pragma mark - UI methods
 
 
 #pragma mark - Work with base
@@ -123,6 +128,7 @@ typedef enum {
 - (void) reloadStickers {
     
     [self.dataModel updateStickers];
+
     [self.headerView setStickerPacks:self.dataModel.stickerPacks];
     [self.headerView setPackSelectedAtIndex:self.currentDisplayedSection];
     [self.collectionView reloadData];
@@ -177,7 +183,7 @@ typedef enum {
             }
         }
     }
-    else if (self.lastContentOffset < scrollView.contentOffset.y)
+    else if (self.lastContentOffset < scrollView.contentOffset.y && self.lastContentOffset != 0)
     {
         self.scrollDirection = STKStickerPanelScrollDirectionBottom;
     }

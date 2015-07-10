@@ -8,6 +8,8 @@
 
 #import "STKStickerObject.h"
 #import "STKSticker.h"
+#import "STKStickerPackObject.h"
+#import "STKStickerPack.h"
 
 @implementation STKStickerObject
 

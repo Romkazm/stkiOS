@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
+NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
 
 
 @implementation STKUtility
@@ -20,10 +20,8 @@ NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
 
 + (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage {
     
-    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
-    NSString *packNameAndStickerName = [stickerMessage stringByTrimmingCharactersInSet:characterSet];
     
-    NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
+    NSArray *separaredStickerNames = [self trimmedPackNameAndStickerNameWithMessage:stickerMessage];
     NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
     NSString *stickerName = [[separaredStickerNames lastObject] lowercaseString];
     
@@ -35,6 +33,14 @@ NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
     
     return url;
     
+}
+
++ (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message {
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+    NSString *packNameAndStickerName = [message stringByTrimmingCharactersInSet:characterSet];
+    
+    NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
+    return separaredStickerNames;
 }
 
 + (NSURL *)tabImageUrlForPackName:(NSString *)name {
