@@ -30,8 +30,7 @@
     [serializer setValue:STKApiVersion forHTTPHeaderField:@"ApiVersion"];
     [serializer setValue:@"iOS" forHTTPHeaderField:@"Platform"];
     [serializer setValue:[STKUUIDManager generatedDeviceToken] forHTTPHeaderField:@"DeviceId"];
-    NSInteger scale = (NSInteger)[[UIScreen mainScreen] scale];
-    [serializer setValue:[NSString stringWithFormat:@"%ld",(long)scale] forHTTPHeaderField:@"Density"];
+    [serializer setValue:[[NSBundle mainBundle] bundleIdentifier] forHTTPHeaderField:@"Package"];
     [serializer setValue:[STKApiKeyManager apiKey] forHTTPHeaderField:@"ApiKey"];
     [serializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
