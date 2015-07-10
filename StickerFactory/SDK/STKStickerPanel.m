@@ -18,13 +18,26 @@
 #import "STKStickersApiClient.h"
 #import "STKStickersDataModel.h"
 
+typedef enum {
+    
+    STKStickerPanelScrollDirectionTop,
+    STKStickerPanelScrollDirectionBottom
+    
+} STKStickerPanelScrollDirection;
 
-@interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 //UI
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) STKStickerPanelLayout *flowLayout;
 @property (strong, nonatomic) STKStickerPanelHeader *headerView;
+
+@property (assign, nonatomic) NSInteger currentDisplayedSection;
+@property (assign, nonatomic) CGFloat lastContentOffset;
+
+@property (assign, nonatomic) BOOL isScrollBottom;
+@property (assign, nonatomic) STKStickerPanelScrollDirection scrollDirection;
 
 //Common
 @property (strong, nonatomic) STKStickersDataModel *dataModel;
@@ -41,11 +54,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
         self.flowLayout = [[STKStickerPanelLayout alloc] init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake(80.0, 80.0);
+        self.flowLayout.headerReferenceSize = CGSizeMake(0, 1.0);
         
-        self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44.0)];
+        self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44.0)];
         self.headerView.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1];
         
         [self addSubview:self.headerView];
@@ -56,17 +73,19 @@
         self.collectionView.delaysContentTouches = NO;
         self.collectionView.showsHorizontalScrollIndicator = NO;
         self.collectionView.showsVerticalScrollIndicator = NO;
-        self.collectionView.allowsSelection = YES;
         self.collectionView.backgroundColor = [UIColor clearColor];
         [self.collectionView registerClass:[STKStickerPanelCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
-        [self.collectionView registerClass:[STKStickerPanelHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STKStickerPanelHeader"];
+        [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableView"];
         [self addSubview:self.collectionView];
+        
+        self.currentDisplayedSection = 0;
         
         self.apiClient = [[STKStickersApiClient alloc] init];
         
         __weak typeof(self) weakSelf = self;
         
         self.dataModel = [STKStickersDataModel new];
+        [self reloadStickers];
         
         [self.apiClient getStickersPackWithType:nil success:^(id response) {
             
@@ -82,7 +101,8 @@
 
 - (void) willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    if (!newSuperview) {
+    self.currentDisplayedSection = 0;
+    if (newSuperview) {
         [self reloadStickers];
     }
 }
@@ -90,9 +110,8 @@
 
 #pragma mark - UI methods
 
-- (void) addConstraints {
+- (void) configureConstraints {
     
-
     
 }
 
@@ -103,12 +122,8 @@
 
 - (void) reloadStickers {
     
-//    self.stickerPacks = [NSMutableArray arrayWithArray:[STKStickerPack stk_findAllInContext:self.context]];
-//    STKStickerPack *recentPack = [STKStickerPack getRecentsPack];
-//    if (recentPack) {
-//        [self.stickerPacks insertObject:recentPack atIndex:0];
-//    }
     [self.dataModel updateStickers];
+    [self.headerView setStickerPacks:self.dataModel.stickerPacks];
     [self.collectionView reloadData];
 }
 
@@ -142,7 +157,42 @@
     return cell;
 }
 
+#pragma mark - UIScrollViewDelegate
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.lastContentOffset > scrollView.contentOffset.y)
+    {
+        self.scrollDirection = STKStickerPanelScrollDirectionTop;
+        NSInteger maxSection = [[[self.collectionView indexPathsForVisibleItems] valueForKeyPath:@"@max.section"] integerValue];
+        if (self.currentDisplayedSection > maxSection) {
+            self.currentDisplayedSection = maxSection;
+            [self.headerView setPackSelectedAtIndex:maxSection];
+        }
+    }
+    else if (self.lastContentOffset < scrollView.contentOffset.y)
+    {
+        NSLog(@"Scrolling Down");
+        self.scrollDirection = STKStickerPanelScrollDirectionBottom;
+    }
+    
+    self.lastContentOffset = scrollView.contentOffset.y;
+}
+
+
 #pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.currentDisplayedSection == indexPath.section) {
+        NSInteger itemsCount = [self.collectionView numberOfItemsInSection:indexPath.section];
+        if (indexPath.item == itemsCount - 1 && self.scrollDirection == STKStickerPanelScrollDirectionBottom) {
+            [self.headerView setPackSelectedAtIndex:indexPath.section + 1];
+            self.currentDisplayedSection = indexPath.section + 1;
+        }
+    }
+    
+}
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     

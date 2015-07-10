@@ -33,6 +33,7 @@
         STKStickerPackObject *stickerPackObject = [[STKStickerPackObject alloc] initWithStickerPack:pack];
         [result addObject:stickerPackObject];
     }
+    [result sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerPackAttributes.packName ascending:YES]]];
     
     STKStickerPackObject *recentPack = [self recentStickerPack];
     if (recentPack) {

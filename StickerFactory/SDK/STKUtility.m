@@ -27,14 +27,25 @@ NSString *const STKUtilityAPIUrl = @"http://stk.908.vc/stk/";
     NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
     NSString *stickerName = [[separaredStickerNames lastObject] lowercaseString];
     
-    NSString *dimension = [self scaleString];
+    NSString *density = [self scaleString];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%@.png", packName, stickerName, dimension];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%@.png", packName, stickerName, density];
     
     NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
     
     return url;
     
+}
+
++ (NSURL *)tabImageUrlForPackName:(NSString *)name {
+    
+    NSString *density = [self scaleString];
+    
+    NSString *urlSting = [NSString stringWithFormat:@"%@/tab_icon_%@.png",name, density];
+    
+    NSURL *url = [NSURL URLWithString:urlSting relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
+    
+    return url;
 }
 
 + (NSString*) scaleString {

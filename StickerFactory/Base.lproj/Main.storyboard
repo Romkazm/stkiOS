@@ -118,8 +118,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="160" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ia5-oU-XSp">
-                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="160" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ia5-oU-XSp">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="160" id="cYY-dQ-3W2" customClass="STKChatCell">
@@ -168,6 +168,7 @@
                         <outlet property="bottomViewConstraint" destination="1Mo-za-2Xq" id="CCL-6Y-EUU"/>
                         <outlet property="inputTextView" destination="UEI-iu-DOR" id="w8J-PG-Yd1"/>
                         <outlet property="tableView" destination="Ia5-oU-XSp" id="x5Z-OE-v4Z"/>
+                        <outlet property="textInputPanel" destination="ala-hF-VUk" id="B9k-ro-T9z"/>
                         <outlet property="textViewHeightConstraint" destination="cb2-Yx-HZ8" id="uF0-j3-hmo"/>
                     </connections>
                 </viewController>

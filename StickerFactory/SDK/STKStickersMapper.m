@@ -64,7 +64,6 @@
                 
             }
         }
-        [STKStickerPack getRecentsPack];
     }
     
     [self.backgroundContext save:nil];

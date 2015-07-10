@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
+@property (weak, nonatomic) IBOutlet UIView *textInputPanel;
 
 @property (assign, nonatomic) BOOL isKeyboardShowed;
 
@@ -37,6 +38,9 @@
     self.inputTextView.layer.cornerRadius = 7.0;
     self.inputTextView.layer.borderWidth = 1.0;
     self.inputTextView.layer.borderColor = [UIColor colorWithRed:0.84 green:0.84 blue:0.85 alpha:1].CGColor;
+    
+    self.textInputPanel.layer.borderWidth = 1.0;
+    self.textInputPanel.layer.borderColor = [UIColor colorWithRed:0.82 green:0.82 blue:0.82 alpha:1].CGColor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(willHideKeyboard:)

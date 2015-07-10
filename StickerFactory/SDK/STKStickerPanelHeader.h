@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class STKStickerPackObject;
+
 @interface STKStickerPanelHeader : UIView
+
+- (void) setStickerPacks:(NSArray*)stickerPacks;
+
+- (void) setPackSelected:(STKStickerPackObject*)object;
+- (void) setPackSelectedAtIndex:(NSInteger)index;
 
 @end
