@@ -34,6 +34,7 @@
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         self.collectionView.delaysContentTouches = NO;
+        self.collectionView.allowsMultipleSelection = NO;
         self.collectionView.showsHorizontalScrollIndicator = NO;
         self.collectionView.showsVerticalScrollIndicator = NO;
         self.collectionView.backgroundColor = [UIColor clearColor];
@@ -85,8 +86,18 @@
     
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.delegate respondsToSelector:@selector(stickerPanelHeader:didSelectPack:atIndex:)]) {
+        STKStickerPackObject *object = self.stickerPacksArray[indexPath.item];
+        [self.delegate stickerPanelHeader:self didSelectPack:object atIndex:indexPath.item];
+    }
+}
+
 - (void)setPackSelectedAtIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+
     [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 }
 
@@ -99,9 +110,8 @@
 
 - (void)setStickerPacks:(NSArray *)stickerPacks {
     self.stickerPacksArray = stickerPacks;
-    
     [self.collectionView reloadData];
-    [self layoutSubviews];
+
 }
 
 

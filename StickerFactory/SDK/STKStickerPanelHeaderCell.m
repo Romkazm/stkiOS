@@ -44,6 +44,7 @@
 - (void)prepareForReuse {
     [self.imageView sd_cancelCurrentImageLoad];
     self.imageView.image = nil;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)configWithStickerPackName:(NSString *)name {

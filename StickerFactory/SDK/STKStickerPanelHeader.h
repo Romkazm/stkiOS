@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class STKStickerPackObject;
+@class STKStickerPackObject, STKStickerPanelHeader;
+
+@protocol STKStickerPanelHeaderDelegate <NSObject>
+
+- (void) stickerPanelHeader:(STKStickerPanelHeader*)header didSelectPack:(STKStickerPackObject*)pack atIndex:(NSInteger)index;
+
+@end
 
 @interface STKStickerPanelHeader : UIView
 
@@ -16,5 +22,7 @@
 
 - (void) setPackSelected:(STKStickerPackObject*)object;
 - (void) setPackSelectedAtIndex:(NSInteger)index;
+
+@property (weak, nonatomic) id<STKStickerPanelHeaderDelegate> delegate;
 
 @end

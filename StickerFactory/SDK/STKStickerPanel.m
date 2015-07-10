@@ -26,7 +26,7 @@ typedef enum {
 } STKStickerPanelScrollDirection;
 
 
-@interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
+@interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate,STKStickerPanelHeaderDelegate>
 
 //UI
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -35,9 +35,8 @@ typedef enum {
 
 @property (assign, nonatomic) NSInteger currentDisplayedSection;
 @property (assign, nonatomic) CGFloat lastContentOffset;
-
-@property (assign, nonatomic) BOOL isScrollBottom;
 @property (assign, nonatomic) STKStickerPanelScrollDirection scrollDirection;
+@property (assign, nonatomic) BOOL needUpdateHeader;
 
 //Common
 @property (strong, nonatomic) STKStickersDataModel *dataModel;
@@ -64,10 +63,11 @@ typedef enum {
         
         self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44.0)];
         self.headerView.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1];
+        self.headerView.delegate = self;
         
         [self addSubview:self.headerView];
         
-        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetHeight(self.headerView.frame)) collectionViewLayout:self.flowLayout];
+        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(frame) - CGRectGetHeight(self.headerView.frame)) collectionViewLayout:self.flowLayout];
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         self.collectionView.delaysContentTouches = NO;
@@ -79,13 +79,13 @@ typedef enum {
         [self addSubview:self.collectionView];
         
         self.currentDisplayedSection = 0;
+        self.needUpdateHeader = YES;
         
         self.apiClient = [[STKStickersApiClient alloc] init];
         
         __weak typeof(self) weakSelf = self;
         
         self.dataModel = [STKStickersDataModel new];
-        [self reloadStickers];
         
         [self.apiClient getStickersPackWithType:nil success:^(id response) {
             
@@ -124,6 +124,7 @@ typedef enum {
     
     [self.dataModel updateStickers];
     [self.headerView setStickerPacks:self.dataModel.stickerPacks];
+    [self.headerView setPackSelectedAtIndex:self.currentDisplayedSection];
     [self.collectionView reloadData];
 }
 
@@ -159,20 +160,25 @@ typedef enum {
 
 #pragma mark - UIScrollViewDelegate
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    self.needUpdateHeader = YES;
+
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.lastContentOffset > scrollView.contentOffset.y)
     {
-        self.scrollDirection = STKStickerPanelScrollDirectionTop;
-        NSInteger maxSection = [[[self.collectionView indexPathsForVisibleItems] valueForKeyPath:@"@max.section"] integerValue];
-        if (self.currentDisplayedSection > maxSection) {
-            self.currentDisplayedSection = maxSection;
-            [self.headerView setPackSelectedAtIndex:maxSection];
+        if (self.needUpdateHeader) {
+            self.scrollDirection = STKStickerPanelScrollDirectionTop;
+            NSInteger minSection = [[[self.collectionView indexPathsForVisibleItems] valueForKeyPath:@"@min.section"] integerValue];
+            if (self.currentDisplayedSection > minSection) {
+                self.currentDisplayedSection = minSection;
+                [self.headerView setPackSelectedAtIndex:minSection];
+            }
         }
     }
     else if (self.lastContentOffset < scrollView.contentOffset.y)
     {
-        NSLog(@"Scrolling Down");
         self.scrollDirection = STKStickerPanelScrollDirectionBottom;
     }
     
@@ -183,7 +189,7 @@ typedef enum {
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentDisplayedSection == indexPath.section) {
+    if (self.currentDisplayedSection == indexPath.section && self.needUpdateHeader) {
         NSInteger itemsCount = [self.collectionView numberOfItemsInSection:indexPath.section];
         if (indexPath.item == itemsCount - 1 && self.scrollDirection == STKStickerPanelScrollDirectionBottom) {
             [self.headerView setPackSelectedAtIndex:indexPath.section + 1];
@@ -206,6 +212,16 @@ typedef enum {
         [self.delegate stickerPanel:self didSelectStickerWithMessage:sticker.stickerMessage];
     }
     
+}
+
+#pragma mark - STKStickerPanelHeaderDelegate
+
+- (void)stickerPanelHeader:(STKStickerPanelHeader *)header didSelectPack:(STKStickerPackObject *)pack atIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:index];
+    //See scrollViewDidEndScrollingAnimation
+    self.needUpdateHeader = NO;
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    self.currentDisplayedSection = index;
 }
 
 #pragma mark - Properties
