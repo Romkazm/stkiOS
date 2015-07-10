@@ -2,8 +2,8 @@
 Pod::Spec.new do |s|
 
   s.name            = 'StickerFactory'
-  s.version         = '0.0.5'
-  s.platform        = :ios, '6.0'
+  s.version         = '0.0.7'
+  s.platform        = :ios, '7.0'
   s.summary         = 'Stickers Factory lib'
   s.description     = 'Sticker Factory for iOS'
   s.homepage        = "https://github.com/908Inc/stkiOS"
