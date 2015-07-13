@@ -4,56 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8oS-Oe-ZsO">
-                                <rect key="frame" x="141" y="0.0" width="317" height="292"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uHP-v8-pIj">
-                                <rect key="frame" x="141.5" y="300" width="317" height="292"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="8oS-Oe-ZsO" secondAttribute="centerX" id="0eT-7J-eTB"/>
-                            <constraint firstAttribute="centerY" secondItem="8oS-Oe-ZsO" secondAttribute="centerY" id="IdW-nV-TBa"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uHP-v8-pIj" secondAttribute="bottom" constant="8" id="apW-2V-k4W"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uHP-v8-pIj" secondAttribute="bottom" constant="8" id="czd-FD-HSq"/>
-                            <constraint firstItem="8oS-Oe-ZsO" firstAttribute="width" secondItem="uHP-v8-pIj" secondAttribute="width" id="h9f-Zc-QyV"/>
-                            <constraint firstItem="uHP-v8-pIj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="141.5" id="hpR-EM-l0E"/>
-                            <constraint firstItem="8oS-Oe-ZsO" firstAttribute="height" secondItem="uHP-v8-pIj" secondAttribute="height" id="kFW-fH-AKX"/>
-                            <constraint firstAttribute="centerX" secondItem="uHP-v8-pIj" secondAttribute="centerX" id="nF7-f3-Bip"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uHP-v8-pIj" secondAttribute="trailing" constant="16" id="o48-43-a1k"/>
-                            <constraint firstItem="8oS-Oe-ZsO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rBU-pS-SNy"/>
-                            <constraint firstItem="uHP-v8-pIj" firstAttribute="top" secondItem="8oS-Oe-ZsO" secondAttribute="bottom" constant="8" id="t8Q-Cg-7pI"/>
-                            <constraint firstAttribute="centerX" secondItem="8oS-Oe-ZsO" secondAttribute="centerX" id="yc8-ui-tD4"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="0eT-7J-eTB"/>
-                                <exclude reference="IdW-nV-TBa"/>
-                                <exclude reference="czd-FD-HSq"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="categoryStickerImageView" destination="8oS-Oe-ZsO" id="wuT-dI-J4x"/>
-                        <outlet property="methodImageView" destination="uHP-v8-pIj" id="Idj-J2-dkx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Demo Chat-->
         <scene sceneID="NbP-xD-65C">
             <objects>

@@ -224,6 +224,15 @@ typedef enum {
     self.currentDisplayedSection = index;
 }
 
+#pragma mark - Support methods
+
+- (BOOL)isShowed {
+    
+    BOOL isShowed = self.superview ? YES : NO;
+    
+    return isShowed;
+}
+
 
 #pragma mark - Context
 

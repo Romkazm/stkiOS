@@ -52,10 +52,12 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification
-                                               object:nil];
+
     [self scrollTableViewToBottom];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UI Methods
@@ -69,10 +71,6 @@
 
 #pragma mark - Notifications
 
-- (void) keyboardWillChangeFrame:(NSNotification*)notification {
-    //TODO: Change stickers panel size
-
-}
 
 - (void) didShowKeyboard:(NSNotification*)notification {
     
@@ -114,7 +112,7 @@
     
     UIImage *buttonImage = nil;
     
-    if (self.inputTextView.inputView) {
+    if (self.stickerPanel.isShowed) {
         buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
         self.inputTextView.inputView = nil;
         
@@ -132,7 +130,6 @@
 
     
 }
-
 
 #pragma mark - UITableViewDataSource
 

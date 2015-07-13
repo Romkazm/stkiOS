@@ -23,10 +23,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.stickerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 80.0, 80.0)];
+        self.stickerImageView.center = CGPointMake(self.contentView.bounds.size.width/2,self.contentView.bounds.size.height/2);
         self.stickerImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:self.stickerImageView];
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    self.stickerImageView.center = CGPointMake(self.contentView.bounds.size.width/2,self.contentView.bounds.size.height/2);
 }
 
 - (void)prepareForReuse {

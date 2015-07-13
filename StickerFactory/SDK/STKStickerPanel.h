@@ -21,6 +21,8 @@
 @property (weak, nonatomic) id<STKStickerPanelDelegate> delegate;
 
 
+@property (assign, nonatomic, readonly) BOOL isShowed;
+
 // Colors
 @property (strong, nonatomic) UIColor *headerBackgroundColor;
 
