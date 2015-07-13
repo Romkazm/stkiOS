@@ -31,6 +31,7 @@
 @property (strong, nonatomic) UIImage *tabPlaceholder;
 
 // Placeholder colors
+// Default is light gray
 @property (strong, nonatomic) UIColor *stickerPlaceholderTintColor;
 @property (strong, nonatomic) UIColor *tabPlaceholderTintColor;
 

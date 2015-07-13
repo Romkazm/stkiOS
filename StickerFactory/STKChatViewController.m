@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
 @property (weak, nonatomic) IBOutlet UIView *textInputPanel;
 
+@property (weak, nonatomic) IBOutlet UIButton *changeInputViewButton;
+
 @property (assign, nonatomic) BOOL isKeyboardShowed;
 
 
@@ -52,6 +54,11 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
+    
+    //tap gesture
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textViewDidTap:)];
+    [self.inputTextView addGestureRecognizer:tapGesture];
 
     [self scrollTableViewToBottom];
 }
@@ -113,22 +120,44 @@
     UIImage *buttonImage = nil;
     
     if (self.stickerPanel.isShowed) {
-        buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
-        self.inputTextView.inputView = nil;
+        [self hideStickersView];
         
     } else {
-        buttonImage = [UIImage imageNamed:@"ShowKeyboadIcon"];
-        self.inputTextView.inputView = self.stickerPanel;
+        [self showStickersView];
     }
+
+}
+
+#pragma mark - Show/hide stickers
+
+- (void) showStickersView {
+    UIImage *buttonImage = [UIImage imageNamed:@"ShowKeyboadIcon"];
+    
+    [self.changeInputViewButton setImage:buttonImage forState:UIControlStateNormal];
+    [self.changeInputViewButton setImage:buttonImage forState:UIControlStateHighlighted];
+    
+    self.inputTextView.inputView = self.stickerPanel;
+    [self reloadStickersInputViews];
+}
+
+- (void) hideStickersView {
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
+    
+    [self.changeInputViewButton setImage:buttonImage forState:UIControlStateNormal];
+    [self.changeInputViewButton setImage:buttonImage forState:UIControlStateHighlighted];
+    
+    self.inputTextView.inputView = nil;
+    
+    [self reloadStickersInputViews];
+}
+
+
+- (void) reloadStickersInputViews {
+    [self.inputTextView reloadInputViews];
     if (!self.isKeyboardShowed) {
         [self.inputTextView becomeFirstResponder];
     }
-    [self.inputTextView reloadInputViews];
-    [button setImage:buttonImage forState:UIControlStateNormal];
-    [button setImage:buttonImage forState:UIControlStateHighlighted];
-    
-
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -166,8 +195,18 @@
 
 #pragma mark - UITextViewDelegate
 
+
 - (void)textViewDidChange:(UITextView *)textView  {
     self.textViewHeightConstraint.constant = textView.contentSize.height;
+}
+
+#pragma mark - Gesture
+
+- (void) textViewDidTap:(UITapGestureRecognizer*) gestureRecognizer {
+    [self.inputTextView becomeFirstResponder];
+    if (self.stickerPanel.isShowed) {
+        [self hideStickersView];
+    }
 }
 
 #pragma mark - Property

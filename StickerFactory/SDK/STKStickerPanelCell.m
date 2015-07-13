@@ -42,6 +42,7 @@
                          placeholder:(UIImage*)placeholder
                     placeholderColor:(UIColor*)placeholderColor {
     UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StickerPanelPlaceholder"];
+
     
     UIImage *coloredPlaceholder = resultPlaceholder ? [resultPlaceholder imageWithImageTintColor:placeholderColor] : resultPlaceholder;
     
