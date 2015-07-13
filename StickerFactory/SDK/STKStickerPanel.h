@@ -20,4 +20,16 @@
 
 @property (weak, nonatomic) id<STKStickerPanelDelegate> delegate;
 
+
+// Colors
+@property (strong, nonatomic) UIColor *headerBackgroundColor;
+
+// Placeholders
+@property (strong, nonatomic) UIImage *stickerPlaceholder;
+@property (strong, nonatomic) UIImage *tabPlaceholder;
+
+// Placeholder colors
+@property (strong, nonatomic) UIColor *stickerPlaceholderTintColor;
+@property (strong, nonatomic) UIColor *tabPlaceholderTintColor;
+
 @end

@@ -39,10 +39,10 @@
 
 - (void) createModelsAndSaveFromStickerPacks:(NSArray*) stickerPacks {
     
-    NSArray *packNames = [stickerPacks valueForKeyPath:@"@unionOfObjects.pack_name"];
+    NSArray *packIDs = [stickerPacks valueForKeyPath:@"@unionOfObjects.pack_id"];
     
     NSFetchRequest *requestForDelete = [NSFetchRequest fetchRequestWithEntityName:[STKStickerPack entityName]];
-    requestForDelete.predicate = [NSPredicate predicateWithFormat:@"NOT (%K in %@)", STKStickerPackAttributes.packName, packNames];
+    requestForDelete.predicate = [NSPredicate predicateWithFormat:@"NOT (%K in %@)", STKStickerPackAttributes.packID, packIDs];
     
     NSArray *objectsForDelete = [self.backgroundContext executeFetchRequest:requestForDelete error:nil];
     
@@ -51,10 +51,11 @@
     }
     
     for (NSDictionary *pack in stickerPacks) {
+        NSNumber *packID = pack[@"pack_id"];
         NSString *packName = pack[@"pack_name"];
         
-        STKStickerPack *packModel = [STKStickerPack stk_objectWithUniqueAttribute:STKStickerPackAttributes.packName value:packName context:self.backgroundContext];
-        if (packModel.packTitle.length > 0) {
+        STKStickerPack *packModel = [STKStickerPack stk_objectWithUniqueAttribute:STKStickerPackAttributes.packID value:packID context:self.backgroundContext];
+        if (packModel.packTitle.length == 0) {
             [[STKAnalyticService sharedService] sendEventWithCategory:STKAnalyticPackCategory action:STKAnalyticActionInstall label:packName value:nil];
         }
         NSArray *stickersArray = pack[@"stickers"];
@@ -63,16 +64,19 @@
             
             for (NSDictionary *sticker in stickersArray) {
                 NSString *stickerName = sticker[@"name"];
-                STKSticker *stickerModel = [NSEntityDescription insertNewObjectForEntityForName:[STKSticker entityName] inManagedObjectContext:self.backgroundContext];
+//                STKSticker *stickerModel = [NSEntityDescription insertNewObjectForEntityForName:[STKSticker entityName] inManagedObjectContext:self.backgroundContext];
+                STKSticker *stickerModel = [STKSticker stk_objectWithUniqueAttribute:STKStickerAttributes.stickerID value:sticker[@"id"] context:self.backgroundContext];
                 
                 stickerModel.stickerName = stickerName;
+                stickerModel.stickerID = sticker[@"id"];
                 stickerModel.stickerMessage = [NSString stringWithFormat:@"[[%@_%@]]",packName, stickerName];
                 
                 [packModel addStickersObject:stickerModel];
                 
             }
         }
-
+        
+        packModel.packID = packID;
         packModel.packName = packName;
         packModel.packTitle = pack[@"title"];
         packModel.artist = pack[@"artist"];

@@ -18,6 +18,7 @@
     self = [super init];
     if (self) {
         self.stickerName = sticker.stickerName;
+        self.stickerID = sticker.stickerID;
         self.stickerMessage = sticker.stickerMessage;
         self.usedCount = sticker.usedCount.integerValue;
     }

@@ -10,6 +10,6 @@
 
 @interface STKStickerPanelHeaderCell : UICollectionViewCell
 
-- (void) configWithStickerPackName:(NSString*) name;
+- (void) configWithStickerPackName:(NSString*)name placeholder:(UIImage*)placeholder placeholderTintColor:(UIColor*)placeholderTintColor;
 
 @end

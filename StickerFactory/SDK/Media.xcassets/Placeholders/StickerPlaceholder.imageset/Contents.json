@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ic_sticker_placeholder-2.png"
+      "filename" : "placeholder40.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "placeholder40@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "ic_sticker_placeholder.png"
+      "filename" : "placeholder40@3x.png"
     }
   ],
   "info" : {

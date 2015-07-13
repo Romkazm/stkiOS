@@ -71,6 +71,7 @@
 
 - (void) keyboardWillChangeFrame:(NSNotification*)notification {
     //TODO: Change stickers panel size
+
 }
 
 - (void) didShowKeyboard:(NSNotification*)notification {

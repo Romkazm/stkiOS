@@ -5,6 +5,7 @@
 
 const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.artist = @"artist",
+	.packID = @"packID",
 	.packName = @"packName",
 	.packTitle = @"packTitle",
 	.price = @"price",
@@ -40,6 +41,11 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"packIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"packID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"priceValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"price"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -50,6 +56,26 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 }
 
 @dynamic artist;
+
+@dynamic packID;
+
+- (int64_t)packIDValue {
+	NSNumber *result = [self packID];
+	return [result longLongValue];
+}
+
+- (void)setPackIDValue:(int64_t)value_ {
+	[self setPackID:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitivePackIDValue {
+	NSNumber *result = [self primitivePackID];
+	return [result longLongValue];
+}
+
+- (void)setPrimitivePackIDValue:(int64_t)value_ {
+	[self setPrimitivePackID:[NSNumber numberWithLongLong:value_]];
+}
 
 @dynamic packName;
 

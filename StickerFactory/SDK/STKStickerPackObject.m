@@ -20,6 +20,7 @@
         self.artist = stickerPack.artist;
         self.packName = stickerPack.packName;
         self.packTitle = stickerPack.packTitle;
+        self.packID = stickerPack.packID;
         self.price = [stickerPack.price floatValue];
         NSMutableArray *stickersArray = [NSMutableArray array];
         for (STKSticker *sticker in stickerPack.stickers) {

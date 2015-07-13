@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) NSString *packTitle;
 
+@property (nonatomic, strong) NSNumber *packID;
+
 @property (nonatomic, assign) CGFloat price;
 
 @property (nonatomic, strong) NSArray *stickers;

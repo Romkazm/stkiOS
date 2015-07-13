@@ -31,7 +31,7 @@
 + (STKSticker*)modelForObject:(STKStickerObject *)object {
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
-    request.predicate = [NSPredicate predicateWithFormat:@"stickerName == %@", object.stickerName];
+    request.predicate = [NSPredicate predicateWithFormat:@"stickerID == %@", object.stickerID];
     request.fetchLimit = 1;
     NSManagedObjectContext *context = [NSManagedObjectContext stk_defaultContext];
     

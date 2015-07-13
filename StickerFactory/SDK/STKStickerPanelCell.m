@@ -29,10 +29,6 @@
     return self;
 }
 
-- (void)awakeFromNib {
-
-}
-
 - (void)prepareForReuse {
     [self.stickerImageView stk_cancelStickerLoading];
 }
@@ -40,8 +36,9 @@
 - (void) configureWithStickerMessage:(NSString*)stickerMessage
                          placeholder:(UIImage*)placeholder
                     placeholderColor:(UIColor*)placeholderColor {
+    UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StickerPanelPlaceholder"];
     
-    UIImage *coloredPlaceholder = [placeholder imageWithImageTintColor:placeholderColor];
+    UIImage *coloredPlaceholder = resultPlaceholder ? [resultPlaceholder imageWithImageTintColor:placeholderColor] : resultPlaceholder;
     
     [self.stickerImageView stk_setStickerWithMessage:stickerMessage placeholder:coloredPlaceholder];
     

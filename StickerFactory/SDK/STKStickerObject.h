@@ -13,6 +13,7 @@
 @interface STKStickerObject : NSObject
 
 @property (strong, nonatomic) NSString *stickerName;
+@property (strong, nonatomic) NSNumber *stickerID;
 @property (strong, nonatomic) NSString *stickerMessage;
 @property (assign, nonatomic) NSInteger usedCount;
 

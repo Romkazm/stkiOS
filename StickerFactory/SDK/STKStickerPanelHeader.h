@@ -18,11 +18,14 @@
 
 @interface STKStickerPanelHeader : UIView
 
+@property (weak, nonatomic) id<STKStickerPanelHeaderDelegate> delegate;
+
+@property (strong, nonatomic) UIImage *placeholderImage;
+@property (strong, nonatomic) UIColor *placeholderTintColor;
+
 - (void) setStickerPacks:(NSArray*)stickerPacks;
 
 - (void) setPackSelected:(STKStickerPackObject*)object;
 - (void) setPackSelectedAtIndex:(NSInteger)index;
-
-@property (weak, nonatomic) id<STKStickerPanelHeaderDelegate> delegate;
 
 @end

@@ -80,7 +80,7 @@
     
     STKStickerPackObject *stickerPack = self.stickerPacksArray[indexPath.item];
     
-    [cell configWithStickerPackName:stickerPack.packName];
+    [cell configWithStickerPackName:stickerPack.packName placeholder:self.placeholderImage placeholderTintColor:self.placeholderTintColor];
     
     return cell;
     

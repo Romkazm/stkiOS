@@ -65,6 +65,7 @@
 		1AA04EB236AD472CD61382DF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		280EB363112837B81F052E19 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6E1E67191B53ECE4008D3D65 /* StickerModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "StickerModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		6E776D601B4AC18A0001FBB6 /* STKStickerPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerPanel.h; path = StickerFactory/SDK/STKStickerPanel.h; sourceTree = "<group>"; };
 		6E776D611B4AC18A0001FBB6 /* STKStickerPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STKStickerPanel.m; path = StickerFactory/SDK/STKStickerPanel.m; sourceTree = "<group>"; };
 		6E776D641B4BB60C0001FBB6 /* STKStickerPanelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STKStickerPanelLayout.h; path = StickerFactory/SDK/STKStickerPanelLayout.h; sourceTree = "<group>"; };
@@ -459,6 +460,7 @@
 				TargetAttributes = {
 					6EF264531B3C0F830099A657 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = Q5ZE6268FL;
 					};
 					6EF2646C1B3C0F830099A657 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -708,9 +710,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StickerFactory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -719,10 +727,16 @@
 			baseConfigurationReference = 5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StickerFactory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -796,10 +810,11 @@
 		6EADF3771B46B43D008005E9 /* StickerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6E1E67191B53ECE4008D3D65 /* StickerModel 3.xcdatamodel */,
 				6E776D731B4BF0EE0001FBB6 /* StickerModel 2.xcdatamodel */,
 				6EADF3781B46B43D008005E9 /* StickerModel.xcdatamodel */,
 			);
-			currentVersion = 6E776D731B4BF0EE0001FBB6 /* StickerModel 2.xcdatamodel */;
+			currentVersion = 6E1E67191B53ECE4008D3D65 /* StickerModel 3.xcdatamodel */;
 			name = StickerModel.xcdatamodeld;
 			path = StickerFactory/SDK/StickerModel.xcdatamodeld;
 			sourceTree = "<group>";

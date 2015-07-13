@@ -59,10 +59,9 @@ typedef enum {
         self.flowLayout = [[STKStickerPanelLayout alloc] init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake(80.0, 80.0);
-        self.flowLayout.headerReferenceSize = CGSizeMake(0, 1.0);
         
         self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44.0)];
-        self.headerView.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1];
+        self.headerView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
         self.headerView.delegate = self;
         
         [self addSubview:self.headerView];
@@ -91,10 +90,7 @@ typedef enum {
             
             [weakSelf reloadStickers];
             
-        } failure:^(NSError *error) {
-            
-            
-        }];
+        } failure:nil];
     }
     return self;
 }
@@ -118,8 +114,6 @@ typedef enum {
     self.collectionView.frame = CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetHeight(self.headerView.frame));
     self.headerView.frame = CGRectMake(0, 0, self.frame.size.width, 44.0);
 }
-
-#pragma mark - UI methods
 
 
 #pragma mark - Work with base
@@ -159,7 +153,7 @@ typedef enum {
         
     STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
 
-    [cell configureWithStickerMessage:sticker.stickerMessage placeholder:nil placeholderColor:[UIColor redColor]];
+    [cell configureWithStickerMessage:sticker.stickerMessage placeholder:self.stickerPlaceholder placeholderColor:self.stickerPlaceholderTintColor];
     
     return cell;
 }
@@ -229,8 +223,6 @@ typedef enum {
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     self.currentDisplayedSection = index;
 }
-
-#pragma mark - Properties
 
 
 #pragma mark - Context

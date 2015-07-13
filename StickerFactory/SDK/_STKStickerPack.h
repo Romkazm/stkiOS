@@ -5,6 +5,7 @@
 
 extern const struct STKStickerPackAttributes {
 	__unsafe_unretained NSString *artist;
+	__unsafe_unretained NSString *packID;
 	__unsafe_unretained NSString *packName;
 	__unsafe_unretained NSString *packTitle;
 	__unsafe_unretained NSString *price;
@@ -28,6 +29,14 @@ extern const struct STKStickerPackRelationships {
 @property (nonatomic, strong) NSString* artist;
 
 //- (BOOL)validateArtist:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* packID;
+
+@property (atomic) int64_t packIDValue;
+- (int64_t)packIDValue;
+- (void)setPackIDValue:(int64_t)value_;
+
+//- (BOOL)validatePackID:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* packName;
 
@@ -70,6 +79,12 @@ extern const struct STKStickerPackRelationships {
 
 - (NSString*)primitiveArtist;
 - (void)setPrimitiveArtist:(NSString*)value;
+
+- (NSNumber*)primitivePackID;
+- (void)setPrimitivePackID:(NSNumber*)value;
+
+- (int64_t)primitivePackIDValue;
+- (void)setPrimitivePackIDValue:(int64_t)value_;
 
 - (NSString*)primitivePackName;
 - (void)setPrimitivePackName:(NSString*)value;

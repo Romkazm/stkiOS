@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "STKStickersManager.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -21,6 +22,7 @@
 #warning API_KEI
 //    [STKStickersManager initWitApiKey:@"API_KEY"];
     [STKStickersManager initWitApiKey:@"f06190d9d63cd2f4e7b124612f63c56c"];
+
     
 
     

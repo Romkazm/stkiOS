@@ -4,6 +4,7 @@
 #import "_STKSticker.h"
 
 const struct STKStickerAttributes STKStickerAttributes = {
+	.stickerID = @"stickerID",
 	.stickerMessage = @"stickerMessage",
 	.stickerName = @"stickerName",
 	.usedCount = @"usedCount",
@@ -39,6 +40,11 @@ const struct STKStickerRelationships STKStickerRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"stickerIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"stickerID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"usedCountValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"usedCount"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -46,6 +52,26 @@ const struct STKStickerRelationships STKStickerRelationships = {
 	}
 
 	return keyPaths;
+}
+
+@dynamic stickerID;
+
+- (int64_t)stickerIDValue {
+	NSNumber *result = [self stickerID];
+	return [result longLongValue];
+}
+
+- (void)setStickerIDValue:(int64_t)value_ {
+	[self setStickerID:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveStickerIDValue {
+	NSNumber *result = [self primitiveStickerID];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveStickerIDValue:(int64_t)value_ {
+	[self setPrimitiveStickerID:[NSNumber numberWithLongLong:value_]];
 }
 
 @dynamic stickerMessage;

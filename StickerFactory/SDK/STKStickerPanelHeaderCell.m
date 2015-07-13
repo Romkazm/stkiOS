@@ -9,6 +9,7 @@
 #import "STKStickerPanelHeaderCell.h"
 #import <UIImageView+WebCache.h>
 #import "STKUtility.h"
+#import "UIImage+Tint.h"
 
 @interface STKStickerPanelHeaderCell()
 
@@ -47,7 +48,7 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)configWithStickerPackName:(NSString *)name {
+- (void)configWithStickerPackName:(NSString *)name placeholder:(UIImage *)placeholder placeholderTintColor:(UIColor *)placeholderTintColor{
     
     if ([name isEqualToString:@"Recent"]) {
         self.imageView.image = [UIImage imageNamed:@"RecentIcon"];
@@ -55,7 +56,12 @@
         
         NSURL *iconUrl = [STKUtility tabImageUrlForPackName:name];
         
-        [self.imageView sd_setImageWithURL:iconUrl];
+        UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StikerTabPlaceholder"];
+        
+        UIImage *coloredPlaceholder = resultPlaceholder ? [resultPlaceholder imageWithImageTintColor:placeholderTintColor] : resultPlaceholder;
+        
+        
+        [self.imageView sd_setImageWithURL:iconUrl placeholderImage:coloredPlaceholder];
     }
     
 }
