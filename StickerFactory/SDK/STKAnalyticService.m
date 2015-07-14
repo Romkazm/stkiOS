@@ -30,7 +30,12 @@ NSString *const STKStickersCountLabel = @"Stickers count";
 NSString *const STKEventsCountLabel = @"Events count";
 
 
+//Used with weak
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
 static const NSInteger kMemoryCacheObjectsCount = 20;
+#pragma clang diagnostic pop
+
 
 @interface STKAnalyticService()
 
