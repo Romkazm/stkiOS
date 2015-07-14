@@ -12,10 +12,57 @@
 
 #pragma mark - Find
 
++ (NSArray*)stk_findAllWithSortDescriptor:(NSArray*) sortDescriptors context:(NSManagedObjectContext*) context {
+    
+    NSFetchRequest *request = [self stk_fetchRequestWithContext:context];
+    
+    request.sortDescriptors = sortDescriptors;
+    
+    __block NSArray *objects = nil;
+    
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        
+        objects = [context executeFetchRequest:request error:&error];
+        
+    }];
+    
+    return objects;
+    
+}
+
++ (NSArray *)stk_findWithPredicate:(NSPredicate *)predicate
+                   sortDescriptors:(NSArray*)sortDescriptors
+                           context:(NSManagedObjectContext *)context {
+    return [self stk_findWithPredicate:predicate sortDescriptors:sortDescriptors fetchLimit:0 context:context];
+}
+
++ (NSArray *)stk_findWithPredicate:(NSPredicate *)predicate
+                   sortDescriptors:(NSArray*)sortDescriptors
+                        fetchLimit:(NSInteger) fetchLimit
+                           context:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self stk_fetchRequestWithContext:context];
+    request.sortDescriptors = sortDescriptors;
+    request.predicate = predicate;
+    request.fetchLimit = fetchLimit;
+    __block NSArray *objects = nil;
+    
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        
+        objects = [context executeFetchRequest:request error:&error];
+        
+    }];
+    
+    return objects;
+}
+
 + (NSArray *)stk_findAllInContext:(NSManagedObjectContext*) context {
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:[self stk_entityName] inManagedObjectContext:context];
+    NSFetchRequest *request = [self stk_fetchRequestWithContext:context];
     
     __block NSArray *objects = nil;
     
@@ -30,6 +77,13 @@
     return objects;
     
 }
+
++ (NSFetchRequest*)stk_fetchRequestWithContext:(NSManagedObjectContext*) context {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:[self stk_entityName] inManagedObjectContext:context];
+    return request;
+}
+
 
 #pragma mark - Delete
 
@@ -65,5 +119,33 @@
     return entityName;
 }
 
+
+#pragma mark - Unique
+
++ (instancetype) stk_objectWithUniqueAttribute:(NSString *) attribute
+                                     value:(id)value
+                               context:(NSManagedObjectContext*) context {
+    
+    if (context == nil) {
+        return nil;
+    }
+    
+    id object = nil;
+    
+    if (value) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:[self stk_entityName]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", attribute, value];
+        [request setPredicate:predicate];
+        object = [[context executeFetchRequest:request error:nil] firstObject];
+    } else {
+        return nil;
+    }
+    
+    if (!object) {
+        object = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([self class])
+                                               inManagedObjectContext:context];
+    }
+    return object;
+}
 
 @end

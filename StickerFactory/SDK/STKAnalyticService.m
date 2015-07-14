@@ -18,9 +18,12 @@
 
 //Categories
 NSString *const STKAnalyticMessageCategory = @"message";
+NSString *const STKAnalyticStickerCategory = @"sticker";
+NSString *const STKAnalyticPackCategory = @"pack";
 
 //Actions
 NSString *const STKAnalyticActionCheck = @"check";
+NSString *const STKAnalyticActionInstall = @"install";
 
 //labels
 NSString *const STKStickersCountLabel = @"Stickers count";
@@ -71,11 +74,11 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
         
         // 4
-        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-80"];
         
 #if DEBUG
         [GAI sharedInstance].dryRun = YES;
 #endif
+        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-83"];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillResignActive:)
@@ -120,7 +123,8 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
         
         STKStatistic *statistic = nil;
-        if (objects.count > 0) {
+        //TODO: REFACTORING
+        if (objects.count > 0 && [category isEqualToString:STKAnalyticActionCheck]) {
             statistic = objects.firstObject;
             NSInteger tempValue = statistic.value.integerValue;
             tempValue += value.integerValue;

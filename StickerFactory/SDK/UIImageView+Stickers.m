@@ -52,6 +52,8 @@ static void * StickerDefaultPlaceholderColorKey = &StickerDefaultPlaceholderColo
         UIImage *defaultPlaceholder = [UIImage imageNamed:@"StickerPlaceholder"];
         if (self.stickerDefaultPlaceholderColor) {
             defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:self.stickerDefaultPlaceholderColor];
+        } else {
+            defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultGrayColor]];
         }
         placeholderImage = defaultPlaceholder;
 

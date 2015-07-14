@@ -11,9 +11,13 @@
 
 //Categories
 extern NSString *const STKAnalyticMessageCategory;
+extern NSString *const STKAnalyticStickerCategory;
+extern NSString *const STKAnalyticPackCategory;
 
 //Actions
 extern NSString *const STKAnalyticActionCheck;
+extern NSString *const STKAnalyticActionInstall;
+
 
 //Labels
 extern NSString *const STKStickersCountLabel;

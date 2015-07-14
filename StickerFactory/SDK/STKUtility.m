@@ -20,21 +20,38 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
 
 + (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage {
     
-    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
-    NSString *packNameAndStickerName = [stickerMessage stringByTrimmingCharactersInSet:characterSet];
     
-    NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
+    NSArray *separaredStickerNames = [self trimmedPackNameAndStickerNameWithMessage:stickerMessage];
     NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
     NSString *stickerName = [[separaredStickerNames lastObject] lowercaseString];
     
-    NSString *dimension = [self scaleString];
+    NSString *density = [self scaleString];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%@.png", packName, stickerName, dimension];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%@.png", packName, stickerName, density];
     
     NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
     
     return url;
     
+}
+
++ (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message {
+    NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+    NSString *packNameAndStickerName = [message stringByTrimmingCharactersInSet:characterSet];
+    
+    NSArray *separaredStickerNames = [packNameAndStickerName componentsSeparatedByString:@"_"];
+    return separaredStickerNames;
+}
+
++ (NSURL *)tabImageUrlForPackName:(NSString *)name {
+    
+    NSString *density = [self scaleString];
+    
+    NSString *urlSting = [NSString stringWithFormat:@"%@/tab_icon_%@.png",name, density];
+    
+    NSURL *url = [NSURL URLWithString:urlSting relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
+    
+    return url;
 }
 
 + (NSString*) scaleString {
@@ -59,6 +76,12 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
             break;
     }
     return dimension;
+}
+
+#pragma mark - Colors
+
++ (UIColor*) defaultGrayColor {
+    return [UIColor colorWithRed:0.9 green:0.9 blue:0.92 alpha:1];
 }
 
 @end
