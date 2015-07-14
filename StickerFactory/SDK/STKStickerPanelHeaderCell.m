@@ -58,7 +58,9 @@
         
         UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StikerTabPlaceholder"];
         
-        UIImage *coloredPlaceholder = resultPlaceholder ? [resultPlaceholder imageWithImageTintColor:placeholderTintColor] : resultPlaceholder;
+        UIColor *colorForPlaceholder = placeholderTintColor ? placeholderTintColor : [STKUtility defaultGrayColor];
+        
+        UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
         
         
         [self.imageView sd_setImageWithURL:iconUrl placeholderImage:coloredPlaceholder];

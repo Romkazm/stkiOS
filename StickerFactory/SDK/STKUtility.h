@@ -7,14 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface STKUtility : NSObject
 
 extern NSString* const  STKUtilityAPIUrl;
 
+
 //Get image url for stiker messa([[packName_stickerName]])
 + (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage;
 + (NSURL*) tabImageUrlForPackName:(NSString*) name;
 + (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
+
+//Colors
++ (UIColor*) defaultGrayColor;
 
 @end

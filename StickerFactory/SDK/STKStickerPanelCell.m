@@ -9,6 +9,7 @@
 #import "STKStickerPanelCell.h"
 #import "UIImageView+Stickers.h"
 #import "UIImage+Tint.h"
+#import "STKUtility.h"
 
 @interface STKStickerPanelCell()
 
@@ -42,9 +43,10 @@
                          placeholder:(UIImage*)placeholder
                     placeholderColor:(UIColor*)placeholderColor {
     UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StickerPanelPlaceholder"];
-
     
-    UIImage *coloredPlaceholder = resultPlaceholder ? [resultPlaceholder imageWithImageTintColor:placeholderColor] : resultPlaceholder;
+    UIColor *colorForPlaceholder = placeholderColor ? placeholderColor : [STKUtility defaultGrayColor];
+    
+    UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
     
     [self.stickerImageView stk_setStickerWithMessage:stickerMessage placeholder:coloredPlaceholder];
     

@@ -78,4 +78,10 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
     return dimension;
 }
 
+#pragma mark - Colors
+
++ (UIColor*) defaultGrayColor {
+    return [UIColor colorWithRed:0.9 green:0.9 blue:0.92 alpha:1];
+}
+
 @end
