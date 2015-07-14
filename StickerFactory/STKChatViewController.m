@@ -211,7 +211,7 @@
 
 - (STKStickerPanel *)stickerPanel {
     if (!_stickerPanel) {
-        _stickerPanel = [[STKStickerPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 224.0)];
+        _stickerPanel = [[STKStickerPanel alloc] initWithFrame:CGRectZero];
         _stickerPanel.delegate = self;
     }
     return _stickerPanel;

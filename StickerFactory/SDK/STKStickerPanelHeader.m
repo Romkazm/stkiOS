@@ -30,7 +30,7 @@
         self.flowLayout.minimumInteritemSpacing = 0;
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        self.collectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:self.flowLayout];
+        self.collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:self.flowLayout];
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         self.collectionView.delaysContentTouches = NO;
@@ -51,7 +51,7 @@
     
     [super layoutSubviews];
     
-//    self.collectionView.frame = self.frame;
+    self.collectionView.frame = self.frame;
 }
 
 - (void) configureConstraints {

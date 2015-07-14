@@ -56,11 +56,14 @@ typedef enum {
         
         self.backgroundColor = [UIColor whiteColor];
         
+        //Flexible height for system
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        
         self.flowLayout = [[STKStickerPanelLayout alloc] init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake(80.0, 80.0);
         
-        self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44.0)];
+        self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44.0)];
         self.headerView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
         self.headerView.delegate = self;
         
