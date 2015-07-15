@@ -7,7 +7,7 @@
 //
 
 #import "STKChatCell.h"
-#import "STKStickerFactory.h"
+#import "STKStickerPipe.h"
 
 @implementation STKChatCell
 

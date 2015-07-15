@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "STKStickerPackProtocol.h"
 
 @class STKStickerPack;
 
-@interface STKStickerPackObject : NSObject
+@interface STKStickerPackObject : NSObject <STKStickerPackProtocol>
 
 @property (nonatomic, strong) NSString *artist;
 
@@ -21,7 +22,7 @@
 
 @property (nonatomic, strong) NSNumber *packID;
 
-@property (nonatomic, assign) CGFloat price;
+@property (nonatomic, assign) NSNumber *price;
 
 @property (nonatomic, strong) NSArray *stickers;
 

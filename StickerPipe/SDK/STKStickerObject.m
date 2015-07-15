@@ -20,7 +20,7 @@
         self.stickerName = sticker.stickerName;
         self.stickerID = sticker.stickerID;
         self.stickerMessage = sticker.stickerMessage;
-        self.usedCount = sticker.usedCount.integerValue;
+        self.usedCount = sticker.usedCount;
     }
     return self;
 }

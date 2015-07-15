@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "STKStickerProtocol.h"
 
 @class STKSticker, STKStickerPackObject;
 
-@interface STKStickerObject : NSObject
+@interface STKStickerObject : NSObject <STKStickerProtocol>
 
 @property (strong, nonatomic) NSString *stickerName;
 @property (strong, nonatomic) NSNumber *stickerID;
 @property (strong, nonatomic) NSString *stickerMessage;
-@property (assign, nonatomic) NSInteger usedCount;
+@property (assign, nonatomic) NSNumber *usedCount;
 
 - (instancetype) initWithSticker:(STKSticker*) sticker;
 
