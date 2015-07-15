@@ -70,18 +70,14 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
         self.analyticsApiClient = [STKAnalyticsAPIClient new];
         
-        // 1
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         
-        // 3
-        [GAI sharedInstance].dispatchInterval = 0;
+        [GAI sharedInstance].dispatchInterval = 60;
         
-        
-        
-        // 4
+        [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
         
 #if DEBUG
-        [GAI sharedInstance].dryRun = YES;
+//        [GAI sharedInstance].dryRun = YES;
 #endif
         self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-83"];
 
@@ -111,7 +107,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                         value:(NSNumber*)value
 {
     
-#ifndef DEBUG
+//#ifndef DEBUG
     __weak typeof(self) weakSelf = self;
     [self.backgroundContext performBlock:^{
         
@@ -151,9 +147,12 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
             [weakSelf.backgroundContext save:&error];
             weakSelf.objectCounter = 0;
         }
+        if (![statistic.category isEqualToString:STKAnalyticMessageCategory]) {
+            [weakSelf sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
+        }
     }];
     
-#endif
+//#endif
     
 }
 
@@ -164,11 +163,8 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                                         label:(NSString*)label
                                         value:(NSNumber*)value
 {
-    if (value.integerValue > 0) {
         NSDictionary*buildedDictionary = [[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build];
         [self.tracker send:buildedDictionary];
-        [[GAI sharedInstance] dispatch];
-    }
 
 }
 
@@ -204,8 +200,14 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     NSArray *events = [STKStatistic stk_findAllInContext:self.backgroundContext];
     
     for (STKStatistic *statistic in events) {
-        [self sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
+        if ([statistic.category isEqualToString:STKAnalyticMessageCategory]) {
+                [self sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
+        }
+
     }
+    
+    //Sending analytics
+    [[GAI sharedInstance] dispatch];
     
     [self.analyticsApiClient sendStatistics:events success:^(id response) {
         

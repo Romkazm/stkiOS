@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 
-NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
+//NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
+NSString *const STKUtilityAPIUrl = @"http://work.stk.908.vc/stk/";
 
 
 @implementation STKUtility

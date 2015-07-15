@@ -21,6 +21,7 @@
     // Override point for customization after application launch.
 #warning API_KEI
 //    [STKStickersManager initWitApiKey:@"API_KEY"];
+    [STKStickersManager initWitApiKey:@"dced537bd6796e0e6dc31b8e79485c6a"];
 
     return YES;
 }
