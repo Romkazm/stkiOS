@@ -11,6 +11,7 @@
 #import "STKStickersMapper.h"
 #import "STKUUIDManager.h"
 #import "STKApiKeyManager.h"
+#import "STKUtility.h"
 
 @interface STKStickersApiClient()
 
@@ -53,6 +54,10 @@
                      success:^(NSURLSessionDataTask *task, id responseObject) {
                          
                          [weakSelf.mapper mappingStickerPacks:responseObject[@"data"] async:NO];
+                         
+                         if ([responseObject[@"data"] count] == 0) {
+                             STKLog(@"get empty stickers pack JSON");
+                         }
                          
                          if (success) {
                              dispatch_async(dispatch_get_main_queue(), ^{

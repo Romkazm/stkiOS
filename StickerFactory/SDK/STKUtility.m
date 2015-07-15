@@ -84,4 +84,21 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
     return [UIColor colorWithRed:0.9 green:0.9 blue:0.92 alpha:1];
 }
 
+#pragma mark - STKLog
+
+void STKLog(NSString *format, ...) {
+
+#if DEBUG
+    
+    va_list argumentList;
+    va_start(argumentList, format);
+    
+    NSLogv(format, argumentList);
+    
+    va_end(argumentList);
+    
+#endif
+}
+
+
 @end

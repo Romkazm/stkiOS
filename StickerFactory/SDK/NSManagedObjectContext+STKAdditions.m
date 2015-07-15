@@ -8,6 +8,7 @@
 
 #import "NSManagedObjectContext+STKAdditions.h"
 #import "NSPersistentStoreCoordinator+STKAdditions.h"
+#import "STKUtility.h"
 
 static NSManagedObjectContext *mainContext;
 static NSManagedObjectContext *backgroundContext;

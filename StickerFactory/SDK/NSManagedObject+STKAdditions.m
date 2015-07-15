@@ -7,6 +7,7 @@
 //
 
 #import "NSManagedObject+STKAdditions.h"
+#import "STKUtility.h"
 
 @implementation NSManagedObject (STKAdditions)
 
@@ -26,6 +27,9 @@
         
         objects = [context executeFetchRequest:request error:&error];
         
+        if (error) {
+            STKLog(@"Coredata error: %@", error.localizedDescription);
+        }
     }];
     
     return objects;
@@ -55,6 +59,9 @@
         
         objects = [context executeFetchRequest:request error:&error];
         
+        if (error) {
+            STKLog(@"Coredata error: %@", error.localizedDescription);
+        }
     }];
     
     return objects;
@@ -71,7 +78,9 @@
         NSError *error = nil;
         
         objects = [context executeFetchRequest:request error:&error];
-        
+        if (error) {
+            STKLog(@"Coredata error: %@", error.localizedDescription);
+        }
     }];
     
     return objects;
@@ -94,8 +103,12 @@
     [request setIncludesPropertyValues:NO];
     request.entity = [NSEntityDescription entityForName:[self stk_entityName] inManagedObjectContext:context];
     
-    NSArray *objects = [context executeFetchRequest:request error:nil];
+    NSError *error = nil;
     
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    if (error) {
+        STKLog(@"Coredata delete error: %@", error.localizedDescription);
+    }
     for (id object in objects) {
         [context deleteObject:object];
     }
@@ -136,7 +149,11 @@
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:[self stk_entityName]];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", attribute, value];
         [request setPredicate:predicate];
-        object = [[context executeFetchRequest:request error:nil] firstObject];
+        NSError *error = nil;
+        object = [[context executeFetchRequest:request error:&error] firstObject];
+        if (error) {
+            STKLog(@"Coredata unique fetching error: %@", error.localizedDescription);
+        }
     } else {
         return nil;
     }

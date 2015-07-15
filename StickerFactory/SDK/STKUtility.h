@@ -22,4 +22,6 @@ extern NSString* const  STKUtilityAPIUrl;
 //Colors
 + (UIColor*) defaultGrayColor;
 
+void STKLog(NSString *format, ...);
+
 @end

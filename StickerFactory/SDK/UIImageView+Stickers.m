@@ -62,7 +62,9 @@ static void * StickerDefaultPlaceholderColorKey = &StickerDefaultPlaceholderColo
     }
     
     [self sd_setImageWithURL:stickerUrl placeholderImage:placeholderImage options:SDWebImageHighPriority progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-       
+        if (error) {
+            STKLog(@"Cannot download sticker from category with error: %@", error.localizedDescription);
+        }
         if (completion) {
             completion(error, image);
         }
