@@ -15,6 +15,7 @@
     
     if ([STKStickersManager isStickerMessage:message]) {
         [self.stickerImageView stk_setStickerWithMessage:message completion:nil];
+        
     }
     
 }
