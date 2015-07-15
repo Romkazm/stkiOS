@@ -2,6 +2,8 @@
 
 **StickerPipe** is a stickers SDK for iOS
 
+![Screencapture GIF](http://stickerpipe.com/static/examples/ios.gif)
+
 ## Installation
 
 Get the API key on the [StickerPipe](http://stickerpipe.com/)
@@ -52,7 +54,7 @@ Use delegate method for reciving sticker messages from sticker panel
 
 ## Contact
 
-mail@stickerpipe.com
+mail@908.vc
 
 ## License
 
