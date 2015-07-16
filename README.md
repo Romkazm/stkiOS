@@ -2,7 +2,7 @@
 
 **StickerPipe** is a stickers SDK for iOS
 
-![Screencapture GIF](http://stickerpipe.com/static/examples/ios.gif)
+![ios](ios.gif)
 
 ## Installation
 
