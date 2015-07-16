@@ -10,6 +10,8 @@
 
 @interface STKStickerPanelHeaderCell : UICollectionViewCell
 
+@property (strong, nonatomic) UIColor *selectionColor;
+
 - (void) configWithStickerPackName:(NSString*)name placeholder:(UIImage*)placeholder placeholderTintColor:(UIColor*)placeholderTintColor;
 
 @end

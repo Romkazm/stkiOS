@@ -22,4 +22,20 @@
 + (BOOL) isStickerMessage:(NSString*) message;
 
 
+//Color settings. Default is light gray
+
++ (void) setColorForDisplayedStickerPlaceholder:(UIColor*) color;
+
++ (void) setColorForPanelPlaceholder:(UIColor*) color;
+
++ (void) setColorForPanelHeaderPlaceholderColor:(UIColor*) color;
+
+
++ (UIColor*) displayedStickerPlaceholderColor;
+
++ (UIColor*) panelPlaceholderColor;
+
++ (UIColor*) panelHeaderPlaceholderColor;
+
+
 @end

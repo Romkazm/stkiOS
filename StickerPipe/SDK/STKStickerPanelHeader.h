@@ -21,7 +21,6 @@
 @property (weak, nonatomic) id<STKStickerPanelHeaderDelegate> delegate;
 
 @property (strong, nonatomic) UIImage *placeholderImage;
-@property (strong, nonatomic) UIColor *placeholderTintColor;
 
 - (void) setStickerPacks:(NSArray*)stickerPacks;
 

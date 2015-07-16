@@ -79,7 +79,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
 #if DEBUG
         [GAI sharedInstance].dryRun = YES;
 #endif
-        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-80"];
+        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-76"];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillResignActive:)

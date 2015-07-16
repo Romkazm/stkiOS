@@ -47,6 +47,27 @@ Use delegate method for reciving sticker messages from sticker panel
     
 }
 ```
+## Сustomizations
+
+**You can change default placeholders color:**
+
+Displayed stickers placeholder color
+
+```objc
+[STKStickersManager setColorForDisplayedStickerPlaceholder:[UIColor greenColor]];
+```
+
+Placeholder in stickers panel
+
+```objc
+[STKStickersManager setColorForPanelPlaceholder:[UIColor redColor]];
+```
+
+Placeholder in stickers panel header
+
+```objc
+[STKStickersManager setColorForPanelHeaderPlaceholderColor:[UIColor blueColor]];
+```
 
 ## Credits
 

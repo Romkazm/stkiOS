@@ -25,6 +25,7 @@
 
 // Colors
 @property (strong, nonatomic) UIColor *headerBackgroundColor;
+@property (strong, nonatomic) UIColor *headerCellSelectionColor;
 
 // Placeholders
 @property (strong, nonatomic) UIImage *stickerPlaceholder;
@@ -32,7 +33,7 @@
 
 // Placeholder colors
 // Default is light gray
-@property (strong, nonatomic) UIColor *stickerPlaceholderTintColor;
-@property (strong, nonatomic) UIColor *tabPlaceholderTintColor;
+//@property (strong, nonatomic) UIColor *stickerPlaceholderTintColor;
+//@property (strong, nonatomic) UIColor *tabPlaceholderTintColor;
 
 @end

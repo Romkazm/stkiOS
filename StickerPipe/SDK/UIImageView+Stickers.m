@@ -11,8 +11,7 @@
 #import "STKUtility.h"
 #import <objc/runtime.h>
 #import "UIImage+Tint.h"
-
-static void * StickerDefaultPlaceholderColorKey = &StickerDefaultPlaceholderColorKey;
+#import "STKStickersManager.h"
 
 @implementation UIImageView (Stickers)
 
@@ -50,8 +49,9 @@ static void * StickerDefaultPlaceholderColorKey = &StickerDefaultPlaceholderColo
     UIImage *placeholderImage = nil;
     if (!placeholder) {
         UIImage *defaultPlaceholder = [UIImage imageNamed:@"StickerPlaceholder"];
-        if (self.stickerDefaultPlaceholderColor) {
-            defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:self.stickerDefaultPlaceholderColor];
+        UIColor *placeholderColor = [STKStickersManager displayedStickerPlaceholderColor];
+        if (placeholderColor) {
+            defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:placeholderColor];
         } else {
             defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultGrayColor]];
         }
@@ -78,16 +78,6 @@ static void * StickerDefaultPlaceholderColorKey = &StickerDefaultPlaceholderColo
 - (void)stk_cancelStickerLoading {
     
     [self sd_cancelCurrentImageLoad];
-}
-
-#pragma mark - Property
-
-- (UIColor *)stickerDefaultPlaceholderColor {
-    return objc_getAssociatedObject(self, StickerDefaultPlaceholderColorKey);
-}
-
-- (void)setStickerDefaultPlaceholderColor:(UIColor *)color {
-    objc_setAssociatedObject(self, StickerDefaultPlaceholderColorKey, color, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

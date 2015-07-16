@@ -12,7 +12,11 @@
 #import "STKAnalyticService.h"
 #import "STKApiKeyManager.h"
 
-//Server url
+//Colors
+
+static UIColor *displayedPlaceholderColor;
+static UIColor *panelPlaceholderColor;
+static UIColor *panelHeaderPlaceholderColor;
 
 
 @interface STKStickersManager()
@@ -88,5 +92,38 @@
     return [SDWebImageManager sharedManager];
 }
 
+#pragma mark - Set Colors
+
++ (void)setColorForDisplayedStickerPlaceholder:(UIColor *)color {
+    if (displayedPlaceholderColor != color) {
+        displayedPlaceholderColor = color;
+    }
+}
+
++ (void)setColorForPanelHeaderPlaceholderColor:(UIColor *)color {
+    if (panelHeaderPlaceholderColor != color) {
+        panelHeaderPlaceholderColor = color;
+    }
+}
+
++ (void)setColorForPanelPlaceholder:(UIColor *)color {
+    if (panelPlaceholderColor != color) {
+        panelPlaceholderColor = color;
+    }
+}
+
+#pragma mark - Get Colors
+
++ (UIColor *)displayedStickerPlaceholderColor {
+    return displayedPlaceholderColor;
+}
+
++ (UIColor *)panelPlaceholderColor {
+    return panelPlaceholderColor;
+}
+
++ (UIColor *)panelHeaderPlaceholderColor {
+    return panelHeaderPlaceholderColor;
+}
 
 @end

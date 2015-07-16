@@ -9,6 +9,7 @@
 #import "STKStickerPanelHeader.h"
 #import "STKStickerPanelHeaderCell.h"
 #import "STKStickerPackObject.h"
+#import "STKStickersManager.h"
 
 @interface STKStickerPanelHeader() <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -80,7 +81,7 @@
     
     STKStickerPackObject *stickerPack = self.stickerPacksArray[indexPath.item];
     
-    [cell configWithStickerPackName:stickerPack.packName placeholder:self.placeholderImage placeholderTintColor:self.placeholderTintColor];
+    [cell configWithStickerPackName:stickerPack.packName placeholder:self.placeholderImage placeholderTintColor:[STKStickersManager panelHeaderPlaceholderColor]];
     
     return cell;
     

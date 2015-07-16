@@ -129,13 +129,11 @@
 		6EADF38C1B46B475008005E9 /* UIImageView+Stickers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Stickers.h"; sourceTree = "<group>"; };
 		6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Stickers.m"; sourceTree = "<group>"; };
 		6EADF3961B46D13F008005E9 /* STKChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatViewController.h; sourceTree = "<group>"; };
-		6EADF3971B46D13F008005E9 /* STKChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatViewController.m; sourceTree = "<group>"; };
+		6EADF3971B46D13F008005E9 /* STKChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		6EADF3991B46D4EE008005E9 /* STKChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatCell.h; sourceTree = "<group>"; };
 		6EADF39A1B46D4EE008005E9 /* STKChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatCell.m; sourceTree = "<group>"; };
 		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6EF264541B3C0F830099A657 /* StickerPipe
-StickerPipe
-StickerPipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StickerPipe\nStickerPipe\nStickerPipe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EF264541B3C0F830099A657 /* StickerPipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerPipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264591B3C0F830099A657 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6EF2645B1B3C0F830099A657 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -366,9 +364,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 		6EF264551B3C0F830099A657 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6EF264541B3C0F830099A657 /* StickerPipe
-StickerPipe
-StickerPipe.app */,
+				6EF264541B3C0F830099A657 /* StickerPipe.app */,
 				6EF2646D1B3C0F830099A657 /* StickerPipe
 StickerPipe
 StickerPipeTests.xctest */,
@@ -447,9 +443,7 @@ StickerPipeTests.xctest */,
 			);
 			name = StickerPipe;
 			productName = StickerFactory;
-			productReference = 6EF264541B3C0F830099A657 /* StickerPipe
-StickerPipe
-StickerPipe.app */;
+			productReference = 6EF264541B3C0F830099A657 /* StickerPipe.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6EF2646C1B3C0F830099A657 /* StickerPipeTests */ = {
@@ -731,7 +725,7 @@ StickerPipeTests.xctest */;
 				);
 				INFOPLIST_FILE = StickerPipe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "StickerPipe\nStickerPipe\nStickerPipe";
+				PRODUCT_NAME = StickerPipe;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -750,7 +744,7 @@ StickerPipeTests.xctest */;
 				);
 				INFOPLIST_FILE = StickerPipe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "StickerPipe\nStickerPipe\nStickerPipe";
+				PRODUCT_NAME = StickerPipe;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

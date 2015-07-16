@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name            = 'StickerPipe'
-  s.version         = '0.1.1'
+  s.version         = '0.1.3'
   s.platform        = :ios, '7.0'
   s.summary         = 'Stickers lib'
   s.description     = 'Sticker library for iOS'

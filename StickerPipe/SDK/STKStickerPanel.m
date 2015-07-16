@@ -17,6 +17,7 @@
 #import "NSManagedObjectContext+STKAdditions.h"
 #import "STKStickersApiClient.h"
 #import "STKStickersDataModel.h"
+#import "STKStickersManager.h"
 
 typedef enum {
     
@@ -156,7 +157,7 @@ typedef enum {
         
     STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
 
-    [cell configureWithStickerMessage:sticker.stickerMessage placeholder:self.stickerPlaceholder placeholderColor:self.stickerPlaceholderTintColor];
+    [cell configureWithStickerMessage:sticker.stickerMessage placeholder:self.stickerPlaceholder placeholderColor:[STKStickersManager panelPlaceholderColor]];
     
     return cell;
 }

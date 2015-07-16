@@ -15,7 +15,14 @@
 
 @implementation STKAnalyticsAPIClient
 
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self.sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    }
+    return self;
+}
 
 - (void)sendStatistics:(NSArray *)statisticsArray success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
@@ -30,8 +37,8 @@
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
         if (failure) {
             failure(error);
         }

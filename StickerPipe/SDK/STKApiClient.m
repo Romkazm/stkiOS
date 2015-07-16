@@ -30,7 +30,6 @@ NSString *const STKBaseApiUrl = @"http://api.stickerpipe.com/api";
         [serializer setValue:@"iOS" forHTTPHeaderField:@"Platform"];
         [serializer setValue:[STKUUIDManager generatedDeviceToken] forHTTPHeaderField:@"DeviceId"];
         [serializer setValue:[STKApiKeyManager apiKey] forHTTPHeaderField:@"ApiKey"];
-        [serializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [serializer setValue:[[NSBundle mainBundle] bundleIdentifier] forHTTPHeaderField:@"Package"];
         
         self.sessionManager.requestSerializer = serializer;
