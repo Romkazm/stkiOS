@@ -41,6 +41,7 @@ typedef enum {
 
 //Common
 @property (strong, nonatomic) STKStickersDataModel *dataModel;
+@property (strong, nonatomic) NSArray *stickerPacks;
 //CoreData
 @property (strong, nonatomic) NSManagedObjectContext *context;
 //Api
@@ -114,7 +115,7 @@ typedef enum {
 - (void) willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     self.currentDisplayedSection = 0;
-    if (newSuperview) {
+    if (!newSuperview) {
 
         [self reloadStickers];
     }
@@ -131,11 +132,19 @@ typedef enum {
 
 - (void) reloadStickers {
     
-    [self.dataModel updateStickers];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataModel getStickerPacks:^(NSArray *stickerPacks) {
+        
+        [weakSelf.headerView setStickerPacks:stickerPacks];
+        [weakSelf.headerView setPackSelectedAtIndex:weakSelf.currentDisplayedSection];
+        weakSelf.stickerPacks = stickerPacks;
+        [weakSelf.collectionView reloadData];
+        
+    }];
 
-    [self.headerView setStickerPacks:self.dataModel.stickerPacks];
-    [self.headerView setPackSelectedAtIndex:self.currentDisplayedSection];
-    [self.collectionView reloadData];
+
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -143,14 +152,14 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return self.dataModel.stickerPacks.count;
+    return self.stickerPacks.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
 
-    STKStickerPackObject *stickerPack = self.dataModel.stickerPacks[section];
+    STKStickerPackObject *stickerPack = self.stickerPacks[section];
     return stickerPack.stickers.count;
 }
 
@@ -159,7 +168,7 @@ typedef enum {
 {
     STKStickerPanelCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"STKStickerPanelCell" forIndexPath:indexPath];
 
-    STKStickerPackObject *stickerPack = self.self.dataModel.stickerPacks[indexPath.section];
+    STKStickerPackObject *stickerPack = self.self.stickerPacks[indexPath.section];
         
     STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
 
@@ -213,7 +222,7 @@ typedef enum {
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    STKStickerPackObject *stickerPack = self.dataModel.stickerPacks[indexPath.section];
+    STKStickerPackObject *stickerPack = self.stickerPacks[indexPath.section];
     STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
     
     [self.dataModel incrementStickerUsedCount:sticker];

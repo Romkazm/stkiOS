@@ -79,9 +79,9 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
         
 #if DEBUG
-        [GAI sharedInstance].dryRun = YES;
+//        [GAI sharedInstance].dryRun = YES;
 #endif
-        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-76"];
+        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-80"];
         
         //Custom dimensions
         [self.tracker set:[GAIFields customDimensionForIndex:1] value:[STKApiKeyManager apiKey]];
@@ -114,7 +114,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                         value:(NSNumber*)value
 {
     
-#ifndef DEBUG
+//#ifndef DEBUG
     __weak typeof(self) weakSelf = self;
     [self.backgroundContext performBlock:^{
         
@@ -168,7 +168,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         }
     }];
     
-#endif
+//#endif
     
 }
 

@@ -12,10 +12,12 @@
 
 @interface STKStickersDataModel : NSObject
 
-@property (strong, nonatomic) NSArray *stickerPacks;
+//@property (strong, nonatomic) NSArray *stickerPacks;
 
-- (void) updateStickers;
-- (void) updateRecentStickers;
+- (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response;
+
+//- (void) updateStickers;
+//- (void) updateRecentStickers;
 - (void) incrementStickerUsedCount:(STKStickerObject*) sticker;
 
 

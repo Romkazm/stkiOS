@@ -19,67 +19,68 @@
 
 @interface STKStickersDataModel()
 
-@property (strong, nonatomic) NSManagedObjectContext *defaultContext;
+@property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
+@property (strong, nonatomic) NSOperationQueue *queue;
 
 @end
 
 @implementation STKStickersDataModel
 
-- (NSArray*) getStickerPacks {
+- (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response {
     
-    NSArray *stickerPacks = [STKStickerPack stk_findAllInContext:self.defaultContext];
-    
-    NSMutableArray *result = [NSMutableArray array];
-    
-    for (STKStickerPack *pack in stickerPacks) {
-        STKStickerPackObject *stickerPackObject = [[STKStickerPackObject alloc] initWithStickerPack:pack];
-        [result addObject:stickerPackObject];
-    }
-    [result sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerPackAttributes.packName ascending:YES]]];
-    
-    STKStickerPackObject *recentPack = [self recentStickerPack];
-    if (recentPack) {
-        [result insertObject:recentPack atIndex:0];
+    if (self.queue.operationCount > 0) {
+        [self.queue cancelAllOperations];
     }
     
-    return [NSArray arrayWithArray:result];
+    [self.queue addOperationWithBlock:^{
+        STKStickerPackObject *recentPack = [self recentStickerPack];
+        NSArray *stickerPacks = [STKStickerPack stk_findAllInContext:[NSManagedObjectContext stk_backgroundContext]];
+        
+        NSMutableArray *result = [NSMutableArray array];
+        
+        for (STKStickerPack *pack in stickerPacks) {
+            STKStickerPackObject *stickerPackObject = [[STKStickerPackObject alloc] initWithStickerPack:pack];
+            [result addObject:stickerPackObject];
+        }
+        [result sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerPackAttributes.packName ascending:YES]]];
+        if (recentPack) {
+            [result insertObject:recentPack atIndex:0];
+        }
+        if (response) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                response(result);
+            });
+        }
+    }];
     
+
 }
 
 - (STKStickerPackObject*) recentStickerPack {
     
-    NSArray *recentSticker = [STKSticker stk_getRecentStickers];
-    if (recentSticker.count > 0) {
-        NSArray *sortedRecentStickers = [recentSticker sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerAttributes.usedCount ascending:NO]]];
-        STKStickerPackObject *recentPack = [STKStickerPackObject new];
-        recentPack.packName = @"Recent";
-        recentPack.packTitle = @"Recent";
-        recentPack.stickers = sortedRecentStickers;
-        return recentPack;
-    }
+    __block STKStickerPackObject *object = nil;
     
-    return nil;
-}
-
-- (void)updateRecentStickers {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K > 0", STKStickerAttributes.usedCount];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStickerAttributes.usedCount
+                                                                         ascending:YES];
+        
+        NSArray *stickers = [STKSticker stk_findWithPredicate:predicate
+                                              sortDescriptors:@[sortDescriptor]
+                                                   fetchLimit:12
+                                                      context:self.backgroundContext];
+        
+        if (stickers.count > 0) {
+            NSArray *sortedRecentStickers = [stickers sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerAttributes.usedCount ascending:NO]]];
+            STKStickerPackObject *recentPack = [STKStickerPackObject new];
+            recentPack.packName = @"Recent";
+            recentPack.packTitle = @"Recent";
+            recentPack.stickers = sortedRecentStickers;
+            
+            object = recentPack;
+        }
     
-    STKStickerPackObject *stickerPack = self.stickerPacks.firstObject;
-    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.stickerPacks];
-    if ([stickerPack.packName isEqualToString:@"Recent"]) {
-        [tempArray removeObjectAtIndex:0];
-    }
-    STKStickerPackObject *recentPack = [self recentStickerPack];
-    if (recentPack) {
-        [tempArray insertObject:recentPack atIndex:0];
-    }
-    
-    self.stickerPacks = [NSArray arrayWithArray:tempArray];
-    
-}
-
-- (void)updateStickers {
-    self.stickerPacks = [self getStickerPacks];
-    
+    return object;
 }
 
 - (void)incrementStickerUsedCount:(STKStickerObject *)sticker {
@@ -91,24 +92,32 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [self.defaultContext performBlock:^{
+    [self.backgroundContext performBlockAndWait:^{
         STKSticker *stickerModel = [STKSticker modelForObject:sticker];
         NSInteger usedCount = [stickerModel.usedCount integerValue];
         usedCount++;
         stickerModel.usedCount = @(usedCount);
         
-        [weakSelf.defaultContext save:nil];
+        [weakSelf.backgroundContext save:nil];
     }];
     
 }
 
 #pragma mark - Properties
 
-- (NSManagedObjectContext *)defaultContext {
-    if (!_defaultContext) {
-        _defaultContext = [NSManagedObjectContext stk_defaultContext];
+- (NSOperationQueue*)queue {
+    if (!_queue) {
+        _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
     }
-    return _defaultContext;
+    return _queue;
+}
+
+- (NSManagedObjectContext *)backgroundContext {
+    if (!_backgroundContext) {
+        _backgroundContext = [NSManagedObjectContext stk_backgroundContext];
+    }
+    return _backgroundContext;
 }
 
 @end

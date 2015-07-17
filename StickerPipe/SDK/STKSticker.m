@@ -33,7 +33,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
     request.predicate = [NSPredicate predicateWithFormat:@"stickerID == %@", object.stickerID];
     request.fetchLimit = 1;
-    NSManagedObjectContext *context = [NSManagedObjectContext stk_defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext stk_backgroundContext];
     
     STKSticker *sticker = [context executeFetchRequest:request error:nil].firstObject;
     
