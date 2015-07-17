@@ -15,6 +15,8 @@
 #import <GAI.h>
 #import <GAIDictionaryBuilder.h>
 #import <GAIFields.h>
+#import "STKApiKeyManager.h"
+#import "STKUUIDManager.h"
 
 //Categories
 NSString *const STKAnalyticMessageCategory = @"message";
@@ -80,6 +82,11 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         [GAI sharedInstance].dryRun = YES;
 #endif
         self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-76"];
+        
+        //Custom dimensions
+        [self.tracker set:[GAIFields customDimensionForIndex:1] value:[STKApiKeyManager apiKey]];
+        [self.tracker set:[GAIFields customDimensionForIndex:2] value:[STKUUIDManager generatedDeviceToken]];
+        [self.tracker set:[GAIFields customDimensionForIndex:3] value:[[NSBundle mainBundle] bundleIdentifier]];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillResignActive:)
@@ -111,44 +118,53 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     __weak typeof(self) weakSelf = self;
     [self.backgroundContext performBlock:^{
         
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStatistic entityName]];
-        request.fetchLimit = 1;
-        
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStatisticAttributes.label ascending:YES];
-        request.sortDescriptors = @[sortDescriptor];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
-        request.predicate = predicate;
-        
-        NSArray *objects = [weakSelf.backgroundContext executeFetchRequest:request error:nil];
-        
-        
         STKStatistic *statistic = nil;
-        //TODO: REFACTORING
-        if (objects.count > 0 && [category isEqualToString:STKAnalyticActionCheck]) {
+        
+        if ([category isEqualToString:STKAnalyticMessageCategory]) {
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStatistic entityName]];
+            request.fetchLimit = 1;
+            
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStatisticAttributes.label ascending:YES];
+            request.sortDescriptors = @[sortDescriptor];
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label == %@", label];
+            request.predicate = predicate;
+            
+            NSArray *objects = [weakSelf.backgroundContext executeFetchRequest:request error:nil];
+            
             statistic = objects.firstObject;
+            
             NSInteger tempValue = statistic.value.integerValue;
             tempValue += value.integerValue;
             statistic.value = @(tempValue);
-            
-        } else {
-            statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
-            statistic.value = value;
         }
         
+        if (!statistic) {
+            statistic = [NSEntityDescription insertNewObjectForEntityForName:[STKStatistic entityName] inManagedObjectContext:weakSelf.backgroundContext];
+            statistic.value = value;
+            [weakSelf sendGoogleAnalyticsEventWithCategory:category action:action label:label value:value];
+        }
+        
+
+        //TODO: REFACTORING
+
         statistic.category = category;
-        statistic.action = action;
-        statistic.label = label;
-        statistic.timeValue = ((NSInteger)[[NSDate date] timeIntervalSince1970]);;
-    
+
+        statistic.timeValue = ((NSInteger)[[NSDate date] timeIntervalSince1970]);
+        
+        if ([statistic.category isEqualToString:STKAnalyticStickerCategory]) {
+            statistic.label = [NSString stringWithFormat:@"[[%@_%@]]", action, label];
+            statistic.action = @"use";
+            
+        } else {
+            statistic.action = action;
+            statistic.label = label;
+        }
         NSError *error = nil;
         weakSelf.objectCounter++;
         if (weakSelf.objectCounter == kMemoryCacheObjectsCount) {
             [weakSelf.backgroundContext save:&error];
             weakSelf.objectCounter = 0;
-        }
-        if (![statistic.category isEqualToString:STKAnalyticMessageCategory]) {
-            [weakSelf sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
         }
     }];
     
@@ -163,8 +179,9 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                                         label:(NSString*)label
                                         value:(NSNumber*)value
 {
-        NSDictionary*buildedDictionary = [[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build];
-        [self.tracker send:buildedDictionary];
+    GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value];
+    NSDictionary*buildedDictionary = [builder build];
+    [self.tracker send:buildedDictionary];
 
 }
 
@@ -201,7 +218,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     
     for (STKStatistic *statistic in events) {
         if ([statistic.category isEqualToString:STKAnalyticMessageCategory]) {
-                [self sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
+            [self sendGoogleAnalyticsEventWithCategory:statistic.category action:statistic.action label:statistic.label value:statistic.value];
         }
 
     }
@@ -214,6 +231,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         for (id object in events) {
             [weakSelf.backgroundContext deleteObject:object];
         }
+        [weakSelf.backgroundContext save:nil];
         
     } failure:^(NSError *error) {
         

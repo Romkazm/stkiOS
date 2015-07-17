@@ -60,6 +60,7 @@ typedef enum {
         //Flexible height for system
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         
+        
         self.flowLayout = [[STKStickerPanelLayout alloc] init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake(80.0, 80.0);
@@ -95,6 +96,11 @@ typedef enum {
             [weakSelf reloadStickers];
             
         } failure:nil];
+        
+        //iOS 7 FIX
+        if (CGRectEqualToRect(frame, CGRectZero) && [UIDevice currentDevice].systemVersion.floatValue < 8.0) {
+            self.frame = CGRectMake(1, 1, 1, 1);
+        }
     }
     return self;
 }
