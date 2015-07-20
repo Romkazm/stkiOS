@@ -61,6 +61,7 @@
     [self.inputTextView addGestureRecognizer:tapGesture];
 
     [self scrollTableViewToBottom];
+    
 }
 
 - (void)dealloc {
