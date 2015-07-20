@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STKChatCell : UITableViewCell
+@interface STKChatStickerCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *stickerImageView;
 

@@ -39,7 +39,7 @@
 		6EADF3901B46B475008005E9 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF38B1B46B475008005E9 /* UIImage+Tint.m */; };
 		6EADF3911B46B475008005E9 /* UIImageView+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */; };
 		6EADF3981B46D13F008005E9 /* STKChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3971B46D13F008005E9 /* STKChatViewController.m */; };
-		6EADF39B1B46D4EE008005E9 /* STKChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF39A1B46D4EE008005E9 /* STKChatCell.m */; };
+		6EADF39B1B46D4EE008005E9 /* STKChatStickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF39A1B46D4EE008005E9 /* STKChatStickerCell.m */; };
 		6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDC5ECF1B41328000EBB034 /* CoreData.framework */; };
 		6EF2645A1B3C0F830099A657 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264591B3C0F830099A657 /* main.m */; };
 		6EF2645D1B3C0F830099A657 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2645C1B3C0F830099A657 /* AppDelegate.m */; };
@@ -130,8 +130,8 @@
 		6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Stickers.m"; sourceTree = "<group>"; };
 		6EADF3961B46D13F008005E9 /* STKChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatViewController.h; sourceTree = "<group>"; };
 		6EADF3971B46D13F008005E9 /* STKChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
-		6EADF3991B46D4EE008005E9 /* STKChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatCell.h; sourceTree = "<group>"; };
-		6EADF39A1B46D4EE008005E9 /* STKChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatCell.m; sourceTree = "<group>"; };
+		6EADF3991B46D4EE008005E9 /* STKChatStickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatStickerCell.h; sourceTree = "<group>"; };
+		6EADF39A1B46D4EE008005E9 /* STKChatStickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatStickerCell.m; sourceTree = "<group>"; };
 		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6EF264541B3C0F830099A657 /* StickerPipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerPipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264581B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -249,8 +249,8 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 		6EADF39C1B46D4F4008005E9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6EADF3991B46D4EE008005E9 /* STKChatCell.h */,
-				6EADF39A1B46D4EE008005E9 /* STKChatCell.m */,
+				6EADF3991B46D4EE008005E9 /* STKChatStickerCell.h */,
+				6EADF39A1B46D4EE008005E9 /* STKChatStickerCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -579,7 +579,7 @@ StickerPipeTests.xctest */;
 				6E776D661B4BB60C0001FBB6 /* STKStickerPanelLayout.m in Sources */,
 				6E8519281B4D641E00808338 /* STKStickerPackObject.m in Sources */,
 				6EADF3701B46B41E008005E9 /* STKApiClient.m in Sources */,
-				6EADF39B1B46D4EE008005E9 /* STKChatCell.m in Sources */,
+				6EADF39B1B46D4EE008005E9 /* STKChatStickerCell.m in Sources */,
 				6E776D7F1B4BF6150001FBB6 /* STKSticker.m in Sources */,
 				6EADF37D1B46B43D008005E9 /* NSPersistentStoreCoordinator+STKAdditions.m in Sources */,
 				6EADF36F1B46B41E008005E9 /* STKAnalyticsAPIClient.m in Sources */,

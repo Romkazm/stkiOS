@@ -7,7 +7,7 @@
 //
 
 #import "STKChatViewController.h"
-#import "STKChatCell.h"
+#import "STKChatStickerCell.h"
 #import "STKStickerPanel.h"
 
 @interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerPanelDelegate>
@@ -170,7 +170,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    STKChatCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    STKChatStickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     [cell fillWithStickerMessage:self.dataSource[indexPath.row]];
     
@@ -181,7 +181,7 @@
 
 - (void)stickerPanel:(STKStickerPanel *)stickerPanel didSelectStickerWithMessage:(NSString *)stickerMessage {
     
-    STKChatCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    STKChatStickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
     [cell fillWithStickerMessage:stickerMessage];
     [self.tableView beginUpdates];
     [self.dataSource addObject:stickerMessage];
