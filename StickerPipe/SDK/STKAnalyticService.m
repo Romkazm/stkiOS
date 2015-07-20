@@ -114,7 +114,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
                         value:(NSNumber*)value
 {
     
-#ifndef DEBUG
+//#ifndef DEBUG
     __weak typeof(self) weakSelf = self;
     [self.backgroundContext performBlock:^{
         
@@ -168,7 +168,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         }
     }];
     
-#endif
+//#endif
     
 }
 
@@ -246,7 +246,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
 
 - (NSManagedObjectContext *)backgroundContext {
     if (!_backgroundContext) {
-        _backgroundContext = [NSManagedObjectContext stk_backgroundContext];
+        _backgroundContext = [NSManagedObjectContext stk_analyticsContext];
     }
     return _backgroundContext;
 }
