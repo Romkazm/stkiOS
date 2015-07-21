@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E5F5A461B5E37C40036214B /* STKStickerPanelSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F5A451B5E37C40036214B /* STKStickerPanelSeparator.m */; };
 		6E776D621B4AC18A0001FBB6 /* STKStickerPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D611B4AC18A0001FBB6 /* STKStickerPanel.m */; };
 		6E776D661B4BB60C0001FBB6 /* STKStickerPanelLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D651B4BB60C0001FBB6 /* STKStickerPanelLayout.m */; };
 		6E776D691B4BB6B00001FBB6 /* STKStickerPanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E776D681B4BB6B00001FBB6 /* STKStickerPanelCell.m */; };
@@ -63,6 +64,8 @@
 		1AA04EB236AD472CD61382DF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		280EB363112837B81F052E19 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6E5F5A441B5E37C40036214B /* STKStickerPanelSeparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKStickerPanelSeparator.h; sourceTree = "<group>"; };
+		6E5F5A451B5E37C40036214B /* STKStickerPanelSeparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKStickerPanelSeparator.m; sourceTree = "<group>"; };
 		6E776D601B4AC18A0001FBB6 /* STKStickerPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKStickerPanel.h; sourceTree = "<group>"; };
 		6E776D611B4AC18A0001FBB6 /* STKStickerPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKStickerPanel.m; sourceTree = "<group>"; };
 		6E776D641B4BB60C0001FBB6 /* STKStickerPanelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKStickerPanelLayout.h; sourceTree = "<group>"; };
@@ -196,19 +199,29 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 			name = IdentityService;
 			sourceTree = "<group>";
 		};
+		6E5F5A431B5E37360036214B /* StickerPanelHeader */ = {
+			isa = PBXGroup;
+			children = (
+				6E776D6C1B4BE2260001FBB6 /* STKStickerPanelHeader.h */,
+				6E776D6D1B4BE2260001FBB6 /* STKStickerPanelHeader.m */,
+				6E85192C1B4D7B0700808338 /* STKStickerPanelHeaderCell.h */,
+				6E85192D1B4D7B0700808338 /* STKStickerPanelHeaderCell.m */,
+			);
+			name = StickerPanelHeader;
+			sourceTree = "<group>";
+		};
 		6E776D631B4AC1920001FBB6 /* StickersPanel */ = {
 			isa = PBXGroup;
 			children = (
+				6E5F5A441B5E37C40036214B /* STKStickerPanelSeparator.h */,
+				6E5F5A451B5E37C40036214B /* STKStickerPanelSeparator.m */,
 				6E776D601B4AC18A0001FBB6 /* STKStickerPanel.h */,
 				6E776D611B4AC18A0001FBB6 /* STKStickerPanel.m */,
 				6E776D641B4BB60C0001FBB6 /* STKStickerPanelLayout.h */,
 				6E776D651B4BB60C0001FBB6 /* STKStickerPanelLayout.m */,
 				6E776D671B4BB6B00001FBB6 /* STKStickerPanelCell.h */,
 				6E776D681B4BB6B00001FBB6 /* STKStickerPanelCell.m */,
-				6E776D6C1B4BE2260001FBB6 /* STKStickerPanelHeader.h */,
-				6E776D6D1B4BE2260001FBB6 /* STKStickerPanelHeader.m */,
-				6E85192C1B4D7B0700808338 /* STKStickerPanelHeaderCell.h */,
-				6E85192D1B4D7B0700808338 /* STKStickerPanelHeaderCell.m */,
+				6E5F5A431B5E37360036214B /* StickerPanelHeader */,
 			);
 			name = StickersPanel;
 			sourceTree = "<group>";
@@ -596,6 +609,7 @@ StickerPipeTests.xctest */;
 				6E85192B1B4D643000808338 /* STKStickerObject.m in Sources */,
 				6E776D6E1B4BE2260001FBB6 /* STKStickerPanelHeader.m in Sources */,
 				6E776D801B4BF6150001FBB6 /* STKStickerPack.m in Sources */,
+				6E5F5A461B5E37C40036214B /* STKStickerPanelSeparator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

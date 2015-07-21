@@ -18,6 +18,7 @@
 #import "STKStickersApiClient.h"
 #import "STKStickersDataModel.h"
 #import "STKStickersManager.h"
+#import "STKStickerPanelSeparator.h"
 
 typedef enum {
     
@@ -25,6 +26,9 @@ typedef enum {
     STKStickerPanelScrollDirectionBottom
     
 } STKStickerPanelScrollDirection;
+
+static const CGFloat separatorHeight = 1.0;
+static const CGFloat sectionInsets = 6.0;
 
 
 @interface STKStickerPanel() <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate,STKStickerPanelHeaderDelegate>
@@ -65,6 +69,8 @@ typedef enum {
         self.flowLayout = [[STKStickerPanelLayout alloc] init];
         self.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.flowLayout.itemSize = CGSizeMake(80.0, 80.0);
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(sectionInsets, 0, sectionInsets, 0);
+        self.flowLayout.footerReferenceSize = CGSizeMake(self.frame.size.width, separatorHeight);
         
         self.headerView = [[STKStickerPanelHeader alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44.0)];
         self.headerView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
@@ -82,6 +88,7 @@ typedef enum {
         [self.collectionView registerClass:[STKStickerPanelCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
         [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableView"];
         [self addSubview:self.collectionView];
+        [self.collectionView registerClass:[STKStickerPanelSeparator class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"STKStickerPanelSeparator"];
         
         self.currentDisplayedSection = 0;
         self.needUpdateHeader = YES;
@@ -124,6 +131,7 @@ typedef enum {
 - (void)layoutSubviews {
     self.collectionView.frame = CGRectMake(0, CGRectGetHeight(self.headerView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetHeight(self.headerView.frame));
     self.headerView.frame = CGRectMake(0, 0, self.frame.size.width, 44.0);
+    
 }
 
 
@@ -148,6 +156,20 @@ typedef enum {
 }
 
 #pragma mark - UICollectionViewDataSource
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        STKStickerPanelSeparator *separator = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"STKStickerPanelSeparator" forIndexPath:indexPath];
+        //if last section
+        if (indexPath.section == self.stickerPacks.count - 1) {
+            separator.backgroundColor = [UIColor clearColor];
+        } else {
+            separator.backgroundColor = [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
+        }
+        return separator;
+    }
+    return nil;
+}
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -177,6 +199,34 @@ typedef enum {
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.currentDisplayedSection == indexPath.section && self.needUpdateHeader) {
+        NSInteger itemsCount = [self.collectionView numberOfItemsInSection:indexPath.section];
+        if (indexPath.item == itemsCount - 1 && self.scrollDirection == STKStickerPanelScrollDirectionBottom) {
+            [self.headerView setPackSelectedAtIndex:indexPath.section + 1];
+            self.currentDisplayedSection = indexPath.section + 1;
+        }
+    }
+    
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    STKStickerPackObject *stickerPack = self.stickerPacks[indexPath.section];
+    STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
+    
+    [self.dataModel incrementStickerUsedCount:sticker];
+    
+    if ([self.delegate respondsToSelector:@selector(stickerPanel:didSelectStickerWithMessage:)]) {
+        [self.delegate stickerPanel:self didSelectStickerWithMessage:sticker.stickerMessage];
+    }
+    
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
@@ -204,34 +254,6 @@ typedef enum {
     self.lastContentOffset = scrollView.contentOffset.y;
 }
 
-
-#pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentDisplayedSection == indexPath.section && self.needUpdateHeader) {
-        NSInteger itemsCount = [self.collectionView numberOfItemsInSection:indexPath.section];
-        if (indexPath.item == itemsCount - 1 && self.scrollDirection == STKStickerPanelScrollDirectionBottom) {
-            [self.headerView setPackSelectedAtIndex:indexPath.section + 1];
-            self.currentDisplayedSection = indexPath.section + 1;
-        }
-    }
-    
-}
-
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    STKStickerPackObject *stickerPack = self.stickerPacks[indexPath.section];
-    STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
-    
-    [self.dataModel incrementStickerUsedCount:sticker];
-        
-    if ([self.delegate respondsToSelector:@selector(stickerPanel:didSelectStickerWithMessage:)]) {
-        [self.delegate stickerPanel:self didSelectStickerWithMessage:sticker.stickerMessage];
-    }
-    
-}
 
 #pragma mark - STKStickerPanelHeaderDelegate
 
