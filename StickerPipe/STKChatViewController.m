@@ -27,8 +27,6 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
 
-//@property (strong, nonatomic) STKStickerPanel *stickerPanel;
-
 @property (strong, nonatomic) STKStickerController *stickerController;
 
 @end
