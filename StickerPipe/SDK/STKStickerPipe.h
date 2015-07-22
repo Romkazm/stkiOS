@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "STKStickersManager.h"
 #import "UIImageView+Stickers.h"
-#import "STKStickerPanel.h"
 
 
 

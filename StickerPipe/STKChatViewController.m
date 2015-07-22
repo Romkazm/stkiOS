@@ -8,9 +8,10 @@
 
 #import "STKChatViewController.h"
 #import "STKChatStickerCell.h"
-#import "STKStickerPanel.h"
+//#import "STKStickerPanel.h"
+#import "STKStickerController.h"
 
-@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerPanelDelegate>
+@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
@@ -26,7 +27,9 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
 
-@property (strong, nonatomic) STKStickerPanel *stickerPanel;
+//@property (strong, nonatomic) STKStickerPanel *stickerPanel;
+
+@property (strong, nonatomic) STKStickerController *stickerController;
 
 @end
 
@@ -118,7 +121,7 @@
 
 - (IBAction)changeKeyboadViewAction:(UIButton*)button {
         
-    if (self.stickerPanel.isShowed) {
+    if (self.stickerController.isStickerViewShowed) {
         [self hideStickersView];
         
     } else {
@@ -135,7 +138,7 @@
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateNormal];
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateHighlighted];
     
-    self.inputTextView.inputView = self.stickerPanel;
+    self.inputTextView.inputView = self.stickerController.stickersView;
     [self reloadStickersInputViews];
 }
 
@@ -177,20 +180,20 @@
     return cell;
 }
 
-#pragma mark - STKStickerPanelDelegate
+#pragma mark - STKStickerControllerDelegate
 
-- (void)stickerPanel:(STKStickerPanel *)stickerPanel didSelectStickerWithMessage:(NSString *)stickerMessage {
-    
+- (void)stickerController:(STKStickerController *)stickerController didSelectStickerWithMessage:(NSString *)message {
     STKChatStickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    [cell fillWithStickerMessage:stickerMessage];
+    [cell fillWithStickerMessage:message];
     [self.tableView beginUpdates];
-    [self.dataSource addObject:stickerMessage];
+    [self.dataSource addObject:message];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
     [self scrollTableViewToBottom];
     
 }
+
 
 #pragma mark - UITextViewDelegate
 
@@ -203,19 +206,20 @@
 
 - (void) textViewDidTap:(UITapGestureRecognizer*) gestureRecognizer {
     [self.inputTextView becomeFirstResponder];
-    if (self.stickerPanel.isShowed) {
+    if (self.stickerController.isStickerViewShowed) {
         [self hideStickersView];
     }
 }
 
 #pragma mark - Property
 
-- (STKStickerPanel *)stickerPanel {
-    if (!_stickerPanel) {
-        _stickerPanel = [[STKStickerPanel alloc] initWithFrame:CGRectZero];
-        _stickerPanel.delegate = self;
+- (STKStickerController *)stickerController {
+    if (!_stickerController) {
+        _stickerController = [STKStickerController new];
+        _stickerController.delegate = self;
     }
-    return _stickerPanel;
+    return _stickerController;
 }
+
 
 @end

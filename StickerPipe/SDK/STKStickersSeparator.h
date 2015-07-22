@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STKStickerPanelSeparator : UICollectionReusableView
+@interface STKStickersSeparator : UICollectionReusableView
 
 
 @end

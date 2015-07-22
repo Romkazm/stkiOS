@@ -16,15 +16,18 @@
 #import "STKSticker.h"
 #import "STKAnalyticService.h"
 #import "STKUtility.h"
+#import "STKStickersApiClient.h"
 
 @interface STKStickersDataModel()
 
 @property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
 @property (strong, nonatomic) NSOperationQueue *queue;
 
+
 @end
 
 @implementation STKStickersDataModel
+
 
 - (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response {
     

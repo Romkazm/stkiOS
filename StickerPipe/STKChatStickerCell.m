@@ -14,7 +14,7 @@
 - (void) fillWithStickerMessage:(NSString*) message {
     
     if ([STKStickersManager isStickerMessage:message]) {
-        [self.stickerImageView stk_setStickerWithMessage:message completion:nil];
+        [self.stickerImageView stk_setStickerWithMessage:message placeholder:nil placeholderColor:nil progress:nil completion:nil];
         
     }
     
