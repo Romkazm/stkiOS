@@ -210,7 +210,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		6E776D631B4AC1920001FBB6 /* StickersPanel */ = {
+		6E776D631B4AC1920001FBB6 /* StickersView */ = {
 			isa = PBXGroup;
 			children = (
 				6E5F5A4A1B5E96A20036214B /* STKStickerController.h */,
@@ -223,7 +223,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 				6E5F5A451B5E37C40036214B /* STKStickersSeparator.m */,
 				6E5F5A431B5E37360036214B /* Cells */,
 			);
-			name = StickersPanel;
+			name = StickersView;
 			sourceTree = "<group>";
 		};
 		6E776D811B4BF6F70001FBB6 /* Mappers */ = {
@@ -354,7 +354,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 				6EADF38B1B46B475008005E9 /* UIImage+Tint.m */,
 				6EADF38C1B46B475008005E9 /* UIImageView+Stickers.h */,
 				6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */,
-				6E776D631B4AC1920001FBB6 /* StickersPanel */,
+				6E776D631B4AC1920001FBB6 /* StickersView */,
 				6E1EB3CF1B4429F500338B2B /* IdentityService */,
 				6EC5F8661B428083004D04CA /* Analytics */,
 				6EC5F86F1B42BA43004D04CA /* API */,
