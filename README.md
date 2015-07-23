@@ -13,7 +13,7 @@ Get the API key on the [StickerPipe](http://stickerpipe.com/)
 
 CocoaPods:
 ```ruby
-pod "StickerPipe", "~> 0.1.8"
+pod "StickerPipe", "~> 0.2.0"
 ```
 ## Usage
 
@@ -27,24 +27,23 @@ Use category for UIImageView for display sticker
 
 ```objc
     if ([STKStickersManager isStickerMessage:message]) {
-        [self.stickerImageView stk_setStickerWithMessage:message completion:nil];
+        [self.stickerImageView stk_setStickerWithMessage:message placeholder:nil placeholderColor:nil progress:nil completion:nil];
         
     }
 ```
-
-Add STKStickerPanel like inputView for your UITextView/UITextField
+Init STKStickerController and add stickersView like inputView for your UITextView/UITextField
 
 ```objc
-@property (strong, nonatomic) STKStickerPanel *stickerPanel;
+@property (strong, nonatomic) STKStickerController *stickerController;
 
 
-self.inputTextView.inputView = self.stickerPanel;
-[self.inputTextView reloadInputViews];
+self.inputTextView.inputView = self.stickerController.stickersView;
+[self reloadStickersInputViews];
 ```
-Use delegate method for reciving sticker messages from sticker panel
+Use delegate method for reciving sticker messages from sticker view controller
 
 ```objc
-- (void)stickerPanel:(STKStickerPanel *)stickerPanel didSelectStickerWithMessage:(NSString *)stickerMessage {
+- (void)stickerController:(STKStickerController *)stickerController didSelectStickerWithMessage:(NSString *)message {
     
     //Send sticker message
     
@@ -54,22 +53,17 @@ Use delegate method for reciving sticker messages from sticker panel
 
 **You can change default placeholders color:**
 
-Displayed stickers placeholder color
+
+Placeholder in stickers view
 
 ```objc
-[STKStickersManager setColorForDisplayedStickerPlaceholder:[UIColor greenColor]];
+[self.stickerController setColorForStickersPlaceholder:[UIColor redColor]];
 ```
 
-Placeholder in stickers panel
+Placeholder in stickers view header
 
 ```objc
-[STKStickersManager setColorForPanelPlaceholder:[UIColor redColor]];
-```
-
-Placeholder in stickers panel header
-
-```objc
-[STKStickersManager setColorForPanelHeaderPlaceholderColor:[UIColor blueColor]];
+[self.stickerController setColorForStickersHeaderPlaceholderColor:[UIColor blueColor]];
 ```
 
 ## Credits
