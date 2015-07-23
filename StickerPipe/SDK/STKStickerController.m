@@ -13,7 +13,7 @@
 #import "STKStickersSeparator.h"
 #import "STKStickerHeaderCell.h"
 #import "STKStickersDataModel.h"
-#import "STKStickersApiClient.h"
+#import "STKStickersApiService.h"
 #import "STKStickerObject.h"
 
 static const CGFloat stickerSeparatorHeight = 1.0;
@@ -34,7 +34,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 @property (strong, nonatomic) STKStickersDataModel *dataModel;
 //Api
-@property (strong, nonatomic) STKStickersApiClient *apiClient;
+@property (strong, nonatomic) STKStickersApiService *apiClient;
 
 
 
@@ -53,7 +53,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         
         self.dataModel = [STKStickersDataModel new];
         
-        self.apiClient = [STKStickersApiClient new];
+        self.apiClient = [STKStickersApiService new];
         
         __weak typeof(self) weakSelf = self;
         [self.apiClient getStickersPackWithType:nil success:^(id response) {
@@ -150,6 +150,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     
 }
+
 
 - (void) configureConstraints {
     

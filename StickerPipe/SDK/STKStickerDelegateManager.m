@@ -11,7 +11,7 @@
 #import "STKStickerCell.h"
 #import "STKStickersSeparator.h"
 #import "STKStickersDataModel.h"
-#import "STKStickersApiClient.h"
+#import "STKStickersApiService.h"
 #import "STKStickerPackObject.h"
 #import "STKStickerObject.h"
 #import "STKStickersManager.h"

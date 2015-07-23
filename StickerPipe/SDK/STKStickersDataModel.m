@@ -16,7 +16,6 @@
 #import "STKSticker.h"
 #import "STKAnalyticService.h"
 #import "STKUtility.h"
-#import "STKStickersApiClient.h"
 
 @interface STKStickersDataModel()
 
