@@ -8,17 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class STKStickerObject;
+@class STKStickerObject, STKStickerPackObject;
 
-@interface STKStickersDataModel : NSObject
+@interface STKStickersCache : NSObject
 
-//@property (strong, nonatomic) NSArray *stickerPacks;
+- (void) saveStickerPacks:(NSArray*) stickerPacks;
 
 - (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response;
+- (STKStickerPackObject*)recentStickerPack;
 
-//- (void) updateStickers;
-//- (void) updateRecentStickers;
-- (void) incrementStickerUsedCount:(STKStickerObject*) sticker;
+- (void) incrementUsedCountWithStickerID:(NSNumber*)stickerID;
 
 
 @end

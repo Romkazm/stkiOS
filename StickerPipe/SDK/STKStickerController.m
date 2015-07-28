@@ -12,9 +12,9 @@
 #import "STKStickerCell.h"
 #import "STKStickersSeparator.h"
 #import "STKStickerHeaderCell.h"
-#import "STKStickersDataModel.h"
-#import "STKStickersApiService.h"
 #import "STKStickerObject.h"
+#import "STKIntroService.h"
+#import "STKStickersEntityService.h"
 
 //SIZES
 //static const CGFloat stickerHeaderItemHeight = 44.0;
@@ -38,9 +38,10 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 @property (strong, nonatomic) UIView *introView;
 
-@property (strong, nonatomic) STKStickersDataModel *dataModel;
-//Api
-@property (strong, nonatomic) STKStickersApiService *apiClient;
+@property (strong, nonatomic) STKIntroService *introService;
+
+@property (strong, nonatomic) STKStickersEntityService *stickersService;
+
 //Constraints
 @property (strong, nonatomic) NSLayoutConstraint *introCenterYConstraint;
 
@@ -57,16 +58,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         self.stickersView = [[UIView alloc] init];
         self.stickersView.backgroundColor = [UIColor whiteColor];
         
-        self.dataModel = [STKStickersDataModel new];
-        
-        self.apiClient = [STKStickersApiService new];
-        
-        __weak typeof(self) weakSelf = self;
-        [self.apiClient getStickersPackWithType:nil success:^(id response) {
-            [weakSelf reloadStickers];
-        } failure:^(NSError *error) {
-            
-        }];
+        self.stickersService = [STKStickersEntityService new];
         
         self.stickersView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         self.stickersView.clipsToBounds = YES;
@@ -82,9 +74,9 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         [self configureStickersViewsConstraints];
         
         [self reloadStickers];
-        
-        if (YES) {
+        if ([STKIntroService needToShowIntro]) {
             [self initIntroView];
+            [STKIntroService setIntroWasShowed:YES];
         }
     }
     return self;
@@ -150,7 +142,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     }];
     
     [self.stickersDelegateManager setDidSelectSticker:^(STKStickerObject *sticker) {
-        [weakSelf.dataModel incrementStickerUsedCount:sticker];
+        [weakSelf.stickersService incrementStickerUsedCountWithID:sticker.stickerID];
         if ([weakSelf.delegate respondsToSelector:@selector(stickerController:didSelectStickerWithMessage:)]) {
             [weakSelf.delegate stickerController:weakSelf didSelectStickerWithMessage:sticker.stickerMessage];
         }
@@ -282,7 +274,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 - (void)reloadStickers {
     __weak typeof(self) weakSelf = self;
-    [self.dataModel getStickerPacks:^(NSArray *stickerPacks) {
+    [self.stickersService getStickerPacksWithType:nil completion:^(NSArray *stickerPacks) {
         [weakSelf.stickersDelegateManager setStickerPacksArray:stickerPacks];
         [weakSelf.stickersHeaderDelegateManager setStickerPacks:stickerPacks];
         [weakSelf.stickersCollectionView reloadData];
@@ -291,14 +283,18 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         weakSelf.stickersDelegateManager.currentDisplayedSection = 0;
         
         [weakSelf setPackSelectedAtIndex:0];
+    } failure:^(NSError *error) {
+        
     }];
-
 }
 
 - (void)setPackSelectedAtIndex:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    
-    [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    if ([self.stickersHeaderCollectionView numberOfItemsInSection:0] >= index) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        
+        [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }
+
 }
 
 #pragma mark - Colors
@@ -316,13 +312,13 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 - (BOOL)isStickerViewShowed {
     
     BOOL isShowed = self.stickersView.superview ? YES : NO;
-    
+
+    [self reloadStickers];
+
     return isShowed;
 }
 
 -(UIView *)stickersView {
-    
-    [self reloadStickers];
     
     return _stickersView;
 }
