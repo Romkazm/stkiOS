@@ -20,8 +20,6 @@
 @interface STKStickersCache()
 
 @property (strong, nonatomic) NSManagedObjectContext *backgroundContext;
-@property (strong, nonatomic) NSOperationQueue *queue;
-
 
 @end
 
@@ -170,13 +168,6 @@
 
 #pragma mark - Properties
 
-//- (NSOperationQueue*)queue {
-//    if (!_queue) {
-//        _queue = [[NSOperationQueue alloc] init];
-//        _queue.maxConcurrentOperationCount = 1;
-//    }
-//    return _queue;
-//}
 
 - (NSManagedObjectContext *)backgroundContext {
     if (!_backgroundContext) {

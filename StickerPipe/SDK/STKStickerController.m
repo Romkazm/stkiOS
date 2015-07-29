@@ -312,7 +312,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 - (BOOL)isStickerViewShowed {
     
     BOOL isShowed = self.stickersView.superview ? YES : NO;
-
+    //TODO:Refactoring
     [self reloadStickers];
 
     return isShowed;

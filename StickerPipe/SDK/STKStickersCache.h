@@ -15,6 +15,7 @@
 - (void) saveStickerPacks:(NSArray*) stickerPacks;
 
 - (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response;
+
 - (STKStickerPackObject*)recentStickerPack;
 
 - (void) incrementUsedCountWithStickerID:(NSNumber*)stickerID;
