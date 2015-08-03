@@ -22,10 +22,13 @@
 NSString *const STKAnalyticMessageCategory = @"message";
 NSString *const STKAnalyticStickerCategory = @"sticker";
 NSString *const STKAnalyticPackCategory = @"pack";
+NSString *const STKAnalyticDevCategory = @"dev";
 
 //Actions
 NSString *const STKAnalyticActionCheck = @"check";
 NSString *const STKAnalyticActionInstall = @"install";
+NSString *const STKAnalyticActionError = @"error";
+
 
 //labels
 NSString *const STKStickersCountLabel = @"Stickers count";
@@ -128,6 +131,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
         STKStatistic *statistic = nil;
         
+        
         if ([category isEqualToString:STKAnalyticMessageCategory]) {
             NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStatistic entityName]];
             request.fetchLimit = 1;
@@ -153,7 +157,9 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
             [weakSelf sendGoogleAnalyticsEventWithCategory:category action:action label:label value:value];
         }
         
-
+        
+        
+        
         //TODO: REFACTORING
 
         statistic.category = category;

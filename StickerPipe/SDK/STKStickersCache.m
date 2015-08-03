@@ -16,6 +16,9 @@
 #import "STKSticker.h"
 #import "STKAnalyticService.h"
 #import "STKUtility.h"
+#import "STKStickersNotificationConstants.h"
+
+
 
 @interface STKStickersCache()
 
@@ -25,6 +28,26 @@
 @end
 
 @implementation STKStickersCache
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateStorage:) name:NSManagedObjectContextDidSaveNotification object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didUpdateStorage:(NSNotification*) notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:STKStickersCacheDidUpdateStickersNotification object:nil];
+    });
+
+}
 
 - (void) saveStickerPacks:(NSArray *)stickerPacks {
     
@@ -91,6 +114,18 @@
     
     STKStickerPack *stickerModel = [self stickerModelFormStickerObject:stickerPack context:self.backgroundContext];
     stickerModel.disabled = @(YES);
+    
+    for (STKStickerObject *stickerObject in stickerPack.stickers) {
+        STKSticker *sticker = [self stickerModelWithID:stickerObject.stickerID context:self.backgroundContext];
+        sticker.stickerName = stickerObject.stickerName;
+        sticker.stickerID = stickerObject.stickerID;
+        sticker.stickerMessage = stickerObject.stickerMessage;
+        sticker.usedCount = stickerObject.usedCount;
+        if (sticker) {
+            [stickerModel addStickersObject:sticker];
+        }
+    }
+    
     [self.backgroundContext save:nil];
 }
 
@@ -178,8 +213,8 @@
                                                    fetchLimit:12
                                                       context:self.backgroundContext];
         
-        if (stickers.count > 0) {
-            
+//        if (stickers.count > 0) {
+        
             STKStickerPackObject *recentPack = [STKStickerPackObject new];
             recentPack.packName = @"Recent";
             recentPack.packTitle = @"Recent";
@@ -195,7 +230,7 @@
             recentPack.stickers = sortedRecentStickers;
             
             object = recentPack;
-        }
+//        }
     }];
 
     
@@ -220,6 +255,16 @@
         [weakSelf.backgroundContext save:nil];
         
     }];
+}
+
+- (BOOL)isStickerPackDownloaded:(NSString*)packName {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND (%K == NO OR %K == nil)", STKStickerPackAttributes.packName, packName, STKStickerPackAttributes.disabled, STKStickerPackAttributes.disabled];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:[STKStickerPack entityName]];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSInteger count = [self.mainContext countForFetchRequest:request error:nil];
+    BOOL saved = count > 0;
+    return saved;
 }
 
 - (STKStickerPackObject *)getStickerPackWithPackName:(NSString *)packName {

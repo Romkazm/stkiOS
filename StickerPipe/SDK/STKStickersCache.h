@@ -10,11 +10,14 @@
 
 @class STKStickerObject, STKStickerPackObject;
 
+
 @interface STKStickersCache : NSObject
 
 - (void) saveStickerPacks:(NSArray*) stickerPacks;
 
 - (void) saveDisabledStickerPack:(STKStickerPackObject*)stickerPack;
+
+- (BOOL) isStickerPackDownloaded:(NSString*)packName;
 
 - (void) deleteStickerPacks:(NSArray*) stickerPacks;
 

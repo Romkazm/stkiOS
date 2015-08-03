@@ -14,7 +14,9 @@
 #import "STKStickerHeaderCell.h"
 #import "STKStickerObject.h"
 #import "STKIntroService.h"
+#import "STKUtility.h"
 #import "STKStickersEntityService.h"
+#import "STKEmptyRecentCell.h"
 
 //SIZES
 //static const CGFloat stickerHeaderItemHeight = 44.0;
@@ -74,57 +76,57 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         [self configureStickersViewsConstraints];
         
         [self reloadStickers];
-        if ([STKIntroService needToShowIntro]) {
-            [self initIntroView];
-            [STKIntroService setIntroWasShowed:YES];
-        }
+//        if ([STKIntroService needToShowIntro]) {
+//            [self initIntroView];
+//            [STKIntroService setIntroWasShowed:YES];
+//        }
     }
     return self;
 }
 
-- (void) initIntroView {
-    self.introView = [[UIView alloc] initWithFrame:self.stickersView.frame];
-    self.introView.backgroundColor = [UIColor whiteColor];
-    self.introView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.stickersView addSubview:self.introView];
-    NSDictionary *dictionaryView = @{@"introView" : self.introView, @"stickersView" : self.stickersView};
-    
-    self.introCenterYConstraint = [NSLayoutConstraint constraintWithItem:self.introView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.stickersView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
-    [self.stickersView addConstraint:self.introCenterYConstraint];
-    
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[introView]|" options:0 metrics:nil views:dictionaryView];
-    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[introView(==stickersView)]" options:0 metrics:nil views:dictionaryView];
-    [self.stickersView addConstraints:heightConstraint];
-    [self.stickersView addConstraints:horizontalConstraints];
-
-    UIImageView *introImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"introImage"]];
-    
-    introImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.introView addSubview:introImageView];
-    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
-    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
-
-    
-    UILabel *introLabel = [[UILabel alloc] init];
-    introLabel.font = [UIFont fontWithName:@"Helvetica-Neue-Regular" size:14.0];
-    introLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    introLabel.text = @"Send emotions with Stickers";
-    introLabel.textColor = [UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1];
-    [self.introView addSubview:introLabel];
-    
-    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:15.0]];
-    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
-    
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(introDidTapWithGesture:)];
-    [self.introView addGestureRecognizer:tapGesture];
-    
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(introDidPanWithGesture:)];
-    [self.introView addGestureRecognizer:panGesture];
-
-}
-
+//- (void) initIntroView {
+//    self.introView = [[UIView alloc] initWithFrame:self.stickersView.frame];
+//    self.introView.backgroundColor = [UIColor whiteColor];
+//    self.introView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self.stickersView addSubview:self.introView];
+//    NSDictionary *dictionaryView = @{@"introView" : self.introView, @"stickersView" : self.stickersView};
+//    
+//    self.introCenterYConstraint = [NSLayoutConstraint constraintWithItem:self.introView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.stickersView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+//    [self.stickersView addConstraint:self.introCenterYConstraint];
+//    
+//    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[introView]|" options:0 metrics:nil views:dictionaryView];
+//    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[introView(==stickersView)]" options:0 metrics:nil views:dictionaryView];
+//    [self.stickersView addConstraints:heightConstraint];
+//    [self.stickersView addConstraints:horizontalConstraints];
+//
+//    UIImageView *introImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"introImage"]];
+//    
+//    introImageView.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    [self.introView addSubview:introImageView];
+//    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+//    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+//
+//    
+//    UILabel *introLabel = [[UILabel alloc] init];
+//    introLabel.font = [UIFont fontWithName:@"Helvetica-Neue-Regular" size:14.0];
+//    introLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    introLabel.text = @"Send emotions with Stickers";
+//    introLabel.textColor = [UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1];
+//    [self.introView addSubview:introLabel];
+//    
+//    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:15.0]];
+//    [self.introView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.introView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+//    
+//    
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(introDidTapWithGesture:)];
+//    [self.introView addGestureRecognizer:tapGesture];
+//    
+//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(introDidPanWithGesture:)];
+//    [self.introView addGestureRecognizer:panGesture];
+//
+//}
+//
 
 - (void) initStickersCollectionView {
     
@@ -155,7 +157,8 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self.stickersCollectionView.showsHorizontalScrollIndicator = NO;
     self.stickersCollectionView.showsVerticalScrollIndicator = NO;
     self.stickersCollectionView.backgroundColor = [UIColor clearColor];
-    [self.stickersCollectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
+    [self.stickersCollectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerViewCell"];
+    [self.stickersCollectionView registerClass:[STKEmptyRecentCell class] forCellWithReuseIdentifier:@"STKEmptyRecentCell"];
     [self.stickersCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableView"];
     [self.stickersView addSubview:self.stickersCollectionView];
     [self.stickersCollectionView registerClass:[STKStickersSeparator class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"STKStickerPanelSeparator"];
@@ -230,44 +233,44 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 #pragma mark - Gestures
 
-- (void)introDidTapWithGesture:(UITapGestureRecognizer*)gesture {
-    
-    [self hideIntroView];
-    
-}
-
-- (void)introDidPanWithGesture:(UIPanGestureRecognizer*)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateChanged) {
-        CGPoint touchPoint = [gesture translationInView:self.stickersView];
-        self.introCenterYConstraint.constant = touchPoint.y;
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        if (self.introCenterYConstraint.constant < CGRectGetHeight(self.introView.frame) / 2) {
-            self.introCenterYConstraint.constant = 0;
-            [UIView animateWithDuration:0.2 animations:^{
-                [self.introView layoutIfNeeded];
-            }];
-        } else {
-            [self hideIntroView];
-        }
-    }
-
-    
-}
+//- (void)introDidTapWithGesture:(UITapGestureRecognizer*)gesture {
+//    
+//    [self hideIntroView];
+//    
+//}
+//
+//- (void)introDidPanWithGesture:(UIPanGestureRecognizer*)gesture {
+//    
+//    if (gesture.state == UIGestureRecognizerStateChanged) {
+//        CGPoint touchPoint = [gesture translationInView:self.stickersView];
+//        self.introCenterYConstraint.constant = touchPoint.y;
+//    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//        if (self.introCenterYConstraint.constant < CGRectGetHeight(self.introView.frame) / 2) {
+//            self.introCenterYConstraint.constant = 0;
+//            [UIView animateWithDuration:0.2 animations:^{
+//                [self.introView layoutIfNeeded];
+//            }];
+//        } else {
+//            [self hideIntroView];
+//        }
+//    }
+//
+//    
+//}
 
 #pragma mark - Intro View
 
-- (void)hideIntroView {
-    
-    self.introCenterYConstraint.constant = CGRectGetHeight(self.introView.frame);
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.stickersView layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [self.introView removeFromSuperview];
-    }];
-
-    
-}
+//- (void)hideIntroView {
+//    
+//    self.introCenterYConstraint.constant = CGRectGetHeight(self.introView.frame);
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.stickersView layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        [self.introView removeFromSuperview];
+//    }];
+//
+//    
+//}
 
 
 #pragma mark - Reload
@@ -294,6 +297,15 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         
         [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     }
+
+}
+
+#pragma mark - Checks
+
+-(BOOL)isStickerPackDownloaded:(NSString *)packMessage {
+    NSArray *packNames = [STKUtility trimmedPackNameAndStickerNameWithMessage:packMessage];
+    NSString *packName = packNames.firstObject;
+    return [self.stickersService isPackDownloaded:packName];
 
 }
 

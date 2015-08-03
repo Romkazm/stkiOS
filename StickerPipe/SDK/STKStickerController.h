@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "STKStickersNotificationConstants.h"
 
 @class STKStickerController;
 
@@ -27,6 +28,8 @@
 
 @property (assign, nonatomic) UIColor *headerBackgroundColor;
 
+
+- (BOOL) isStickerPackDownloaded:(NSString*)packMessage;
 
 //Color settings. Default is light gray
 

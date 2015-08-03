@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
-#import "STKPacksDescriptionController.h"
+#import "STKPackDescriptionController.h"
 #import "STKStickersEntityService.h"
 #import "STKStickerViewCell.h"
 #import "STKPackDescriptionHeader.h"
@@ -15,7 +15,7 @@
 #import <UIImageView+WebCache.h>
 #import "STKUtility.h"
 
-@interface STKPacksDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate>
+@interface STKPackDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation STKPacksDescriptionController
+@implementation STKPackDescriptionController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,13 +88,14 @@
         }
         [stickerHeader.statusButton setTitleColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1] forState:UIControlStateNormal];
         [stickerHeader.statusButton setTitleColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1] forState:UIControlStateHighlighted];
-        if (!self.stickerPack.disabled.boolValue) {
+        if (self.stickerPack.disabled.boolValue) {
+            [stickerHeader.statusButton setTitle:@"Download" forState:UIControlStateNormal];
+            [stickerHeader.statusButton setTitle:@"Download" forState:UIControlStateHighlighted];
+
+        } else {
             [stickerHeader.statusButton setTitle:@"Remove" forState:UIControlStateNormal];
             [stickerHeader.statusButton setTitle:@"Remove" forState:UIControlStateHighlighted];
 
-        } else {
-            [stickerHeader.statusButton setTitle:@"Download" forState:UIControlStateNormal];
-            [stickerHeader.statusButton setTitle:@"Download" forState:UIControlStateHighlighted];
 
         }
         
@@ -143,6 +144,9 @@
 - (void)packDescriptionHeader:(STKPackDescriptionHeader *)header didTapDownloadButton:(UIButton*)button {
     [self.service togglePackDisabling:self.stickerPack];
     [self reloadStickerPack];
+    if ([self.delegate respondsToSelector:@selector(packDescriptionControllerDidChangePakcStatus:)]) {
+        [self.delegate packDescriptionControllerDidChangePakcStatus:self];
+    }
 }
 
 @end

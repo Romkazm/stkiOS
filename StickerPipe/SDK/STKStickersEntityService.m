@@ -132,8 +132,9 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
             NSDictionary *serverPack = response[@"data"];
             STKStickerPackObject *object = [weakSelf.serializer serializeStickerPack:serverPack];
             //TODO:Refactoring
-            if (![self isPackSaved:object]) {
+            if (![self isPackDownloaded:object.packName]) {
                 [weakSelf.cacheEntity saveDisabledStickerPack:object];
+                object.disabled = @YES;
             }
             
             if (completion) {
@@ -164,14 +165,9 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
 
 #pragma mark Check save delete
 
-- (BOOL)isPackSaved:(STKStickerPackObject *)stickerPack {
-    //TODO: Optimize
-    STKStickerPackObject *object = [self.cacheEntity getStickerPackWithPackName:stickerPack.packName];
-    if (object) {
-        return YES;
-    } else {
-        return NO;
-    }
+- (BOOL)isPackDownloaded:(NSString*)packName {
+ 
+   return [self.cacheEntity isStickerPackDownloaded:packName];
 }
 
 - (void)saveStickerPack:(STKStickerPackObject *)stickerPack {

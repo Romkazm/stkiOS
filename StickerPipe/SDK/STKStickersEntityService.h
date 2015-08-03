@@ -20,7 +20,7 @@
 
 - (void) getPackWithMessage:(NSString*)message completion:(void(^)(STKStickerPackObject* stickerPack, BOOL isDownloaded))completion;
 
-- (BOOL) isPackSaved:(STKStickerPackObject*)stickerPack;
+- (BOOL)isPackDownloaded:(NSString*)packName;
 
 - (void) saveStickerPack:(STKStickerPackObject*)stickerPack;
 

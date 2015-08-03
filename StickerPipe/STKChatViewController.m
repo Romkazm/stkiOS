@@ -8,10 +8,10 @@
 
 #import "STKChatViewController.h"
 #import "STKChatStickerCell.h"
-#import "STKStickerController.h"
-#import "STKPacksDescriptionController.h"
+#import "STKStickerPipe.h"
+#import "STKPackDescriptionController.h"
 
-@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerControllerDelegate>
+@interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerControllerDelegate, STKPackDescriptionControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataSource = [@[@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_china]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bike]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_dontknow]]"] mutableCopy];
+    self.dataSource = [@[@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_china]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bike]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_bigsmile]]",@"[[pinkgorilla_dontknow]]",@"[[flowers_flower1]]"] mutableCopy];
     
     self.inputTextView.layer.cornerRadius = 7.0;
     self.inputTextView.layer.borderWidth = 1.0;
@@ -63,11 +63,17 @@
 
     [self scrollTableViewToBottom];
     
+    self.stickerController = [[STKStickerController alloc] init];
+    self.stickerController.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateStickersCache:) name:STKStickersCacheDidUpdateStickersNotification object:nil];
+    
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 #pragma mark - UI Methods
 
@@ -80,6 +86,9 @@
 
 #pragma mark - Notifications
 
+- (void)didUpdateStickersCache:(NSNotification*) notification {
+    [self.tableView reloadData];
+}
 
 - (void) didShowKeyboard:(NSNotification*)notification {
     
@@ -163,8 +172,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[STKChatStickerCell class]]) {
-        STKPacksDescriptionController *vc = [[STKPacksDescriptionController alloc] initWithNibName:@"STKPacksDescriptionController" bundle:nil];
-        vc.stickerMessage = [cell stickerMessage];
+        STKPackDescriptionController *vc = [[STKPackDescriptionController alloc] initWithNibName:@"STKPacksDescriptionController" bundle:nil];
+        vc.stickerMessage = self.dataSource[indexPath.row];
+        vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];
     }
     
@@ -183,8 +193,12 @@
     
     STKChatStickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    [cell fillWithStickerMessage:self.dataSource[indexPath.row]];
+    NSString *message = self.dataSource[indexPath.row];
     
+    if ([STKStickersManager isStickerMessage:message]) {
+        [cell fillWithStickerMessage:message downloaded:[self.stickerController isStickerPackDownloaded:message]];
+    }
+
     return cell;
 }
 
@@ -192,7 +206,7 @@
 
 - (void)stickerController:(STKStickerController *)stickerController didSelectStickerWithMessage:(NSString *)message {
     STKChatStickerCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    [cell fillWithStickerMessage:message];
+    [cell fillWithStickerMessage:message downloaded:[self.stickerController isStickerPackDownloaded:message]];
     [self.tableView beginUpdates];
     [self.dataSource addObject:message];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0];
@@ -200,6 +214,12 @@
     [self.tableView endUpdates];
     [self scrollTableViewToBottom];
     
+}
+
+#pragma mark - STKPackDescriptionControllerDelegate
+
+- (void) packDescriptionControllerDidChangePakcStatus:(STKPackDescriptionController*)controller {
+    [self.tableView reloadData];
 }
 
 

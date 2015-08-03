@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STKPacksDescriptionController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STKPackDescriptionController">
             <connections>
                 <outlet property="activityIndicator" destination="PUn-z6-S4O" id="M0F-NM-ndS"/>
                 <outlet property="collectionView" destination="Iga-Mt-7Ok" id="RCN-6z-UCs"/>
@@ -18,10 +17,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PUn-z6-S4O">
-                    <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                    <rect key="frame" x="150" y="274" width="20" height="20"/>
                 </activityIndicatorView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-Mt-7Ok">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vi9-R5-Nr7">
                         <size key="itemSize" width="80" height="80"/>
@@ -31,11 +30,9 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZa-It-dwf">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="K0Q-cl-GC9">
-                            <variation key="heightClass=regular-widthClass=compact" constant="64"/>
-                        </constraint>
+                        <constraint firstAttribute="height" constant="64" id="K0Q-cl-GC9"/>
                     </constraints>
                     <items>
                         <navigationItem title="Title" id="uXP-Vv-xhU">
@@ -47,75 +44,27 @@
                             </barButtonItem>
                         </navigationItem>
                     </items>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="K0Q-cl-GC9"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="K0Q-cl-GC9"/>
-                        </mask>
-                    </variation>
                 </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Iga-Mt-7Ok" firstAttribute="top" secondItem="fZa-It-dwf" secondAttribute="bottom" id="2wv-rk-Mg2"/>
-                <constraint firstItem="Iga-Mt-7Ok" firstAttribute="top" secondItem="hUd-VI-LEf" secondAttribute="top" id="CFt-Fb-9D3"/>
-                <constraint firstItem="Iga-Mt-7Ok" firstAttribute="leading" secondItem="hUd-VI-LEf" secondAttribute="leading" id="ELC-Y3-fzi">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                </constraint>
+                <constraint firstItem="Iga-Mt-7Ok" firstAttribute="leading" secondItem="hUd-VI-LEf" secondAttribute="leading" id="ELC-Y3-fzi"/>
                 <constraint firstItem="fZa-It-dwf" firstAttribute="leading" secondItem="hUd-VI-LEf" secondAttribute="leading" id="HlO-th-Jt2"/>
                 <constraint firstItem="fZa-It-dwf" firstAttribute="top" secondItem="hUd-VI-LEf" secondAttribute="top" id="KIz-O8-pNI"/>
-                <constraint firstAttribute="trailing" secondItem="Iga-Mt-7Ok" secondAttribute="trailing" id="Pbd-s9-EtZ">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                </constraint>
+                <constraint firstAttribute="trailing" secondItem="Iga-Mt-7Ok" secondAttribute="trailing" id="Pbd-s9-EtZ"/>
                 <constraint firstAttribute="centerY" secondItem="PUn-z6-S4O" secondAttribute="centerY" id="pCo-pe-kjJ"/>
                 <constraint firstAttribute="centerX" secondItem="PUn-z6-S4O" secondAttribute="centerX" id="q3a-bv-F5K"/>
                 <constraint firstAttribute="trailing" secondItem="fZa-It-dwf" secondAttribute="trailing" id="xgs-4I-u2J"/>
                 <constraint firstAttribute="bottom" secondItem="Iga-Mt-7Ok" secondAttribute="bottom" id="ynG-Dy-tZ3"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="PUn-z6-S4O"/>
-                    <exclude reference="Iga-Mt-7Ok"/>
-                    <exclude reference="fZa-It-dwf"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="HlO-th-Jt2"/>
-                    <exclude reference="KIz-O8-pNI"/>
-                    <exclude reference="xgs-4I-u2J"/>
-                    <exclude reference="2wv-rk-Mg2"/>
-                    <exclude reference="CFt-Fb-9D3"/>
-                    <exclude reference="ELC-Y3-fzi"/>
-                    <exclude reference="Pbd-s9-EtZ"/>
-                    <exclude reference="ynG-Dy-tZ3"/>
-                    <exclude reference="pCo-pe-kjJ"/>
-                    <exclude reference="q3a-bv-F5K"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=compact">
-                <mask key="subviews">
-                    <include reference="PUn-z6-S4O"/>
-                    <include reference="Iga-Mt-7Ok"/>
-                    <include reference="fZa-It-dwf"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="HlO-th-Jt2"/>
-                    <include reference="KIz-O8-pNI"/>
-                    <include reference="xgs-4I-u2J"/>
-                    <include reference="2wv-rk-Mg2"/>
-                    <exclude reference="CFt-Fb-9D3"/>
-                    <include reference="ELC-Y3-fzi"/>
-                    <include reference="Pbd-s9-EtZ"/>
-                    <include reference="ynG-Dy-tZ3"/>
-                    <include reference="pCo-pe-kjJ"/>
-                    <include reference="q3a-bv-F5K"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="16" y="61"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

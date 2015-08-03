@@ -13,15 +13,18 @@
 extern NSString *const STKAnalyticMessageCategory;
 extern NSString *const STKAnalyticStickerCategory;
 extern NSString *const STKAnalyticPackCategory;
+extern NSString *const STKAnalyticDevCategory;
 
 //Actions
 extern NSString *const STKAnalyticActionCheck;
 extern NSString *const STKAnalyticActionInstall;
+extern NSString *const STKAnalyticActionError;
 
 
 //Labels
 extern NSString *const STKStickersCountLabel;
 extern NSString *const STKEventsCountLabel;
+
 
 
 @interface STKAnalyticService : NSObject

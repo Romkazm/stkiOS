@@ -8,6 +8,7 @@
 
 #import "STKUtility.h"
 #import <UIKit/UIKit.h>
+#import "STKAnalyticService.h"
 
 
 NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
@@ -109,6 +110,9 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
 
 void STKLog(NSString *format, ...) {
 
+    
+//    [[STKAnalyticService sharedService] sendEventWithCategory:stkana action:<#(NSString *)#> label:<#(NSString *)#> value:<#(NSNumber *)#>]
+    
 #if DEBUG
     
     va_list argumentList;

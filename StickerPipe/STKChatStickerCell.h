@@ -11,8 +11,8 @@
 @interface STKChatStickerCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *stickerImageView;
-@property (strong, nonatomic) NSString *stickerMessage;
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
 
-- (void) fillWithStickerMessage:(NSString*) message;
+- (void) fillWithStickerMessage:(NSString*) message downloaded:(BOOL)downloaded;
 
 @end
