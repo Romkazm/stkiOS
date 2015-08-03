@@ -22,9 +22,13 @@
 
 @property (nonatomic, strong) NSNumber *packID;
 
-@property (nonatomic, assign) NSNumber *price;
+@property (nonatomic, strong) NSNumber *price;
 
 @property (nonatomic, strong) NSArray *stickers;
+
+@property (nonatomic, strong) NSNumber *disabled;
+
+@property (nonatomic, strong) NSString *packDescription;
 
 - (instancetype)initWithServerResponse:(NSDictionary*)serverResponse;
 

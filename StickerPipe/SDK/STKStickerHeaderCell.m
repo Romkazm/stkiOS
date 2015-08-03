@@ -64,8 +64,14 @@
         
         
         [self.imageView sd_setImageWithURL:iconUrl placeholderImage:coloredPlaceholder];
+        
     }
     
+}
+
+- (SDWebImageManager *)imageManager {
+    
+    return [SDWebImageManager sharedManager];
 }
 
 @end

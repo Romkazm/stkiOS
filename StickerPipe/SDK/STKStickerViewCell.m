@@ -6,18 +6,19 @@
 //  Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
-#import "STKStickerCell.h"
+#import "STKStickerViewCell.h"
 #import "UIImageView+Stickers.h"
 #import "UIImage+Tint.h"
 #import "STKUtility.h"
+#import <UIImageView+WebCache.h>
 
-@interface STKStickerCell()
+@interface STKStickerViewCell()
 
 @property (strong, nonatomic) UIImageView *stickerImageView;
 
 @end
 
-@implementation STKStickerCell
+@implementation STKStickerViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -48,7 +49,9 @@
     
     UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
     
-    [self.stickerImageView stk_setStickerWithMessage:stickerMessage placeholder:coloredPlaceholder];
+    NSURL *stickerUrl = [STKUtility imageUrlForStickerPanelWithMessage:stickerMessage];
+    
+    [self.stickerImageView sd_setImageWithURL:stickerUrl placeholderImage:coloredPlaceholder];
     
 }
 

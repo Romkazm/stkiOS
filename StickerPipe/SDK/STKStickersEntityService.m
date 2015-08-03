@@ -10,6 +10,8 @@
 #import "STKStickersCache.h"
 #import "STKStickersApiService.h"
 #import "STKStickersSerializer.h"
+#import "STKStickerPackObject.h"
+#import "STKUtility.h"
 
 static NSString *const kLastModifiedDateKey = @"kLastModifiedDateKey";
 static NSString *const kLastUpdateIntervalKey = @"kLastUpdateIntervalKey";
@@ -72,7 +74,7 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
     });
 }
 
-- (void) updateStickerPacksWithType:(NSString*)type completion:(void(^)(NSArray *stickerPacks))completion {
+- (void)updateStickerPacksWithType:(NSString*)type completion:(void(^)(NSArray *stickerPacks))completion {
     
     __weak typeof(self) weakSelf = self;
     
@@ -83,20 +85,24 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
             [weakSelf.cacheEntity saveStickerPacks:serializedObjects];
             [weakSelf setLastModifiedDate:lastModifiedDate];
         }
-        STKStickerPackObject *recentPack = weakSelf.cacheEntity.recentStickerPack;
-        NSArray *packsWithRecent = nil;
-        if (recentPack) {
-            NSArray *recentPackArray = @[recentPack];
-            packsWithRecent = [recentPackArray arrayByAddingObjectsFromArray:serializedObjects];
-        } else {
-            packsWithRecent = serializedObjects;
-        }
+//        STKStickerPackObject *recentPack = weakSelf.cacheEntity.recentStickerPack;
+//        NSArray *packsWithRecent = nil;
+//        if (recentPack) {
+//            NSArray *recentPackArray = @[recentPack];
+//            packsWithRecent = [recentPackArray arrayByAddingObjectsFromArray:serializedObjects];
+//        } else {
+//            packsWithRecent = serializedObjects;
+//        }
+        //TODO:Refactoring
+        [weakSelf.cacheEntity getStickerPacks:^(NSArray *stickerPacks) {
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(stickerPacks);
+                });
+            }
+        }];
         [weakSelf setLastUpdateDate:[[NSDate date] timeIntervalSince1970]];
-        if (completion) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(packsWithRecent);
-            });
-        }
+
         
     } failure:^(NSError *error) {
         if (completion) {
@@ -110,6 +116,71 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
 - (void)incrementStickerUsedCountWithID:(NSNumber *)stickerID {
     [self.cacheEntity incrementUsedCountWithStickerID:stickerID];
 }
+
+-(void)getPackWithMessage:(NSString *)message completion:(void (^)(STKStickerPackObject *, BOOL))completion {
+    
+    NSArray *separaredStickerNames = [STKUtility trimmedPackNameAndStickerNameWithMessage:message];
+    NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
+    
+    STKStickerPackObject *stickerPackObject =  [self.cacheEntity getStickerPackWithPackName:packName];
+    if (!stickerPackObject) {
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [self.apiService getStickerPackWithName:packName success:^(id response) {
+            
+            NSDictionary *serverPack = response[@"data"];
+            STKStickerPackObject *object = [weakSelf.serializer serializeStickerPack:serverPack];
+            //TODO:Refactoring
+            if (![self isPackSaved:object]) {
+                [weakSelf.cacheEntity saveDisabledStickerPack:object];
+            }
+            
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(object, NO);
+                });
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    } else {
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(stickerPackObject, YES);
+            });
+        }
+    }
+
+}
+
+- (void)togglePackDisabling:(STKStickerPackObject *)pack {
+    BOOL status = pack.disabled.boolValue;
+    pack.disabled = @(!status);
+    
+    [self.cacheEntity markStickerPack:pack disabled:!status];
+    
+}
+
+#pragma mark Check save delete
+
+- (BOOL)isPackSaved:(STKStickerPackObject *)stickerPack {
+    //TODO: Optimize
+    STKStickerPackObject *object = [self.cacheEntity getStickerPackWithPackName:stickerPack.packName];
+    if (object) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)saveStickerPack:(STKStickerPackObject *)stickerPack {
+    [self.cacheEntity saveStickerPacks:@[stickerPack]];
+}
+- (void)deleteStickerPack:(STKStickerPackObject *)stickerPack {
+    [self.cacheEntity deleteStickerPacks:@[stickerPack]];
+}
+
 #pragma mark - LastUpdateTime
 
 - (NSTimeInterval)lastUpdateDate {

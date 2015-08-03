@@ -8,12 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+@class STKStickerPackObject;
+
 @interface STKStickersEntityService : NSObject
 
 - (void)getStickerPacksWithType:(NSString*)type
                  completion:(void(^)(NSArray *stickerPacks))completion
                     failure:(void(^)(NSError *error))failure;
 
-- (void) incrementStickerUsedCountWithID:(NSNumber*)stickerID;
+- (void)incrementStickerUsedCountWithID:(NSNumber*)stickerID;
+
+- (void) getPackWithMessage:(NSString*)message completion:(void(^)(STKStickerPackObject* stickerPack, BOOL isDownloaded))completion;
+
+- (BOOL) isPackSaved:(STKStickerPackObject*)stickerPack;
+
+- (void) saveStickerPack:(STKStickerPackObject*)stickerPack;
+
+- (void) deleteStickerPack:(STKStickerPackObject*) stickerPack;
+
+- (void) togglePackDisabling:(STKStickerPackObject*)pack;
 
 @end

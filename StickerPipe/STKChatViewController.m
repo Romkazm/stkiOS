@@ -8,8 +8,8 @@
 
 #import "STKChatViewController.h"
 #import "STKChatStickerCell.h"
-//#import "STKStickerPanel.h"
 #import "STKStickerController.h"
+#import "STKPacksDescriptionController.h"
 
 @interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerControllerDelegate>
 
@@ -158,6 +158,16 @@
     if (!self.isKeyboardShowed) {
         [self.inputTextView becomeFirstResponder];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[STKChatStickerCell class]]) {
+        STKPacksDescriptionController *vc = [[STKPacksDescriptionController alloc] initWithNibName:@"STKPacksDescriptionController" bundle:nil];
+        vc.stickerMessage = [cell stickerMessage];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource

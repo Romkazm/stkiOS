@@ -5,6 +5,8 @@
 
 const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.artist = @"artist",
+	.disabled = @"disabled",
+	.packDescription = @"packDescription",
 	.packID = @"packID",
 	.packName = @"packName",
 	.packTitle = @"packTitle",
@@ -41,6 +43,11 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"disabledValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"disabled"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"packIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"packID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -56,6 +63,28 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 }
 
 @dynamic artist;
+
+@dynamic disabled;
+
+- (BOOL)disabledValue {
+	NSNumber *result = [self disabled];
+	return [result boolValue];
+}
+
+- (void)setDisabledValue:(BOOL)value_ {
+	[self setDisabled:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveDisabledValue {
+	NSNumber *result = [self primitiveDisabled];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveDisabledValue:(BOOL)value_ {
+	[self setPrimitiveDisabled:[NSNumber numberWithBool:value_]];
+}
+
+@dynamic packDescription;
 
 @dynamic packID;
 

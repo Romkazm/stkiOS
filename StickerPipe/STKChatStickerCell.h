@@ -11,6 +11,7 @@
 @interface STKChatStickerCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *stickerImageView;
+@property (strong, nonatomic) NSString *stickerMessage;
 
 - (void) fillWithStickerMessage:(NSString*) message;
 

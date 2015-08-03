@@ -9,7 +9,7 @@
 #import "STKStickerController.h"
 #import "STKStickerDelegateManager.h"
 #import "STKStickerHeaderDelegateManager.h"
-#import "STKStickerCell.h"
+#import "STKStickerViewCell.h"
 #import "STKStickersSeparator.h"
 #import "STKStickerHeaderCell.h"
 #import "STKStickerObject.h"
@@ -155,7 +155,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self.stickersCollectionView.showsHorizontalScrollIndicator = NO;
     self.stickersCollectionView.showsVerticalScrollIndicator = NO;
     self.stickersCollectionView.backgroundColor = [UIColor clearColor];
-    [self.stickersCollectionView registerClass:[STKStickerCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
+    [self.stickersCollectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerPanelCell"];
     [self.stickersCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableView"];
     [self.stickersView addSubview:self.stickersCollectionView];
     [self.stickersCollectionView registerClass:[STKStickersSeparator class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"STKStickerPanelSeparator"];
@@ -289,7 +289,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 }
 
 - (void)setPackSelectedAtIndex:(NSInteger)index {
-    if ([self.stickersHeaderCollectionView numberOfItemsInSection:0] >= index) {
+    if ([self.stickersHeaderCollectionView numberOfItemsInSection:0] - 1 >= index) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         
         [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];

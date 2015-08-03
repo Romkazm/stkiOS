@@ -23,9 +23,10 @@
         self.packTitle = serverResponse[@"title"];
         self.packID = serverResponse[@"pack_id"];
         self.price = serverResponse[@"price"];
+        self.packDescription = serverResponse[@"description"];
         NSMutableArray *stickersArray = [NSMutableArray array];
         NSArray *stickers = serverResponse[@"stickers"];
-//        @autoreleasepool {
+        @autoreleasepool {
             for (NSDictionary *sticker in stickers) {
                 STKStickerObject *stickerObject = [[STKStickerObject alloc] init];
                 stickerObject.stickerID = sticker[@"id"];
@@ -34,7 +35,7 @@
                 stickerObject.stickerMessage = [NSString stringWithFormat:@"[[%@_%@]]", packName, stickerName];
                 [stickersArray addObject:stickerObject];
             }
-//        }
+        }
 
         self.stickers = [NSArray arrayWithArray:stickersArray];
     }
@@ -50,6 +51,8 @@
         self.packTitle = stickerPack.packTitle;
         self.packID = stickerPack.packID;
         self.price = stickerPack.price;
+        self.packDescription = stickerPack.packDescription;
+        self.disabled = stickerPack.disabled;
         NSMutableArray *stickersArray = [NSMutableArray array];
         for (STKSticker *sticker in stickerPack.stickers) {
             
@@ -65,7 +68,7 @@
 #pragma mark - Description
 
 - (NSString*) stringForDescription {
-    return [NSString stringWithFormat:@"%@/n Artist: %@/n packName: %@/n Pack title: %@/n packID: %@/n price: %@", [super description], self.artist, self.packName, self.packTitle, self.packID, self.price];
+    return [NSString stringWithFormat:@"%@\n Artist: %@\n packName: %@\n Pack title: %@\n packID: %@\n price: %@", [super description], self.artist, self.packName, self.packTitle, self.packID, self.price];
 }
 
 - (NSString *)description {

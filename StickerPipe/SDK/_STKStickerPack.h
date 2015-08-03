@@ -5,6 +5,8 @@
 
 extern const struct STKStickerPackAttributes {
 	__unsafe_unretained NSString *artist;
+	__unsafe_unretained NSString *disabled;
+	__unsafe_unretained NSString *packDescription;
 	__unsafe_unretained NSString *packID;
 	__unsafe_unretained NSString *packName;
 	__unsafe_unretained NSString *packTitle;
@@ -29,6 +31,18 @@ extern const struct STKStickerPackRelationships {
 @property (nonatomic, strong) NSString* artist;
 
 //- (BOOL)validateArtist:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* disabled;
+
+@property (atomic) BOOL disabledValue;
+- (BOOL)disabledValue;
+- (void)setDisabledValue:(BOOL)value_;
+
+//- (BOOL)validateDisabled:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* packDescription;
+
+//- (BOOL)validatePackDescription:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* packID;
 
@@ -79,6 +93,15 @@ extern const struct STKStickerPackRelationships {
 
 - (NSString*)primitiveArtist;
 - (void)setPrimitiveArtist:(NSString*)value;
+
+- (NSNumber*)primitiveDisabled;
+- (void)setPrimitiveDisabled:(NSNumber*)value;
+
+- (BOOL)primitiveDisabledValue;
+- (void)setPrimitiveDisabledValue:(BOOL)value_;
+
+- (NSString*)primitivePackDescription;
+- (void)setPrimitivePackDescription:(NSString*)value;
 
 - (NSNumber*)primitivePackID;
 - (void)setPrimitivePackID:(NSNumber*)value;

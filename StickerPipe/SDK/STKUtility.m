@@ -47,10 +47,31 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
     
     NSString *density = [self scaleString];
     
-    NSString *urlSting = [NSString stringWithFormat:@"%@/tab_icon_%@.png",name, density];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tab_icon_%@.png",name, density];
     
-    NSURL *url = [NSURL URLWithString:urlSting relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
+    NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
     
+    return url;
+}
+
++ (NSURL *)mainImageUrlForPackName:(NSString *)name {
+    
+    NSString *density = [self scaleString];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/main_icon_%@.png",name, density];
+    
+    NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
+    
+    return url;
+}
+
++ (NSURL *)imageUrlForStickerPanelWithMessage:(NSString *)stickerMessage {
+    NSArray *separaredStickerNames = [self trimmedPackNameAndStickerNameWithMessage:stickerMessage];
+    NSString *packName = [[separaredStickerNames firstObject] lowercaseString];
+    NSString *stickerName = [[separaredStickerNames lastObject] lowercaseString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_mdpi.png", packName, stickerName];
+    
+    NSURL *url = [NSURL URLWithString:urlString relativeToURL:[NSURL URLWithString:STKUtilityAPIUrl]];
     return url;
 }
 
@@ -81,7 +102,7 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
 #pragma mark - Colors
 
 + (UIColor*) defaultGrayColor {
-    return [UIColor colorWithRed:0.9 green:0.9 blue:0.92 alpha:1];
+    return [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:147.0/255.0 alpha:1];
 }
 
 #pragma mark - STKLog

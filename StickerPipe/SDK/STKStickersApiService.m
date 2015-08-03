@@ -54,15 +54,30 @@
                          }
                      }
                      failure:^(NSURLSessionDataTask *task, NSError *error) {
-//                                 NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//                                 NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
                          if (failure) {
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  failure(error);
                              });
                          }
                      }];
+}
+
+
+- (void)getStickerPackWithName:(NSString *)packName
+                       success:(void (^)(id))success
+                       failure:(void (^)(NSError *))failure
+{
+    NSString *route = [NSString stringWithFormat:@"pack/%@", packName];
     
+    [self.sessionManager GET:route parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
 }
 
 @end

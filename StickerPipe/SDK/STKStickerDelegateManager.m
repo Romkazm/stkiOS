@@ -8,7 +8,7 @@
 
 #import "STKStickerDelegateManager.h"
 #import <UIKit/UIKit.h>
-#import "STKStickerCell.h"
+#import "STKStickerViewCell.h"
 #import "STKStickersSeparator.h"
 #import "STKStickersCache.h"
 #import "STKStickersApiService.h"
@@ -73,7 +73,7 @@ typedef enum {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    STKStickerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STKStickerPanelCell" forIndexPath:indexPath];
+    STKStickerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STKStickerPanelCell" forIndexPath:indexPath];
     
     STKStickerPackObject *stickerPack = self.self.stickerPacks[indexPath.section];
     

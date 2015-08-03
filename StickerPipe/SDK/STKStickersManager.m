@@ -81,8 +81,9 @@ static UIColor *panelHeaderPlaceholderColor;
 
 #pragma mark - ApiKey
 
-+(void)initWitApiKey:(NSString *)apiKey {
++ (void)initWitApiKey:(NSString *)apiKey {
     [STKApiKeyManager setApiKey:apiKey];
+    [SDWebImageManager sharedManager].imageDownloader.downloadTimeout = 120;
 }
 
 #pragma mark - Properties
