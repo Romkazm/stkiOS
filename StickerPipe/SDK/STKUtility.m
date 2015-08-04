@@ -11,7 +11,7 @@
 #import "STKAnalyticService.h"
 
 
-NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
+NSString *const STKUtilityAPIUrl = @"https://api.stickerpipe.com/stk/";
 
 
 @implementation STKUtility
@@ -111,18 +111,21 @@ NSString *const STKUtilityAPIUrl = @"http://api.stickerpipe.com/stk/";
 void STKLog(NSString *format, ...) {
 
     
-//    [[STKAnalyticService sharedService] sendEventWithCategory:stkana action:<#(NSString *)#> label:<#(NSString *)#> value:<#(NSNumber *)#>]
+
     
-#if DEBUG
     
     va_list argumentList;
     va_start(argumentList, format);
-    
+#if DEBUG
+
     NSLogv(format, argumentList);
+#endif
+    NSString *log = [[NSString alloc] initWithFormat:format arguments:argumentList];
+    
+    [[STKAnalyticService sharedService] sendDevEventWithCategory:STKAnalyticDevCategory action:STKAnalyticActionError label:log value:nil];
     
     va_end(argumentList);
     
-#endif
 }
 
 

@@ -84,9 +84,19 @@
     __weak typeof(self) weakSelf = self;
     
     self.imageTask = [[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
+        NSError *error = info[DFImageInfoErrorKey];
+        
         if (image) {
             weakSelf.image = image;
             [weakSelf setNeedsLayout];
+        } else {
+            if (error.code != -1) {
+                STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+            }
+        }
+        
+        if (completion) {
+            completion(error, image);
         }
     }];
     

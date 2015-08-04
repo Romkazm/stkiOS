@@ -12,7 +12,7 @@
 #import "STKUUIDManager.h"
 
 NSString *const STKApiVersion = @"v1";
-NSString *const STKBaseApiUrl = @"http://api.stickerpipe.com/api";
+NSString *const STKBaseApiUrl = @"https://api.stickerpipe.com/api";
 
 @implementation STKApiAbstractService
 

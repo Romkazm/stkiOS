@@ -68,6 +68,11 @@
         if (image) {
             weakSelf.stickerImageView.image = image;
             [weakSelf setNeedsLayout];
+        } else {
+            NSError *error = info[DFImageInfoErrorKey];
+            if (error.code != -1) {
+                STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+            }
         }
     }];
     

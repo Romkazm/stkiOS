@@ -42,36 +42,27 @@ static UIColor *panelHeaderPlaceholderColor;
         };
         
         DFImageRequest *request = [DFImageRequest requestWithResource:stickerUrl targetSize:CGSizeMake(160.f, 160.f) contentMode:DFImageContentModeAspectFit options:options];
-        
-        __weak typeof(self) weakSelf = self;
-        
+                
         DFImageTask *task =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
-//            if (result.error) {
-//                if (failure) {
-//                    failure(result.error, nil);
-//                    STKLog(@"Cannot download sticker from STKStickerManager");
-//                }
-//            } else {
+            NSError *error = info[DFImageInfoErrorKey];
+            if (error) {
+                if (failure) {
+                    failure(error, error.localizedDescription);
+                }
+            } else {
                 if (success) {
                     success(image);
                 }
-//            }
+            }
+            
+            if (error.code != -1) {
+                STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+            }
+
         }];
         
         [task resume];
         
-//        [self.imageManager downloadImageWithURL:stickerUrl options:0 progress:^(PINRemoteImageManagerResult *result) {
-//            
-//        } completion:^(PINRemoteImageManagerResult *result) {
-//
-//        }];
-        
-//        [self.imageManager downloadImageWithURL:stickerUrl
-//                                        options:0
-//                                       progress:progress
-//                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//
-//                                      }];
     } else {
         if (failure) {
             NSError *error = [NSError errorWithDomain:@"It's not a sticker" code:999 userInfo:nil];

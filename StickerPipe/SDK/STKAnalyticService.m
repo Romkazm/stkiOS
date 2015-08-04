@@ -117,6 +117,19 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
 
+- (void)sendDevEventWithCategory:(NSString*)category
+                          action:(NSString*)action
+                           label:(NSString*)label
+                           value:(NSNumber*)value {
+    
+#ifndef DEBUG
+
+    [self sendGoogleAnalyticsEventWithCategory:category action:action label:label value:value];
+    
+#endif
+    
+}
+
 #pragma mark - Events
 
 - (void)sendEventWithCategory:(NSString*)category

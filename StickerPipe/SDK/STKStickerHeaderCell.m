@@ -80,6 +80,11 @@
             if (image) {
                 weakSelf.imageView.image = image;
                 [weakSelf setNeedsLayout];
+            } else {
+                NSError *error = info[DFImageInfoErrorKey];
+                if (error.code != -1) {
+                    STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+                }
             }
         }];
         
