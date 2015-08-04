@@ -172,7 +172,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[STKChatStickerCell class]]) {
-        STKPackDescriptionController *vc = [[STKPackDescriptionController alloc] initWithNibName:@"STKPacksDescriptionController" bundle:nil];
+        STKPackDescriptionController *vc = [[STKPackDescriptionController alloc] initWithNibName:@"STKPackDescriptionController" bundle:nil];
         vc.stickerMessage = self.dataSource[indexPath.row];
         vc.delegate = self;
         [self presentViewController:vc animated:YES completion:nil];

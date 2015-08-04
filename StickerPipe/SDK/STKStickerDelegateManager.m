@@ -23,7 +23,6 @@ typedef enum {
     
 } STKStickerPanelScrollDirection;
 
-static const NSInteger kRecentSectionNumber = 0;
 
 @interface STKStickerDelegateManager()
 
