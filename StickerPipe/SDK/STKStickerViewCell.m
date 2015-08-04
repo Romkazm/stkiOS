@@ -10,11 +10,12 @@
 #import "UIImageView+Stickers.h"
 #import "UIImage+Tint.h"
 #import "STKUtility.h"
-#import <UIImageView+WebCache.h>
+#import <DFImageManagerKit.h>
 
 @interface STKStickerViewCell()
 
 @property (strong, nonatomic) UIImageView *stickerImageView;
+@property (strong, nonatomic) DFImageTask *imageTask;
 
 @end
 
@@ -37,7 +38,9 @@
 }
 
 - (void)prepareForReuse {
-    [self.stickerImageView stk_cancelStickerLoading];
+    [self.imageTask cancel];
+    self.imageTask = nil;
+    self.stickerImageView.image = nil;
 }
 
 - (void) configureWithStickerMessage:(NSString*)stickerMessage
@@ -51,7 +54,26 @@
     
     NSURL *stickerUrl = [STKUtility imageUrlForStickerPanelWithMessage:stickerMessage];
     
-    [self.stickerImageView sd_setImageWithURL:stickerUrl placeholderImage:coloredPlaceholder];
+    DFImageRequestOptions *options = [DFImageRequestOptions new];
+    options.priority = (self.window == nil) ? DFImageRequestPriorityNormal : DFImageRequestPriorityVeryHigh;
+    
+    self.stickerImageView.image = coloredPlaceholder;
+    [self setNeedsLayout];
+    
+    DFImageRequest *request = [DFImageRequest requestWithResource:stickerUrl targetSize:CGSizeZero contentMode:DFImageContentModeAspectFit options:options];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    self.imageTask =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
+        if (image) {
+            weakSelf.stickerImageView.image = image;
+            [weakSelf setNeedsLayout];
+        }
+    }];
+    
+    [self.imageTask resume];
+    
+//    [self.stickerImageView sd_setImageWithURL:stickerUrl placeholderImage:coloredPlaceholder];
     
 }
 

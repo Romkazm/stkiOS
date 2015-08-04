@@ -190,6 +190,10 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 #pragma mark - Reload
 
+- (void)reloadStickersView {
+    [self reloadStickers];
+}
+
 - (void)reloadStickers {
     __weak typeof(self) weakSelf = self;
     [self.stickersService getStickerPacksWithType:nil completion:^(NSArray *stickerPacks) {

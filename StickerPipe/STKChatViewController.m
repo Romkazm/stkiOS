@@ -88,6 +88,7 @@
 
 - (void)didUpdateStickersCache:(NSNotification*) notification {
     [self.tableView reloadData];
+    [self.stickerController reloadStickersView];
 }
 
 - (void) didShowKeyboard:(NSNotification*)notification {

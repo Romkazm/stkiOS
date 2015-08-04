@@ -15,7 +15,7 @@
 + (void) initWitApiKey:(NSString*) apiKey;
 
 - (void) getStickerForMessage:(NSString*) message
-                     progress:(void(^)(NSInteger receivedSize, NSInteger expectedSize)) progress
+                     progress:(void(^)(double progress)) progress
                       success:(void(^)(UIImage *sticker))success
                       failure:(void(^)(NSError *error, NSString *errorMessage)) failure;
 

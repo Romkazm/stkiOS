@@ -7,7 +7,7 @@
 //
 
 #import "STKStickersManager.h"
-#import <SDWebImageManager.h>
+#import <DFImageManagerKit.h>
 #import "STKUtility.h"
 #import "STKAnalyticService.h"
 #import "STKApiKeyManager.h"
@@ -21,32 +21,57 @@ static UIColor *panelHeaderPlaceholderColor;
 
 @interface STKStickersManager()
 
-@property (strong, nonatomic) SDWebImageManager *imageManager;
+//@property (strong, nonatomic) PINRemoteImageManager *imageManager;
 
 @end
 
 @implementation STKStickersManager
 
-- (void)getStickerForMessage:(NSString *)message progress:(void (^)(NSInteger, NSInteger))progress success:(void (^)(UIImage *))success failure:(void (^)(NSError *, NSString *))failure {
+- (void)getStickerForMessage:(NSString *)message progress:(void (^)(double))progressBlock success:(void (^)(UIImage *))success failure:(void (^)(NSError *, NSString *))failure {
     
     if ([self.class isStickerMessage:message]) {
         NSURL *stickerUrl = [STKUtility imageUrlForStikerMessage:message];
         
-        [self.imageManager downloadImageWithURL:stickerUrl
-                                        options:0
-                                       progress:progress
-                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                          if (error) {
-                                              if (failure) {
-                                                  failure(error, nil);
-                                                  STKLog(@"Cannot download sticker from STKStickerManager");
-                                              }
-                                          } else {
-                                              if (success) {
-                                                  success(image);
-                                              }
-                                          }
-                                      }];
+        DFImageRequestOptions *options = [DFImageRequestOptions new];
+        options.allowsClipping = YES;
+        options.progressHandler = ^(double progress){
+            // Observe progress
+            if (progressBlock) {
+                progressBlock(progress);
+            }
+        };
+        
+        DFImageRequest *request = [DFImageRequest requestWithResource:stickerUrl targetSize:CGSizeMake(160.f, 160.f) contentMode:DFImageContentModeAspectFit options:options];
+        
+        __weak typeof(self) weakSelf = self;
+        
+        DFImageTask *task =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
+//            if (result.error) {
+//                if (failure) {
+//                    failure(result.error, nil);
+//                    STKLog(@"Cannot download sticker from STKStickerManager");
+//                }
+//            } else {
+                if (success) {
+                    success(image);
+                }
+//            }
+        }];
+        
+        [task resume];
+        
+//        [self.imageManager downloadImageWithURL:stickerUrl options:0 progress:^(PINRemoteImageManagerResult *result) {
+//            
+//        } completion:^(PINRemoteImageManagerResult *result) {
+//
+//        }];
+        
+//        [self.imageManager downloadImageWithURL:stickerUrl
+//                                        options:0
+//                                       progress:progress
+//                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//
+//                                      }];
     } else {
         if (failure) {
             NSError *error = [NSError errorWithDomain:@"It's not a sticker" code:999 userInfo:nil];
@@ -83,16 +108,21 @@ static UIColor *panelHeaderPlaceholderColor;
 
 + (void)initWitApiKey:(NSString *)apiKey {
     [STKApiKeyManager setApiKey:apiKey];
-    [SDWebImageManager sharedManager].imageDownloader.downloadTimeout = 30;
-    [[SDWebImageManager sharedManager].imageDownloader setMaxConcurrentDownloads:3];
+//    [SDWebImageManager sharedManager].imageDownloader.downloadTimeout = 30;
+//    [[SDWebImageManager sharedManager].imageDownloader setMaxConcurrentDownloads:3];
 }
 
 #pragma mark - Properties
 
-- (SDWebImageManager *)imageManager {
-    
-    return [SDWebImageManager sharedManager];
-}
+//- (PINRemoteImageManager *)imageManager {
+//    
+//    return [PINRemoteImageManager sharedImageManager];
+//}
+
+//- (SDWebImageManager *)imageManager {
+//    
+//    return [SDWebImageManager sharedManager];
+//}
 
 #pragma mark - Set Colors
 

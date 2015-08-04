@@ -7,13 +7,14 @@
 //
 
 #import "STKStickerHeaderCell.h"
-#import <UIImageView+WebCache.h>
+#import <DFImageManagerKit.h>
 #import "STKUtility.h"
 #import "UIImage+Tint.h"
 
 @interface STKStickerHeaderCell()
 
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) DFImageTask *imageTask;
 
 @end
 
@@ -43,7 +44,7 @@
 }
 
 - (void)prepareForReuse {
-    [self.imageView sd_cancelCurrentImageLoad];
+    [self.imageTask cancel];
     self.imageView.image = nil;
     self.backgroundColor = [UIColor clearColor];
 }
@@ -63,15 +64,30 @@
         UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
         
         
-        [self.imageView sd_setImageWithURL:iconUrl placeholderImage:coloredPlaceholder];
+        DFImageRequestOptions *options = [DFImageRequestOptions new];
+        
+        options.priority = DFImageRequestPriorityHigh;
+        
+        self.imageView.image = coloredPlaceholder;
+        [self setNeedsLayout];
+        
+        DFImageRequest *request = [DFImageRequest requestWithResource:iconUrl targetSize:CGSizeZero contentMode:DFImageContentModeAspectFit options:options];
+        
+        __weak typeof(self) weakSelf = self;
+        
+        self.imageTask =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
+            
+            if (image) {
+                weakSelf.imageView.image = image;
+                [weakSelf setNeedsLayout];
+            }
+        }];
+        
+        [self.imageTask resume];
         
     }
     
 }
 
-- (SDWebImageManager *)imageManager {
-    
-    return [SDWebImageManager sharedManager];
-}
 
 @end

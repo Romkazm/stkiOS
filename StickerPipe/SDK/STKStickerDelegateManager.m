@@ -114,10 +114,13 @@ typedef enum {
     
     
     STKStickerPackObject *stickerPack = self.stickerPacks[indexPath.section];
-    STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
-    
-    self.didSelectSticker(sticker);
-    
+    if (stickerPack.stickers.count > 0) {
+        STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
+        if (sticker) {
+            self.didSelectSticker(sticker);
+        }
+    }
+
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

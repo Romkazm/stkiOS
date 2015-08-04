@@ -12,8 +12,9 @@
 #import "STKPackDescriptionHeader.h"
 #import "STKStickerPackObject.h"
 #import "STKStickerObject.h"
-#import <UIImageView+WebCache.h>
+#import <DFImageManagerKit.h>
 #import "STKUtility.h"
+#import "UIImage+Tint.h"
 
 @interface STKPackDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate>
 
@@ -105,7 +106,11 @@
         
         stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
         [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
-        [stickerHeader.packImageView sd_setImageWithURL:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
+        
+        UIImage *defaultPlaceholder = [UIImage imageNamed:@"StickerPlaceholder"];
+        defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultGrayColor]];
+        stickerHeader.packImageView.image = defaultPlaceholder;
+        [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
         
         return stickerHeader;
     }
@@ -119,7 +124,7 @@
     stickerHeader.packNameLabel.text = self.stickerPack.packTitle;
     stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
     [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
-    [stickerHeader.packImageView sd_setImageWithURL:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
+    [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
 
     
     stickerHeader.bounds = CGRectMake(0, 0, collectionView.frame.size.width, 0);

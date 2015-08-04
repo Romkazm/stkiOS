@@ -28,6 +28,7 @@
 
 @property (assign, nonatomic) UIColor *headerBackgroundColor;
 
+- (void) reloadStickersView;
 
 - (BOOL) isStickerPackDownloaded:(NSString*)packMessage;
 
