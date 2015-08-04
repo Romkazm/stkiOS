@@ -91,7 +91,7 @@
             [weakSelf setNeedsLayout];
         } else {
             if (error.code != -1) {
-                STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+                STKLog(@"Failed loading from category: %@", error.localizedDescription);
             }
         }
         

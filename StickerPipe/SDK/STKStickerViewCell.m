@@ -55,7 +55,7 @@
     NSURL *stickerUrl = [STKUtility imageUrlForStickerPanelWithMessage:stickerMessage];
     
     DFImageRequestOptions *options = [DFImageRequestOptions new];
-    options.priority = (self.window == nil) ? DFImageRequestPriorityNormal : DFImageRequestPriorityVeryHigh;
+    options.priority = DFImageRequestPriorityNormal;
     
     self.stickerImageView.image = coloredPlaceholder;
     [self setNeedsLayout];
@@ -70,16 +70,14 @@
             [weakSelf setNeedsLayout];
         } else {
             NSError *error = info[DFImageInfoErrorKey];
-            if (error.code != -1) {
-                STKLog(@"Failed loading from category: %@ %@", error.localizedDescription, @"ddd");
+            if (error && error.code != -1) {
+                STKLog(@"Failed loading from stickerView cell: %@", error.localizedDescription);
             }
         }
     }];
     
     [self.imageTask resume];
-    
-//    [self.stickerImageView sd_setImageWithURL:stickerUrl placeholderImage:coloredPlaceholder];
-    
+            
 }
 
 @end

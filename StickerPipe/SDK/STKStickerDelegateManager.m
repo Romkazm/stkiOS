@@ -86,7 +86,6 @@ typedef enum {
        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STKStickerViewCell" forIndexPath:indexPath];
         
         STKStickerObject *sticker = stickerPack.stickers[indexPath.item];
-        
         [cell configureWithStickerMessage:sticker.stickerMessage placeholder:self.stickerPlaceholderImage placeholderColor:self.placeholderColor];
     }
     
@@ -98,6 +97,9 @@ typedef enum {
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell isKindOfClass:[STKStickerViewCell class]]) {
+        STKStickerViewCell *stickerCell = (STKStickerViewCell*)cell;
+    }
     if (self.currentDisplayedSection == indexPath.section) {
         NSInteger itemsCount = [collectionView numberOfItemsInSection:indexPath.section];
         if (indexPath.item == itemsCount - 1 && self.scrollDirection == STKStickerPanelScrollDirectionBottom) {

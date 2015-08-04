@@ -13,7 +13,6 @@
 #import "STKStickersSeparator.h"
 #import "STKStickerHeaderCell.h"
 #import "STKStickerObject.h"
-#import "STKIntroService.h"
 #import "STKUtility.h"
 #import "STKStickersEntityService.h"
 #import "STKEmptyRecentCell.h"
@@ -39,8 +38,6 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 @property (strong, nonatomic) STKStickerHeaderDelegateManager *stickersHeaderDelegateManager;
 
 @property (strong, nonatomic) UIView *introView;
-
-@property (strong, nonatomic) STKIntroService *introService;
 
 @property (strong, nonatomic) STKStickersEntityService *stickersService;
 

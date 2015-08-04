@@ -45,6 +45,7 @@
 
 - (void)prepareForReuse {
     [self.imageTask cancel];
+    self.imageTask = nil;
     self.imageView.image = nil;
     self.backgroundColor = [UIColor clearColor];
 }
