@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface STKStickersMapper : NSObject
+@interface STKStickersSerializer : NSObject
 
-- (void) mappingStickerPacks:(NSArray*)stickerPacks async:(BOOL)async;
+- (NSArray*) serializeStickerPacks:(NSArray*)stickerPacks;
+
+//- (void) mappingStickerPacks:(NSArray*)stickerPacks async:(BOOL)async;
 
 @end
