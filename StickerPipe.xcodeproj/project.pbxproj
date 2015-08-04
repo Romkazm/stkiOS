@@ -45,7 +45,6 @@
 		6EADF3911B46B475008005E9 /* UIImageView+Stickers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF38D1B46B475008005E9 /* UIImageView+Stickers.m */; };
 		6EADF3981B46D13F008005E9 /* STKChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF3971B46D13F008005E9 /* STKChatViewController.m */; };
 		6EADF39B1B46D4EE008005E9 /* STKChatStickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EADF39A1B46D4EE008005E9 /* STKChatStickerCell.m */; };
-		6EB287CE1B666D6400E9A2A5 /* STKIntroService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB287CD1B666D6400E9A2A5 /* STKIntroService.m */; };
 		6EB287D41B66731300E9A2A5 /* STKStickersEntityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB287D31B66731300E9A2A5 /* STKStickersEntityService.m */; };
 		6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDC5ECF1B41328000EBB034 /* CoreData.framework */; };
 		6EDE15BD1B6F95120024B6DC /* STKStickersNotificationConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE15BC1B6F95120024B6DC /* STKStickersNotificationConstants.m */; };
@@ -150,8 +149,6 @@
 		6EADF3971B46D13F008005E9 /* STKChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		6EADF3991B46D4EE008005E9 /* STKChatStickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKChatStickerCell.h; sourceTree = "<group>"; };
 		6EADF39A1B46D4EE008005E9 /* STKChatStickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKChatStickerCell.m; sourceTree = "<group>"; };
-		6EB287CC1B666D6400E9A2A5 /* STKIntroService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKIntroService.h; sourceTree = "<group>"; };
-		6EB287CD1B666D6400E9A2A5 /* STKIntroService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKIntroService.m; sourceTree = "<group>"; };
 		6EB287D21B66731300E9A2A5 /* STKStickersEntityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKStickersEntityService.h; sourceTree = "<group>"; };
 		6EB287D31B66731300E9A2A5 /* STKStickersEntityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKStickersEntityService.m; sourceTree = "<group>"; };
 		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -319,8 +316,6 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 		6EB287CB1B666D5200E9A2A5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6EB287CC1B666D6400E9A2A5 /* STKIntroService.h */,
-				6EB287CD1B666D6400E9A2A5 /* STKIntroService.m */,
 				6EB287D21B66731300E9A2A5 /* STKStickersEntityService.h */,
 				6EB287D31B66731300E9A2A5 /* STKStickersEntityService.m */,
 			);
@@ -641,7 +636,6 @@ StickerPipeTests.xctest */;
 				6EADF3901B46B475008005E9 /* UIImage+Tint.m in Sources */,
 				6E9012681B56941500A5FCAE /* StickerModel.xcdatamodeld in Sources */,
 				6EADF36A1B46B40F008005E9 /* STKAnalyticService.m in Sources */,
-				6EB287CE1B666D6400E9A2A5 /* STKIntroService.m in Sources */,
 				6EDE15C01B6FA6600024B6DC /* STKEmptyRecentCell.m in Sources */,
 				6E310A381B68B9E300FB75D0 /* STKPackDescriptionController.m in Sources */,
 				6EADF3661B46B3FD008005E9 /* STKApiKeyManager.m in Sources */,
