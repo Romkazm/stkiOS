@@ -64,6 +64,8 @@
     
     __weak typeof(self) weakSelf = self;
     
+    //TODO:MOVE TASK TO MODEL
+    
     self.imageTask =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
         if (image) {
             weakSelf.stickerImageView.image = image;
