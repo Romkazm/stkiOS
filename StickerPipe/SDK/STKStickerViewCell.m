@@ -48,7 +48,7 @@
                     placeholderColor:(UIColor*)placeholderColor {
     UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StickerPanelPlaceholder"];
     
-    UIColor *colorForPlaceholder = placeholderColor && !placeholder ? placeholderColor : [STKUtility defaultGrayColor];
+    UIColor *colorForPlaceholder = placeholderColor && !placeholder ? placeholderColor : [STKUtility defaultPlaceholderGrayColor];
     
     UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
     

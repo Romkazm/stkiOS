@@ -53,6 +53,7 @@
         self.price = stickerPack.price;
         self.packDescription = stickerPack.packDescription;
         self.disabled = stickerPack.disabled;
+        self.order = stickerPack.order;
         NSMutableArray *stickersArray = [NSMutableArray array];
         for (STKSticker *sticker in stickerPack.stickers) {
             
@@ -68,7 +69,7 @@
 #pragma mark - Description
 
 - (NSString*) stringForDescription {
-    return [NSString stringWithFormat:@"%@\n Artist: %@\n packName: %@\n Pack title: %@\n packID: %@\n price: %@", [super description], self.artist, self.packName, self.packTitle, self.packID, self.price];
+    return [NSString stringWithFormat:@"%@\n Artist: %@\n packName: %@\n Pack title: %@\n packID: %@\n price: %@\n Disabled: %@\n Order: %@", [super description], self.artist, self.packName, self.packTitle, self.packID, self.price,self.disabled, self.order];
 }
 
 - (NSString *)description {

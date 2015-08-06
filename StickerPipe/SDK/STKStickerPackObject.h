@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) NSNumber *disabled;
 
+@property (nonatomic, strong) NSNumber *order;
+
 @property (nonatomic, strong) NSString *packDescription;
 
 - (instancetype)initWithServerResponse:(NSDictionary*)serverResponse;

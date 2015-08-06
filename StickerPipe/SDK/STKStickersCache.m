@@ -72,6 +72,9 @@
             stickerPack.price = object.price;
             stickerPack.packTitle = object.packTitle;
             stickerPack.packDescription = object.packDescription;
+            if (object.order) {
+                stickerPack.order = object.order;
+            }
             
             for (STKStickerObject *stickerObject in object.stickers) {
                 STKSticker *sticker = [weakSelf stickerModelWithID:stickerObject.stickerID context:weakSelf.backgroundContext];
@@ -168,33 +171,49 @@
     return stickerPack;
 }
 
+- (void)getStickerPacksIgnoringRecent:(void (^)(NSArray *))response {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ OR %K == nil", STKStickerPackAttributes.disabled, @NO, STKStickerPackAttributes.disabled];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:STKStickerPackAttributes.order ascending:YES];
+    NSArray *stickerPacks = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:@[sortDescriptor] context:self.backgroundContext];
+    
+    NSMutableArray *result = [NSMutableArray array];
+    
+    for (STKStickerPack *pack in stickerPacks) {
+        STKStickerPackObject *stickerPackObject = [[STKStickerPackObject alloc] initWithStickerPack:pack];
+        if (stickerPackObject) {
+            [result addObject:stickerPackObject];
+        }
+    }
+    if (response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            response(result);
+        });
+    }
+    
+}
+
+
 
 - (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response {
     
     __weak typeof(self) weakSelf = self;
-    [self.backgroundContext performBlock:^{
-        STKStickerPackObject *recentPack = [weakSelf recentStickerPack];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ OR %K == nil", STKStickerPackAttributes.disabled, @NO, STKStickerPackAttributes.disabled];
-        NSArray *stickerPacks = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil context:self.backgroundContext];
+    
+    STKStickerPackObject *recentPack = [weakSelf recentStickerPack];
+    
+    NSMutableArray *result = [NSMutableArray array];
+    
+    [weakSelf getStickerPacksIgnoringRecent:^(NSArray *stickerPacks) {
         
-        NSMutableArray *result = [NSMutableArray array];
-        
-        for (STKStickerPack *pack in stickerPacks) {
-            STKStickerPackObject *stickerPackObject = [[STKStickerPackObject alloc] initWithStickerPack:pack];
-            if (stickerPackObject) {
-                [result addObject:stickerPackObject];
-            }
-        }
-        [result sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:STKStickerPackAttributes.packName ascending:YES]]];
         if (recentPack) {
             [result insertObject:recentPack atIndex:0];
+            [result addObjectsFromArray:stickerPacks];
         }
         if (response) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                response(result);
-            });
+            response(result);
         }
-    }];    
+        
+    }];
 
 }
 
@@ -213,8 +232,6 @@
                                                    fetchLimit:12
                                                       context:self.backgroundContext];
         
-//        if (stickers.count > 0) {
-        
             STKStickerPackObject *recentPack = [STKStickerPackObject new];
             recentPack.packName = @"Recent";
             recentPack.packTitle = @"Recent";
@@ -230,7 +247,6 @@
             recentPack.stickers = sortedRecentStickers;
             
             object = recentPack;
-//        }
     }];
 
     
@@ -263,8 +279,8 @@
     request.predicate = predicate;
     request.fetchLimit = 1;
     NSInteger count = [self.mainContext countForFetchRequest:request error:nil];
-    BOOL saved = count > 0;
-    return saved;
+    BOOL downloaded = count > 0;
+    return downloaded;
 }
 
 - (STKStickerPackObject *)getStickerPackWithPackName:(NSString *)packName {

@@ -172,10 +172,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[STKChatStickerCell class]]) {
-        STKPackDescriptionController *vc = [[STKPackDescriptionController alloc] initWithNibName:@"STKPackDescriptionController" bundle:nil];
-        vc.stickerMessage = self.dataSource[indexPath.row];
-        vc.delegate = self;
-        [self presentViewController:vc animated:YES completion:nil];
+        
+        [self.stickerController showPackInfoControllerWithStickerMessage:self.dataSource[indexPath.row]];
     }
     
 }
@@ -183,7 +181,6 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     
     return self.dataSource.count;
     
@@ -214,6 +211,10 @@
     [self.tableView endUpdates];
     [self scrollTableViewToBottom];
     
+}
+
+- (UIViewController *)stickerControllerViewControllerForPresentingModalView {
+    return self;
 }
 
 #pragma mark - STKPackDescriptionControllerDelegate

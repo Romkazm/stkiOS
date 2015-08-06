@@ -74,6 +74,16 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
     });
 }
 
+- (void)getStickerPacksIgnoringRecentWithType:(NSString *)type completion:(void (^)(NSArray *))completion failure:(void (^)(NSError *))failre {
+    
+    [self.cacheEntity getStickerPacksIgnoringRecent:^(NSArray *stickerPacks) {
+        if (completion) {
+            completion(stickerPacks);
+        }
+    }];
+    
+}
+
 - (void)updateStickerPacksWithType:(NSString*)type completion:(void(^)(NSArray *stickerPacks))completion {
     
     __weak typeof(self) weakSelf = self;
@@ -111,6 +121,10 @@ static const NSTimeInterval kUpdatesDelay = 900.0; //15 min
         }
     }];
 
+}
+
+- (void)saveStickerPacks:(NSArray *)stickerPacks {
+    [self.cacheEntity saveStickerPacks:stickerPacks];
 }
 
 - (void)incrementStickerUsedCountWithID:(NSNumber *)stickerID {

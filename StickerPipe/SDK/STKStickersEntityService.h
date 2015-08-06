@@ -18,11 +18,17 @@
 
 - (void)incrementStickerUsedCountWithID:(NSNumber*)stickerID;
 
+- (void)getStickerPacksIgnoringRecentWithType:(NSString*)type
+                                   completion:(void(^)(NSArray *stickerPacks))completion
+                                      failure:(void(^)(NSError *error))failre;
+
 - (void) getPackWithMessage:(NSString*)message completion:(void(^)(STKStickerPackObject* stickerPack, BOOL isDownloaded))completion;
 
 - (BOOL)isPackDownloaded:(NSString*)packName;
 
 - (void) saveStickerPack:(STKStickerPackObject*)stickerPack;
+
+- (void) saveStickerPacks:(NSArray*)stickerPacks;
 
 - (void) deleteStickerPack:(STKStickerPackObject*) stickerPack;
 

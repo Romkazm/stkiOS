@@ -59,7 +59,7 @@
         if (placeholderColor) {
             defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:placeholderColor];
         } else {
-            defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultGrayColor]];
+            defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultPlaceholderGrayColor]];
         }
         placeholderImage = defaultPlaceholder;
 

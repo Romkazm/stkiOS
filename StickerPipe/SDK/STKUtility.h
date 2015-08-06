@@ -22,7 +22,8 @@ extern NSString* const  STKUtilityAPIUrl;
 + (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
 
 //Colors
-+ (UIColor*) defaultGrayColor;
++ (UIColor*)defaultGreyColor;
++ (UIColor*) defaultPlaceholderGrayColor;
 
 void STKLog(NSString *format, ...);
 

@@ -60,7 +60,7 @@
         
         UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StikerTabPlaceholder"];
         
-        UIColor *colorForPlaceholder = placeholderTintColor && !placeholder ? placeholderTintColor : [STKUtility defaultGrayColor];
+        UIColor *colorForPlaceholder = placeholderTintColor && !placeholder ? placeholderTintColor : [STKUtility defaultPlaceholderGrayColor];
         
         UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
         

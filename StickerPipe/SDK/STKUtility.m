@@ -102,17 +102,17 @@ NSString *const STKUtilityAPIUrl = @"https://api.stickerpipe.com/stk/";
 
 #pragma mark - Colors
 
-+ (UIColor*) defaultGrayColor {
++ (UIColor*)defaultGreyColor {
+    return [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
+}
+
++ (UIColor*) defaultPlaceholderGrayColor {
     return [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:147.0/255.0 alpha:1];
 }
 
 #pragma mark - STKLog
 
 void STKLog(NSString *format, ...) {
-
-    
-
-    
     
     va_list argumentList;
     va_start(argumentList, format);

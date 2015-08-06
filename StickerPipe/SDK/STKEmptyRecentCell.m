@@ -21,7 +21,9 @@
         
         [self.contentView addSubview:introImageView];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+        //TODO:Refactoring
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-15.0]];
+
         
         
         UILabel *introLabel = [[UILabel alloc] init];
@@ -31,7 +33,8 @@
         introLabel.textColor = [UIColor colorWithRed:151.0/255.0 green:151.0/255.0 blue:151.0/255.0 alpha:1];
         [self.contentView addSubview:introLabel];
         
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:15.0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:introImageView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0]];
+        
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:introLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     }
     return self;

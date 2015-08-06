@@ -16,16 +16,18 @@
 #import "STKUtility.h"
 #import "STKStickersEntityService.h"
 #import "STKEmptyRecentCell.h"
+#import "STKStickersSettingsViewController.h"
+#import "STKPackDescriptionController.h"
 
 //SIZES
-//static const CGFloat stickerHeaderItemHeight = 44.0;
-//static const CGFloat stickerHeaderItemWidth = 44.0;
+static const CGFloat kStickerHeaderItemHeight = 44.0;
+static const CGFloat kStickerHeaderItemWidth = 44.0;
 
 static const CGFloat stickerSeparatorHeight = 1.0;
 static const CGFloat stickersSectionPaddingTopBottom = 12.0;
 static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
-@interface STKStickerController()
+@interface STKStickerController() <STKPackDescriptionControllerDelegate>
 
 @property (strong, nonatomic) UIView *stickersView;
 
@@ -36,6 +38,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 @property (strong, nonatomic) UICollectionView *stickersHeaderCollectionView;
 @property (strong, nonatomic) UICollectionViewFlowLayout *stickersHeaderFlowLayout;
 @property (strong, nonatomic) STKStickerHeaderDelegateManager *stickersHeaderDelegateManager;
+@property (strong, nonatomic) UIButton *shopButton;
 
 @property (strong, nonatomic) UIView *introView;
 
@@ -69,6 +72,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         
         [self initStickerHeader];
         [self initStickersCollectionView];
+        [self initShopButton];
         
         [self configureStickersViewsConstraints];
         
@@ -118,10 +122,24 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     [self.stickersView addSubview:self.stickersCollectionView];
 }
 
+- (void)initShopButton {
+    self.shopButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    [self.shopButton setTitle:@"..." forState:UIControlStateNormal];
+    self.shopButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
+    [self.shopButton setTintColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1]];
+    
+    [self.shopButton addTarget:self action:@selector(shopButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.shopButton.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [STKUtility defaultGreyColor];
+    
+    [self.stickersView addSubview:self.shopButton];
+}
+
 - (void) initStickerHeader {
     
     self.stickersHeaderFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.stickersHeaderFlowLayout.itemSize = CGSizeMake(44.0, 44.0);
+    self.stickersHeaderFlowLayout.itemSize = CGSizeMake(kStickerHeaderItemWidth, kStickerHeaderItemHeight);
     self.stickersHeaderFlowLayout.minimumInteritemSpacing = 0;
     self.stickersHeaderFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
@@ -143,7 +161,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self.stickersHeaderCollectionView.backgroundColor = [UIColor clearColor];
     [self.stickersHeaderCollectionView registerClass:[STKStickerHeaderCell class] forCellWithReuseIdentifier:@"STKStickerPanelHeaderCell"];
     
-    self.stickersHeaderCollectionView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];
+    self.stickersHeaderCollectionView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [STKUtility defaultGreyColor];
     
     [self.stickersView addSubview:self.stickersHeaderCollectionView];
     
@@ -155,12 +173,22 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     self.stickersHeaderCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
     self.stickersCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.shopButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *viewsDictionary = @{@"stickersHeaderCollectionView" : self.stickersHeaderCollectionView,
                                       @"stickersView" : self.stickersView,
-                                      @"stickersCollectionView" : self.stickersCollectionView};
+                                      @"stickersCollectionView" : self.stickersCollectionView,
+                                      @"shopButton" : self.shopButton};
+    NSArray *verticalShopButtonConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[shopButton]"
+                                                                                    options:0
+                                                                                    metrics:nil
+                                                                                      views:viewsDictionary];
+    [self.stickersView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton]|" options:0 metrics:nil views:viewsDictionary]];
     
-    NSArray *horizontalHeaderConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[stickersHeaderCollectionView]|"
+    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shopButton(==44.0)]" options:0 metrics:nil views:viewsDictionary];
+    NSArray *widthConstrant = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton(==44.0)]" options:0 metrics:nil views:viewsDictionary];
+    
+    NSArray *horizontalHeaderConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[stickersHeaderCollectionView]-0-[shopButton]"
                                                                                  options:0
                                                                                  metrics:nil
                                                                                    views:viewsDictionary];
@@ -174,6 +202,10 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
                                                                                     metrics:nil
                                                                                       views:viewsDictionary];
     [self.stickersHeaderCollectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[stickersHeaderCollectionView(44.0)]" options:0 metrics:nil views:viewsDictionary]];
+    [self.shopButton addConstraints:heightConstraint];
+    [self.shopButton addConstraints:widthConstrant];
+    
+    [self.stickersView addConstraints:verticalShopButtonConstraints];
     [self.stickersView addConstraints:verticalHeaderConstraints];
     [self.stickersView addConstraints:verticalStickersConstraints];
     [self.stickersView addConstraints:horizontalHeaderConstraints];
@@ -182,7 +214,16 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 }
 
 
-#pragma mark - S
+#pragma mark - Action
+
+- (void)shopButtonAction:(UIButton*)shopButton {
+    
+    STKStickersSettingsViewController *vc = [[STKStickersSettingsViewController alloc] initWithNibName:@"STKStickersSettingsViewController" bundle:nil];
+    
+    UIViewController *presenter = [self.delegate stickerControllerViewControllerForPresentingModalView];
+    
+    [presenter presentViewController:vc animated:YES completion:nil];
+}
 
 
 #pragma mark - Reload
@@ -214,6 +255,24 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     }
 
+}
+
+#pragma mark - STKPackDescriptionControllerDelegate
+
+- (void) packDescriptionControllerDidChangePakcStatus:(STKPackDescriptionController*)controller {
+    if ([self.delegate respondsToSelector:@selector(stickerControllerDidChangePackStatus:)]) {
+        [self.delegate stickerControllerDidChangePackStatus:self];
+    }
+}
+
+#pragma mark - Presenting
+
+-(void)showPackInfoControllerWithStickerMessage:(NSString*)message {
+    STKPackDescriptionController *vc = [[STKPackDescriptionController alloc] initWithNibName:@"STKPackDescriptionController" bundle:nil];
+    vc.stickerMessage = message;
+    vc.delegate = self;
+    UIViewController *presentViewController = [self.delegate stickerControllerViewControllerForPresentingModalView];
+    [presentViewController presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - Checks

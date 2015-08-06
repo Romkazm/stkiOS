@@ -6,6 +6,7 @@
 const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.artist = @"artist",
 	.disabled = @"disabled",
+	.order = @"order",
 	.packDescription = @"packDescription",
 	.packID = @"packID",
 	.packName = @"packName",
@@ -48,6 +49,11 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"orderValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"order"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"packIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"packID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -82,6 +88,26 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 
 - (void)setPrimitiveDisabledValue:(BOOL)value_ {
 	[self setPrimitiveDisabled:[NSNumber numberWithBool:value_]];
+}
+
+@dynamic order;
+
+- (int32_t)orderValue {
+	NSNumber *result = [self order];
+	return [result intValue];
+}
+
+- (void)setOrderValue:(int32_t)value_ {
+	[self setOrder:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveOrderValue {
+	NSNumber *result = [self primitiveOrder];
+	return [result intValue];
+}
+
+- (void)setPrimitiveOrderValue:(int32_t)value_ {
+	[self setPrimitiveOrder:[NSNumber numberWithInt:value_]];
 }
 
 @dynamic packDescription;

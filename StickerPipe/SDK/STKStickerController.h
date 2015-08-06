@@ -14,7 +14,14 @@
 
 @protocol STKStickerControllerDelegate <NSObject>
 
-- (void) stickerController:(STKStickerController*)stickerController didSelectStickerWithMessage:(NSString*)message;
+@required
+- (void)stickerController:(STKStickerController*)stickerController didSelectStickerWithMessage:(NSString*)message;
+
+//View controller for presenting modal controllers
+- (UIViewController*)stickerControllerViewControllerForPresentingModalView;
+
+@optional
+- (void)stickerControllerDidChangePackStatus:(STKStickerController*)stickerController;
 
 @end
 
@@ -28,15 +35,17 @@
 
 @property (assign, nonatomic) UIColor *headerBackgroundColor;
 
-- (void) reloadStickersView;
+- (void)reloadStickersView;
 
-- (BOOL) isStickerPackDownloaded:(NSString*)packMessage;
+- (BOOL)isStickerPackDownloaded:(NSString*)packMessage;
+
+-(void)showPackInfoControllerWithStickerMessage:(NSString*)message;
 
 //Color settings. Default is light gray
 
-- (void) setColorForStickersPlaceholder:(UIColor*) color;
+- (void)setColorForStickersPlaceholder:(UIColor*) color;
 
-- (void) setColorForStickersHeaderPlaceholderColor:(UIColor*) color;
+- (void)setColorForStickersHeaderPlaceholderColor:(UIColor*) color;
 
 
 

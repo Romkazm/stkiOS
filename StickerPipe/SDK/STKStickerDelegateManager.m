@@ -128,7 +128,7 @@ typedef enum {
     STKStickerPackObject *pack = self.stickerPacks[indexPath.section];
     if ([pack.packName isEqualToString:@"Recent"] && pack.stickers.count == 0) {
    
-        return CGSizeMake(self.collectionView.frame.size.width, 120.0);
+        return CGSizeMake(self.collectionView.frame.size.width, 100.0);
         
     } else {
         return CGSizeMake(80.0, 80.0);

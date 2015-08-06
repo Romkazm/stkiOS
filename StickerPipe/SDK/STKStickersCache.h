@@ -21,6 +21,8 @@
 
 - (void) deleteStickerPacks:(NSArray*) stickerPacks;
 
+- (void) getStickerPacksIgnoringRecent:(void(^)(NSArray *stickerPacks))response;
+
 - (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response;
 
 - (STKStickerPackObject*)recentStickerPack;
