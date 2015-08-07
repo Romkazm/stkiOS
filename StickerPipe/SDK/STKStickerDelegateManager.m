@@ -127,8 +127,10 @@ typedef enum {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     STKStickerPackObject *pack = self.stickerPacks[indexPath.section];
     if ([pack.packName isEqualToString:@"Recent"] && pack.stickers.count == 0) {
-   
-        return CGSizeMake(self.collectionView.frame.size.width, 100.0);
+        
+        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)collectionViewLayout;
+        
+        return CGSizeMake(self.collectionView.frame.size.width - (layout.sectionInset.left + layout.sectionInset.right), 100.0);
         
     } else {
         return CGSizeMake(80.0, 80.0);

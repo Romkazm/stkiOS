@@ -11,6 +11,7 @@
 #import "STKUtility.h"
 #import "STKAnalyticService.h"
 #import "STKApiKeyManager.h"
+#import "STKCoreDataService.h"
 
 //Colors
 
@@ -99,54 +100,9 @@ static UIColor *panelHeaderPlaceholderColor;
 
 + (void)initWitApiKey:(NSString *)apiKey {
     [STKApiKeyManager setApiKey:apiKey];
-//    [SDWebImageManager sharedManager].imageDownloader.downloadTimeout = 30;
-//    [[SDWebImageManager sharedManager].imageDownloader setMaxConcurrentDownloads:3];
+    [STKCoreDataService setupCoreData];
 }
 
-#pragma mark - Properties
 
-//- (PINRemoteImageManager *)imageManager {
-//    
-//    return [PINRemoteImageManager sharedImageManager];
-//}
-
-//- (SDWebImageManager *)imageManager {
-//    
-//    return [SDWebImageManager sharedManager];
-//}
-
-#pragma mark - Set Colors
-
-+ (void)setColorForDisplayedStickerPlaceholder:(UIColor *)color {
-    if (displayedPlaceholderColor != color) {
-        displayedPlaceholderColor = color;
-    }
-}
-
-+ (void)setColorForPanelHeaderPlaceholderColor:(UIColor *)color {
-    if (panelHeaderPlaceholderColor != color) {
-        panelHeaderPlaceholderColor = color;
-    }
-}
-
-+ (void)setColorForPanelPlaceholder:(UIColor *)color {
-    if (panelPlaceholderColor != color) {
-        panelPlaceholderColor = color;
-    }
-}
-
-#pragma mark - Get Colors
-
-+ (UIColor *)displayedStickerPlaceholderColor {
-    return displayedPlaceholderColor;
-}
-
-+ (UIColor *)panelPlaceholderColor {
-    return panelPlaceholderColor;
-}
-
-+ (UIColor *)panelHeaderPlaceholderColor {
-    return panelHeaderPlaceholderColor;
-}
 
 @end

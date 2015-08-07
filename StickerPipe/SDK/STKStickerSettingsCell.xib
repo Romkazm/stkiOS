@@ -36,11 +36,10 @@
                 <constraints>
                     <constraint firstItem="Hib-Xu-sHi" firstAttribute="top" secondItem="Cs6-kP-Jei" secondAttribute="bottom" constant="8" id="5fK-Q8-k48"/>
                     <constraint firstItem="Cs6-kP-Jei" firstAttribute="top" secondItem="XJM-2A-jnd" secondAttribute="top" constant="8" id="Iu8-n6-5AM"/>
-                    <constraint firstItem="XJM-2A-jnd" firstAttribute="top" secondItem="KIK-Ct-fAs" secondAttribute="top" constant="8" id="Nc9-yi-KgQ"/>
                     <constraint firstItem="Hib-Xu-sHi" firstAttribute="leading" secondItem="XJM-2A-jnd" secondAttribute="trailing" constant="8" id="Orm-wL-GuH"/>
                     <constraint firstItem="Cs6-kP-Jei" firstAttribute="leading" secondItem="XJM-2A-jnd" secondAttribute="trailing" constant="8" id="ecL-D7-U9x"/>
                     <constraint firstItem="XJM-2A-jnd" firstAttribute="leading" secondItem="KIK-Ct-fAs" secondAttribute="leading" constant="8" id="iiZ-oR-0zE"/>
-                    <constraint firstAttribute="bottom" secondItem="XJM-2A-jnd" secondAttribute="bottom" constant="7" id="rjC-bm-Ahd"/>
+                    <constraint firstAttribute="centerY" secondItem="XJM-2A-jnd" secondAttribute="centerY" id="wEU-4x-XSr"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
