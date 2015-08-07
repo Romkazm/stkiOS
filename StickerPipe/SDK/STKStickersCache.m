@@ -54,16 +54,16 @@
     __weak typeof(self) weakSelf = self;
     
     [self.backgroundContext performBlock:^{
-//        NSArray *packIDs = [stickerPacks valueForKeyPath:@"@unionOfObjects.packID"];
-//        
-//        NSFetchRequest *requestForDelete = [NSFetchRequest fetchRequestWithEntityName:[STKStickerPack entityName]];
-//        requestForDelete.predicate = [NSPredicate predicateWithFormat:@"NOT (%K in %@)", STKStickerPackAttributes.packID, packIDs];
-//        
-//        NSArray *objectsForDelete = [weakSelf.backgroundContext executeFetchRequest:requestForDelete error:nil];
-//        
-//        for (STKStickerPack *pack in objectsForDelete) {
-//            [self.backgroundContext deleteObject:pack];
-//        }
+        NSArray *packIDs = [stickerPacks valueForKeyPath:@"@unionOfObjects.packID"];
+        
+        NSFetchRequest *requestForDelete = [NSFetchRequest fetchRequestWithEntityName:[STKStickerPack entityName]];
+        requestForDelete.predicate = [NSPredicate predicateWithFormat:@"NOT (%K in %@)", STKStickerPackAttributes.packID, packIDs];
+        
+        NSArray *objectsForDelete = [weakSelf.backgroundContext executeFetchRequest:requestForDelete error:nil];
+        
+        for (STKStickerPack *pack in objectsForDelete) {
+            [self.backgroundContext deleteObject:pack];
+        }
         for (STKStickerPackObject *object in stickerPacks) {
             STKStickerPack *stickerPack = [weakSelf stickerPackModelWithID:object.packID context:weakSelf.backgroundContext];
             stickerPack.artist = object.artist;
