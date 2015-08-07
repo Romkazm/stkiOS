@@ -12,13 +12,14 @@
 #import "STKStickerPackObject.h"
 #import "STKUtility.h"
 #import "STKStickerSettingsCell.h"
-#import <DFImageManagerKit.h>
+#import "STKPackDescriptionController.h"
 
 @interface STKStickersSettingsViewController () <UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) STKStickersEntityService *service;
 @property (strong, nonatomic) STKTableViewDataSource *dataSource;
+@property (strong, nonatomic) UIBarButtonItem *editBarButton;
 
 @end
 
@@ -39,7 +40,13 @@
     self.tableView.dataSource = self.dataSource;
     self.tableView.delegate = self;
     
+    self.navigationItem.title = @"Stickers";
+    
     [self updateStickerPacks];
+    
+    [self setUpButtons];
+    
+    self.navigationController.navigationBar.tintColor = [STKUtility defaultOrangeColor];
     
     __weak typeof(self) wself = self;
     
@@ -54,6 +61,16 @@
         
     };
 
+}
+
+- (void) setUpButtons {
+    UIBarButtonItem *closeBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(closeAction:)];
+    
+    self.navigationItem.leftBarButtonItem = closeBarButton;
+    
+    self.editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
+    
+    self.navigationItem.rightBarButtonItem = self.editBarButton;
 }
 
 - (void) reorderPacks {
@@ -74,11 +91,26 @@
     } failure:nil];
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    STKStickerPackObject *stickerPack = [self.dataSource itemAtIndexPath:indexPath];
+    STKPackDescriptionController *descriptionController = [[STKPackDescriptionController alloc] initWithNibName:@"STKPackDescriptionController" bundle:nil];
+    descriptionController.stickerMessage = [stickerPack.stickers.firstObject stickerMessage];
+    [self.navigationController pushViewController:descriptionController animated:YES];
+    
+}
+
 
 #pragma mark - Actions
 
 - (IBAction)editAction:(id)sender {
     [self.tableView setEditing:!self.tableView.editing animated:YES];
+    if (self.tableView.editing) {
+        self.editBarButton.title = @"Done";
+    } else {
+        self.editBarButton.title = @"Edit";
+    }
 }
 
 - (IBAction)closeAction:(id)sender {

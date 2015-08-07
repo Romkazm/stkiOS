@@ -29,7 +29,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 @interface STKStickerController() <STKPackDescriptionControllerDelegate>
 
-@property (strong, nonatomic) UIView *stickersView;
+@property (strong, nonatomic) UIView *internalStickersView;
 
 @property (strong, nonatomic) UICollectionView *stickersCollectionView;
 @property (strong, nonatomic) UICollectionViewFlowLayout *stickersFlowLayout;
@@ -40,12 +40,9 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 @property (strong, nonatomic) STKStickerHeaderDelegateManager *stickersHeaderDelegateManager;
 @property (strong, nonatomic) UIButton *shopButton;
 
-@property (strong, nonatomic) UIView *introView;
 
 @property (strong, nonatomic) STKStickersEntityService *stickersService;
 
-//Constraints
-@property (strong, nonatomic) NSLayoutConstraint *introCenterYConstraint;
 
 
 @end
@@ -57,17 +54,17 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self = [super init];
     if (self) {
         
-        self.stickersView = [[UIView alloc] init];
-        self.stickersView.backgroundColor = [UIColor whiteColor];
+        self.internalStickersView = [[UIView alloc] init];
+        self.internalStickersView.backgroundColor = [UIColor whiteColor];
         
         self.stickersService = [STKStickersEntityService new];
         
-        self.stickersView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        self.stickersView.clipsToBounds = YES;
+        self.internalStickersView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        self.internalStickersView.clipsToBounds = YES;
         
         //iOS 7 FIX
-        if (CGRectEqualToRect(self.stickersView.frame, CGRectZero) && [UIDevice currentDevice].systemVersion.floatValue < 8.0) {
-            self.stickersView.frame = CGRectMake(1, 1, 1, 1);
+        if (CGRectEqualToRect(self.internalStickersView.frame, CGRectZero) && [UIDevice currentDevice].systemVersion.floatValue < 8.0) {
+            self.internalStickersView.frame = CGRectMake(1, 1, 1, 1);
         }
         
         [self initStickerHeader];
@@ -114,26 +111,28 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     [self.stickersCollectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerViewCell"];
     [self.stickersCollectionView registerClass:[STKEmptyRecentCell class] forCellWithReuseIdentifier:@"STKEmptyRecentCell"];
     [self.stickersCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableView"];
-    [self.stickersView addSubview:self.stickersCollectionView];
+    [self.internalStickersView addSubview:self.stickersCollectionView];
     [self.stickersCollectionView registerClass:[STKStickersSeparator class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"STKStickerPanelSeparator"];
     
     self.stickersDelegateManager.collectionView = self.stickersCollectionView;
     
-    [self.stickersView addSubview:self.stickersCollectionView];
+    [self.internalStickersView addSubview:self.stickersCollectionView];
 }
 
 - (void)initShopButton {
     self.shopButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [self.shopButton setTitle:@"..." forState:UIControlStateNormal];
+
+    [self.shopButton setImage:[UIImage imageNamed:@"STKMoreIcon"] forState:UIControlStateNormal];
+    [self.shopButton setImage:[UIImage imageNamed:@"STKMoreIcon"] forState:UIControlStateHighlighted];
+
     self.shopButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
-    [self.shopButton setTintColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1]];
+    [self.shopButton setTintColor:[STKUtility defaultOrangeColor]];
     
     [self.shopButton addTarget:self action:@selector(shopButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.shopButton.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [STKUtility defaultGreyColor];
     
-    [self.stickersView addSubview:self.shopButton];
+    [self.internalStickersView addSubview:self.shopButton];
 }
 
 - (void) initStickerHeader {
@@ -163,7 +162,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     self.stickersHeaderCollectionView.backgroundColor = self.headerBackgroundColor ? self.headerBackgroundColor : [STKUtility defaultGreyColor];
     
-    [self.stickersView addSubview:self.stickersHeaderCollectionView];
+    [self.internalStickersView addSubview:self.stickersHeaderCollectionView];
     
     
 }
@@ -176,17 +175,17 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self.shopButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *viewsDictionary = @{@"stickersHeaderCollectionView" : self.stickersHeaderCollectionView,
-                                      @"stickersView" : self.stickersView,
+                                      @"stickersView" : self.internalStickersView,
                                       @"stickersCollectionView" : self.stickersCollectionView,
                                       @"shopButton" : self.shopButton};
     NSArray *verticalShopButtonConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[shopButton]"
                                                                                     options:0
                                                                                     metrics:nil
                                                                                       views:viewsDictionary];
-    [self.stickersView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton]|" options:0 metrics:nil views:viewsDictionary]];
+    [self.internalStickersView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton]|" options:0 metrics:nil views:viewsDictionary]];
     
     NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shopButton(==44.0)]" options:0 metrics:nil views:viewsDictionary];
-    NSArray *widthConstrant = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton(==44.0)]" options:0 metrics:nil views:viewsDictionary];
+    NSArray *widthConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[shopButton(==44.0)]" options:0 metrics:nil views:viewsDictionary];
     
     NSArray *horizontalHeaderConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[stickersHeaderCollectionView]-0-[shopButton]"
                                                                                  options:0
@@ -203,13 +202,13 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
                                                                                       views:viewsDictionary];
     [self.stickersHeaderCollectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[stickersHeaderCollectionView(44.0)]" options:0 metrics:nil views:viewsDictionary]];
     [self.shopButton addConstraints:heightConstraint];
-    [self.shopButton addConstraints:widthConstrant];
+    [self.shopButton addConstraints:widthConstraint];
     
-    [self.stickersView addConstraints:verticalShopButtonConstraints];
-    [self.stickersView addConstraints:verticalHeaderConstraints];
-    [self.stickersView addConstraints:verticalStickersConstraints];
-    [self.stickersView addConstraints:horizontalHeaderConstraints];
-    [self.stickersView addConstraints:horizontalStickersConstraints];
+    [self.internalStickersView addConstraints:verticalShopButtonConstraints];
+    [self.internalStickersView addConstraints:verticalHeaderConstraints];
+    [self.internalStickersView addConstraints:verticalStickersConstraints];
+    [self.internalStickersView addConstraints:horizontalHeaderConstraints];
+    [self.internalStickersView addConstraints:horizontalStickersConstraints];
     
 }
 
@@ -220,9 +219,11 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     STKStickersSettingsViewController *vc = [[STKStickersSettingsViewController alloc] initWithNibName:@"STKStickersSettingsViewController" bundle:nil];
     
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    
     UIViewController *presenter = [self.delegate stickerControllerViewControllerForPresentingModalView];
     
-    [presenter presentViewController:vc animated:YES completion:nil];
+    [presenter presentViewController:navigationController animated:YES completion:nil];
 }
 
 
@@ -298,16 +299,16 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 - (BOOL)isStickerViewShowed {
     
-    BOOL isShowed = self.stickersView.superview ? YES : NO;
-    //TODO:Refactoring
-    [self reloadStickers];
+    BOOL isShowed = self.internalStickersView.superview != nil;
 
     return isShowed;
 }
 
 -(UIView *)stickersView {
     
-    return _stickersView;
+    [self reloadStickers];
+    
+    return _internalStickersView;
 }
 
 

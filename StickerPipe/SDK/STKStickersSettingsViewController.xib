@@ -17,41 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Dho-O1-5v2">
-                    <rect key="frame" x="0.0" y="63" width="320" height="505"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6i-6J-rT5">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="64" id="GoI-Bj-ao5"/>
-                    </constraints>
-                    <items>
-                        <navigationItem title="Shop" id="3wI-er-OwX">
-                            <barButtonItem key="leftBarButtonItem" title="Cancel" id="7CP-Yp-9Av">
-                                <color key="tintColor" red="1" green="0.3294117647" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="closeAction:" destination="-1" id="7O9-Tn-dyX"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" title="Edit" id="tFT-rQ-v8B">
-                                <color key="tintColor" red="1" green="0.3294117647" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="editAction:" destination="-1" id="oO6-CI-teU"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Dho-O1-5v2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0OZ-ca-72y"/>
-                <constraint firstItem="m6i-6J-rT5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RYc-bG-EZb"/>
+                <constraint firstItem="Dho-O1-5v2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="NR9-Fr-xSZ"/>
                 <constraint firstAttribute="bottom" secondItem="Dho-O1-5v2" secondAttribute="bottom" id="gjb-ri-AZT"/>
-                <constraint firstAttribute="trailing" secondItem="m6i-6J-rT5" secondAttribute="trailing" id="hgc-8e-t68"/>
                 <constraint firstAttribute="trailing" secondItem="Dho-O1-5v2" secondAttribute="trailing" id="ulv-OX-j8f"/>
-                <constraint firstItem="m6i-6J-rT5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wXM-Es-fE9"/>
-                <constraint firstItem="Dho-O1-5v2" firstAttribute="top" secondItem="m6i-6J-rT5" secondAttribute="bottom" constant="-1" id="yNc-iJ-FYU"/>
             </constraints>
             <point key="canvasLocation" x="282" y="295"/>
         </view>

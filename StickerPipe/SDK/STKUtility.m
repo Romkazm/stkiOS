@@ -7,7 +7,6 @@
 //
 
 #import "STKUtility.h"
-#import <UIKit/UIKit.h>
 #import "STKAnalyticService.h"
 
 
@@ -101,6 +100,10 @@ NSString *const STKUtilityAPIUrl = @"https://api.stickerpipe.com/stk/";
 }
 
 #pragma mark - Colors
+
++ (UIColor*)defaultOrangeColor {
+    return [UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1];
+}
 
 + (UIColor*)defaultGreyColor {
     return [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:234.0/255.0 alpha:1];

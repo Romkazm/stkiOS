@@ -55,7 +55,7 @@
     NSURL *stickerUrl = [STKUtility imageUrlForStikerMessage:stickerMessage];
     UIImage *placeholderImage = nil;
     if (!placeholder) {
-        UIImage *defaultPlaceholder = [UIImage imageNamed:@"StickerPlaceholder"];
+        UIImage *defaultPlaceholder = [UIImage imageNamed:@"STKStickerPlaceholder"];
         if (placeholderColor) {
             defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:placeholderColor];
         } else {

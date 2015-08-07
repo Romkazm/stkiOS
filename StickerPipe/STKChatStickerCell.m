@@ -24,7 +24,7 @@
         
     }
     
-    UIImage *downloadImage = [UIImage imageNamed:@"DownloadIcon"];
+    UIImage *downloadImage = [UIImage imageNamed:@"STKDownloadIcon"];
     
     UIColor *imageColor = [UIColor colorWithRed:255.0/255.0 green:87.0/255.0 blue:34.0/255.0 alpha:1];
     

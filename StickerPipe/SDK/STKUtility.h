@@ -15,15 +15,16 @@ extern NSString* const  STKUtilityAPIUrl;
 
 
 //Get image url for stiker messa([[packName_stickerName]])
-+ (NSURL*) imageUrlForStikerMessage:(NSString *)stickerMessage;
-+ (NSURL*) imageUrlForStickerPanelWithMessage:(NSString*)stickerMessage;
-+ (NSURL*) tabImageUrlForPackName:(NSString*) name;
-+ (NSURL*) mainImageUrlForPackName:(NSString*) name;
-+ (NSArray*) trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
++ (NSURL*)imageUrlForStikerMessage:(NSString *)stickerMessage;
++ (NSURL*)imageUrlForStickerPanelWithMessage:(NSString*)stickerMessage;
++ (NSURL*)tabImageUrlForPackName:(NSString*) name;
++ (NSURL*)mainImageUrlForPackName:(NSString*) name;
++ (NSArray*)trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
 
 //Colors
++ (UIColor*)defaultOrangeColor;
 + (UIColor*)defaultGreyColor;
-+ (UIColor*) defaultPlaceholderGrayColor;
++ (UIColor*)defaultPlaceholderGrayColor;
 
 void STKLog(NSString *format, ...);
 

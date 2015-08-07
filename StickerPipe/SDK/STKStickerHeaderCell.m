@@ -53,12 +53,12 @@
 - (void)configWithStickerPackName:(NSString *)name placeholder:(UIImage *)placeholder placeholderTintColor:(UIColor *)placeholderTintColor{
     
     if ([name isEqualToString:@"Recent"]) {
-        self.imageView.image = [UIImage imageNamed:@"RecentIcon"];
+        self.imageView.image = [UIImage imageNamed:@"STKRecentIcon"];
     } else {
         
         NSURL *iconUrl = [STKUtility tabImageUrlForPackName:name];
         
-        UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StikerTabPlaceholder"];
+        UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"STKStikerTabPlaceholder"];
         
         UIColor *colorForPlaceholder = placeholderTintColor && !placeholder ? placeholderTintColor : [STKUtility defaultPlaceholderGrayColor];
         

@@ -107,7 +107,7 @@
         stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
         [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
         
-        UIImage *defaultPlaceholder = [UIImage imageNamed:@"StickerPlaceholder"];
+        UIImage *defaultPlaceholder = [UIImage imageNamed:@"STKStickerPlaceholder"];
         defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultPlaceholderGrayColor]];
         stickerHeader.packImageView.image = defaultPlaceholder;
         [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];

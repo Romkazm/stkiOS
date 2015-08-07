@@ -86,7 +86,7 @@ static const NSInteger kMemoryCacheObjectsCount = 20;
         
 #if DEBUG
         [GAI sharedInstance].dryRun = YES;
-        [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+//        [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
 
 #endif
         self.tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-1113296-76"];

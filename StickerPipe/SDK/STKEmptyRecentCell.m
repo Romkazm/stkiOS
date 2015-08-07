@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        UIImageView *introImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"introImage"]];
+        UIImageView *introImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"STKIntroImage"]];
         
         introImageView.translatesAutoresizingMaskIntoConstraints = NO;
         

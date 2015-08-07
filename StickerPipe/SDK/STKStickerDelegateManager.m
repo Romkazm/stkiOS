@@ -7,14 +7,10 @@
 //
 
 #import "STKStickerDelegateManager.h"
-#import <UIKit/UIKit.h>
 #import "STKStickerViewCell.h"
 #import "STKStickersSeparator.h"
-#import "STKStickersCache.h"
-#import "STKStickersApiService.h"
 #import "STKStickerPackObject.h"
 #import "STKStickerObject.h"
-#import "STKStickersManager.h"
 
 typedef enum {
     

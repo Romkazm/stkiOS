@@ -128,7 +128,7 @@
 
 - (IBAction)changeKeyboadViewAction:(UIButton*)button {
         
-    if (self.stickerController.isStickerViewShowed) {
+    if (self.inputTextView.inputView) {
         [self hideStickersView];
         
     } else {
@@ -140,7 +140,7 @@
 #pragma mark - Show/hide stickers
 
 - (void) showStickersView {
-    UIImage *buttonImage = [UIImage imageNamed:@"ShowKeyboadIcon"];
+    UIImage *buttonImage = [UIImage imageNamed:@"STKShowKeyboadIcon"];
     
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateNormal];
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateHighlighted];
@@ -151,7 +151,7 @@
 
 - (void) hideStickersView {
     
-    UIImage *buttonImage = [UIImage imageNamed:@"ShowStickersIcon"];
+    UIImage *buttonImage = [UIImage imageNamed:@"STKShowStickersIcon"];
     
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateNormal];
     [self.changeInputViewButton setImage:buttonImage forState:UIControlStateHighlighted];

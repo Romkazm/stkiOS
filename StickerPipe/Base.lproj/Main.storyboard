@@ -46,7 +46,7 @@
                                             <constraint firstAttribute="width" constant="38" id="4nM-oR-pP5"/>
                                             <constraint firstAttribute="height" constant="38" id="93S-cP-0zM"/>
                                         </constraints>
-                                        <state key="normal" image="ShowStickersIcon">
+                                        <state key="normal" image="STKShowStickersIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -98,7 +98,7 @@
                                                 </imageView>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jre-cg-nrc">
                                                     <rect key="frame" x="383" y="69" width="21" height="22"/>
-                                                    <state key="normal" image="DownloadIcon">
+                                                    <state key="normal" image="STKDownloadIcon">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -168,7 +168,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DownloadIcon" width="21" height="21"/>
-        <image name="ShowStickersIcon" width="21" height="21"/>
+        <image name="STKDownloadIcon" width="21" height="21"/>
+        <image name="STKShowStickersIcon" width="21" height="21"/>
     </resources>
 </document>

@@ -46,7 +46,7 @@
 - (void) configureWithStickerMessage:(NSString*)stickerMessage
                          placeholder:(UIImage*)placeholder
                     placeholderColor:(UIColor*)placeholderColor {
-    UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"StickerPanelPlaceholder"];
+    UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"STKStickerPanelPlaceholder"];
     
     UIColor *colorForPlaceholder = placeholderColor && !placeholder ? placeholderColor : [STKUtility defaultPlaceholderGrayColor];
     

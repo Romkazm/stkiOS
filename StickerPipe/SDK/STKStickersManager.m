@@ -22,7 +22,6 @@ static UIColor *panelHeaderPlaceholderColor;
 
 @interface STKStickersManager()
 
-//@property (strong, nonatomic) PINRemoteImageManager *imageManager;
 
 @end
 
