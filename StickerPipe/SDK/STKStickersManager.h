@@ -14,6 +14,10 @@
 
 + (void) initWitApiKey:(NSString*) apiKey;
 
++ (void)setUserKey:(NSString *)userKey;
+
++ (NSString *)userKey;
+
 - (void) getStickerForMessage:(NSString*) message
                      progress:(void(^)(double progress)) progress
                       success:(void(^)(UIImage *sticker))success

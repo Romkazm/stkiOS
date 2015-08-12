@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import "STKApiKeyManager.h"
 #import "STKUUIDManager.h"
+#import "STKStickersManager.h"
 
 NSString *const STKApiVersion = @"v1";
 NSString *const STKBaseApiUrl = @"https://api.stickerpipe.com/api";
@@ -25,7 +26,12 @@ NSString *const STKBaseApiUrl = @"https://api.stickerpipe.com/api";
         
         
         AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-        
+
+        NSString *userKey = [STKStickersManager userKey];
+        if (userKey) {
+            [serializer setValue:userKey forHTTPHeaderField:@"UserID"];
+        }
+
         [serializer setValue:STKApiVersion forHTTPHeaderField:@"ApiVersion"];
         [serializer setValue:@"iOS" forHTTPHeaderField:@"Platform"];
         [serializer setValue:[STKUUIDManager generatedDeviceToken] forHTTPHeaderField:@"DeviceId"];

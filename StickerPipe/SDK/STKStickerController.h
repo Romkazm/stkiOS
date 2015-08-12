@@ -29,11 +29,12 @@
 
 @property (weak, nonatomic) id<STKStickerControllerDelegate> delegate;
 
-@property (strong, nonatomic, readonly) UIView *stickersView;
+@property (nonatomic, strong, readonly) UIView *stickersView;
 
-@property (assign, nonatomic, readonly) BOOL isStickerViewShowed;
+@property (nonatomic, assign, readonly) BOOL isStickerViewShowed;
 
-@property (assign, nonatomic) UIColor *headerBackgroundColor;
+@property (nonatomic, assign) UIColor *headerBackgroundColor;
+
 
 - (void)reloadStickersView;
 

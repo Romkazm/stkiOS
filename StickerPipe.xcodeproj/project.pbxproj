@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E19A0AC1B788E1B002DC75F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E19A0AB1B788E1B002DC75F /* StoreKit.framework */; };
 		6E310A381B68B9E300FB75D0 /* STKPackDescriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E310A371B68B9E300FB75D0 /* STKPackDescriptionController.m */; };
 		6E310A3A1B68BA9000FB75D0 /* STKPackDescriptionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E310A391B68BA9000FB75D0 /* STKPackDescriptionController.xib */; };
 		6E310A3C1B68EE4D00FB75D0 /* STKPackDescriptionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E310A3B1B68EE4D00FB75D0 /* STKPackDescriptionHeader.xib */; };
@@ -59,6 +60,7 @@
 		6EF264631B3C0F830099A657 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EF264611B3C0F830099A657 /* Main.storyboard */; };
 		6EF264651B3C0F830099A657 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EF264641B3C0F830099A657 /* Images.xcassets */; };
 		6EF264741B3C0F830099A657 /* StickerFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264731B3C0F830099A657 /* StickerFactoryTests.m */; };
+		806D796EC2F2167C25C0B150 /* STKPurchaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */; };
 		DF71B99FAA77DDC25C0F577E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280EB363112837B81F052E19 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,7 @@
 		1AA04EB236AD472CD61382DF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		280EB363112837B81F052E19 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4CC6B4D3CDAB1319028FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6E19A0AB1B788E1B002DC75F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6E310A361B68B9E300FB75D0 /* STKPackDescriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKPackDescriptionController.h; sourceTree = "<group>"; };
 		6E310A371B68B9E300FB75D0 /* STKPackDescriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKPackDescriptionController.m; sourceTree = "<group>"; };
 		6E310A391B68BA9000FB75D0 /* STKPackDescriptionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STKPackDescriptionController.xib; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@ StickerPipe
 StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StickerPipe\nStickerPipe\nStickerPipeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF264721B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264731B3C0F830099A657 /* StickerFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerFactoryTests.m; sourceTree = "<group>"; };
+		806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKPurchaseEntity.m; sourceTree = "<group>"; };
+		806D7A8AEE54902F6E8C3365 /* STKPurchaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKPurchaseEntity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +194,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E19A0AC1B788E1B002DC75F /* StoreKit.framework in Frameworks */,
 				6EDC5ED01B41328000EBB034 /* CoreData.framework in Frameworks */,
 				DF71B99FAA77DDC25C0F577E /* libPods.a in Frameworks */,
 			);
@@ -207,6 +213,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 		47FB3E470E9D34BB5596AC37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E19A0AB1B788E1B002DC75F /* StoreKit.framework */,
 				6EDC5ECF1B41328000EBB034 /* CoreData.framework */,
 				280EB363112837B81F052E19 /* libPods.a */,
 			);
@@ -453,6 +460,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 				6EC5F8661B428083004D04CA /* Analytics */,
 				6EC5F86F1B42BA43004D04CA /* API */,
 				6EDC5ECA1B41305500EBB034 /* CoreDataService */,
+				806D7979E7EEC278B5A81B4B /* Purchases */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -529,6 +537,15 @@ StickerPipeTests.xctest */,
 				6EDC5EE41B4173D600EBB034 /* Core */,
 			);
 			path = SDK;
+			sourceTree = "<group>";
+		};
+		806D7979E7EEC278B5A81B4B /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				806D7A8AEE54902F6E8C3365 /* STKPurchaseEntity.h */,
+				806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */,
+			);
+			name = Purchases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -716,6 +733,7 @@ StickerPipeTests.xctest */;
 				6E776D801B4BF6150001FBB6 /* STKStickerPack.m in Sources */,
 				6E5F5A461B5E37C40036214B /* STKStickersSeparator.m in Sources */,
 				6EDE15BD1B6F95120024B6DC /* STKStickersNotificationConstants.m in Sources */,
+				806D796EC2F2167C25C0B150 /* STKPurchaseEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

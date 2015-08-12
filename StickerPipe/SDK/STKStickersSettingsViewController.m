@@ -45,6 +45,8 @@
     [self updateStickerPacks];
     
     [self setUpButtons];
+
+
     
     self.navigationController.navigationBar.tintColor = [STKUtility defaultOrangeColor];
     
@@ -71,6 +73,7 @@
     self.editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editAction:)];
     
     self.navigationItem.rightBarButtonItem = self.editBarButton;
+
 }
 
 - (void) reorderPacks {

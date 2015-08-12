@@ -13,8 +13,10 @@
 #import "STKStickerPackObject.h"
 #import "STKStickerObject.h"
 #import <DFImageManagerKit.h>
+#import <StoreKit/StoreKit.h>
 #import "STKUtility.h"
 #import "UIImage+Tint.h"
+#import "STKPurchaseEntity.h"
 
 @interface STKPackDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate>
 
@@ -22,8 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) STKStickersEntityService *service;
 @property (strong, nonatomic) STKStickerPackObject *stickerPack;
-
-@property (assign, nonatomic, getter=isStickerPackDownloaded) BOOL stickerPackDownloaded;
+@property (nonatomic, strong) STKPurchaseEntity *purchaseEntity;
+@property (nonatomic, strong) SKProduct *product;
+@property (nonatomic, assign) BOOL needDisableDownloadButton;
 
 @end
 
@@ -36,7 +39,16 @@
     [self.collectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerViewCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"STKPackDescriptionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STKPackDescriptionHeader"];
     self.service = [STKStickersEntityService new];
-    
+
+    self.purchaseEntity = [STKPurchaseEntity new];
+
+    __weak typeof(self) wself = self;
+
+    [self.purchaseEntity requestProductsWithIdentifiers:[NSSet setWithObject:@"com.stickerpipe.demo.stickerpacktest"] completion:^(NSArray *products, NSArray *invalidProductsIdentifier) {
+        wself.product = products.firstObject;
+        [wself.collectionView reloadData];
+    }];
+
     self.collectionView.hidden = YES;
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidesWhenStopped = YES;
@@ -50,7 +62,6 @@
     [self.service getPackWithMessage:self.stickerMessage completion:^(STKStickerPackObject *stickerPack, BOOL isDownloaded) {
         if (stickerPack) {
             weakSelf.stickerPack = stickerPack;
-            self.stickerPackDownloaded = isDownloaded;
             weakSelf.collectionView.hidden = NO;
             [weakSelf.activityIndicator stopAnimating];
             [weakSelf.collectionView reloadData];
@@ -82,9 +93,11 @@
         stickerHeader.artistLabel.text = self.stickerPack.artist;
         stickerHeader.packNameLabel.text = self.stickerPack.packTitle;
         
-        if (self.stickerPack.price.integerValue > 0) {
-            stickerHeader.priceLabel.text = [NSString stringWithFormat:@"%@ $", self.stickerPack.price];
+        if (self.stickerPack.price.integerValue == 0 && self.product) {
+            [stickerHeader.priceLoadingIndicator stopAnimating];
+            stickerHeader.priceLabel.text = [NSString stringWithFormat:@"%@$", self.product.price];
         } else {
+            [stickerHeader.priceLoadingIndicator startAnimating];
             stickerHeader.priceLabel.text = nil;
         }
         [stickerHeader.statusButton setTitleColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1] forState:UIControlStateNormal];
@@ -96,9 +109,8 @@
         } else {
             [stickerHeader.statusButton setTitle:@"Remove" forState:UIControlStateNormal];
             [stickerHeader.statusButton setTitle:@"Remove" forState:UIControlStateHighlighted];
-
-
         }
+        stickerHeader.statusButton.enabled = !self.needDisableDownloadButton;
         
         [stickerHeader.statusButton invalidateIntrinsicContentSize];
         
@@ -147,11 +159,31 @@
 #pragma mark - STKPackDescriptionHeaderDelegate
 
 - (void)packDescriptionHeader:(STKPackDescriptionHeader *)header didTapDownloadButton:(UIButton*)button {
-    [self.service togglePackDisabling:self.stickerPack];
-    [self reloadStickerPack];
-    if ([self.delegate respondsToSelector:@selector(packDescriptionControllerDidChangePakcStatus:)]) {
-        [self.delegate packDescriptionControllerDidChangePakcStatus:self];
+    //TODO:FIX ME
+    if (self.product && self.stickerPack.disabled.boolValue == YES && ![self.purchaseEntity isPurchasedProductWithIdentifier:@"com.stickerpipe.demo.stickerpacktest"]) {
+
+        self.needDisableDownloadButton = YES;
+        [self.collectionView reloadData];
+
+        __weak typeof(self) wself = self;
+
+        [self.purchaseEntity purchaseProductWithIdentifier:@"com.stickerpipe.demo.stickerpacktest" completion:^(SKPaymentTransaction *transaction) {
+            //TODO: Buy product on server side
+            [wself.service togglePackDisabling:self.stickerPack];
+            wself.needDisableDownloadButton = NO;
+            [wself reloadStickerPack];
+        } failure:^(NSError *error) {
+            wself.needDisableDownloadButton = NO;
+            [wself.collectionView reloadData];
+        }];
+    } else {
+        [self.service togglePackDisabling:self.stickerPack];
+        [self reloadStickerPack];
+        if ([self.delegate respondsToSelector:@selector(packDescriptionControllerDidChangePakcStatus:)]) {
+            [self.delegate packDescriptionControllerDidChangePakcStatus:self];
+        }
     }
+
 }
 
 @end

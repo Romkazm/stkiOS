@@ -13,12 +13,7 @@
 #import "STKApiKeyManager.h"
 #import "STKCoreDataService.h"
 
-//Colors
-
-static UIColor *displayedPlaceholderColor;
-static UIColor *panelPlaceholderColor;
-static UIColor *panelHeaderPlaceholderColor;
-
+NSString *const kUserKeyDefaultsKey = @"kUserKeyDefaultsKey";
 
 @interface STKStickersManager()
 
@@ -102,6 +97,14 @@ static UIColor *panelHeaderPlaceholderColor;
     [STKCoreDataService setupCoreData];
 }
 
+#pragma mark - User key
 
++ (void)setUserKey:(NSString *)userKey {
+    [[NSUserDefaults standardUserDefaults] setObject:userKey forKey:kUserKeyDefaultsKey];
+}
+
++ (NSString *)userKey {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kUserKeyDefaultsKey];
+}
 
 @end
