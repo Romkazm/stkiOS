@@ -13,23 +13,25 @@
 
 @interface STKStickersCache : NSObject
 
-- (void) saveStickerPacks:(NSArray*) stickerPacks;
+- (void)saveStickerPacks:(NSArray*) stickerPacks;
 
-- (void) saveDisabledStickerPack:(STKStickerPackObject*)stickerPack;
+- (void)saveDisabledStickerPack:(STKStickerPackObject*)stickerPack;
 
-- (BOOL) isStickerPackDownloaded:(NSString*)packName;
+- (void)updateStickerPack:(STKStickerPackObject *)stickerPackObject;
 
-- (void) deleteStickerPacks:(NSArray*) stickerPacks;
+- (void)deleteStickerPacks:(NSArray*) stickerPacks;
 
-- (void) getStickerPacksIgnoringRecent:(void(^)(NSArray *stickerPacks))response;
+- (STKStickerPackObject*)getStickerPackWithPackName:(NSString*)packName;
 
-- (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response;
+- (void)getStickerPacksIgnoringRecent:(void(^)(NSArray *stickerPacks))response;
+
+- (void)getStickerPacks:(void(^)(NSArray *stickerPacks))response;
 
 - (STKStickerPackObject*)recentStickerPack;
 
-- (void) incrementUsedCountWithStickerID:(NSNumber*)stickerID;
+- (BOOL)isStickerPackDownloaded:(NSString*)packName;
 
-- (STKStickerPackObject*) getStickerPackWithPackName:(NSString*)packName;
+- (void)incrementUsedCountWithStickerID:(NSNumber*)stickerID;
 
 - (void)markStickerPack:(STKStickerPackObject*)pack disabled:(BOOL)disabled;
 

@@ -18,6 +18,7 @@
 #import "STKEmptyRecentCell.h"
 #import "STKStickersSettingsViewController.h"
 #import "STKPackDescriptionController.h"
+#import "STKStickerPackObject.h"
 
 //SIZES
 static const CGFloat kStickerHeaderItemHeight = 44.0;
@@ -144,10 +145,16 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     self.stickersHeaderDelegateManager = [STKStickerHeaderDelegateManager new];
     __weak typeof(self) weakSelf = self;
-    [self.stickersHeaderDelegateManager setDidSelectRow:^(NSIndexPath *indexPath) {
+    [self.stickersHeaderDelegateManager setDidSelectRow:^(NSIndexPath *indexPath, STKStickerPackObject *stickerPack) {
+        if (stickerPack.isNew.boolValue) {
+            stickerPack.isNew = @NO;
+            [weakSelf.stickersService updateStickerPackInCache:stickerPack];
+            [weakSelf reloadStickersHeader];
+        }
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.item];
         [weakSelf.stickersCollectionView scrollToItemAtIndexPath:newIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
         weakSelf.stickersDelegateManager.currentDisplayedSection = indexPath.item;
+
     }];
     
     self.stickersHeaderCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.stickersHeaderFlowLayout];
@@ -231,6 +238,17 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 - (void)reloadStickersView {
     [self reloadStickers];
+}
+
+- (void)reloadStickersHeader {
+    __weak  typeof(self) wself = self;
+
+    [self.stickersService getStickerPacksWithType:nil completion:^(NSArray *stickerPacks) {
+        [wself.stickersHeaderDelegateManager setStickerPacks:stickerPacks];
+        [wself.stickersHeaderCollectionView reloadData];
+        NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForItem:wself.stickersDelegateManager.currentDisplayedSection inSection:0];
+        [wself.stickersHeaderCollectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    } failure:nil];
 }
 
 - (void)reloadStickers {

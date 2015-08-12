@@ -28,4 +28,6 @@
 
 @property (nonatomic, strong) NSString *packDescription;
 
+@property (nonatomic, strong) NSNumber *isNew;
+
 @end

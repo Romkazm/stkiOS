@@ -49,6 +49,8 @@
 
 }
 
+#pragma mark - Saving
+
 - (void) saveStickerPacks:(NSArray *)stickerPacks {
     
     __weak typeof(self) weakSelf = self;
@@ -66,31 +68,53 @@
         }
         for (STKStickerPackObject *object in stickerPacks) {
             STKStickerPack *stickerPack = [weakSelf stickerPackModelWithID:object.packID context:weakSelf.backgroundContext];
-            stickerPack.artist = object.artist;
-            stickerPack.packName = object.packName;
-            stickerPack.packID = object.packID;
-            stickerPack.price = object.price;
-            stickerPack.packTitle = object.packTitle;
-            stickerPack.packDescription = object.packDescription;
-            if (object.order) {
-                stickerPack.order = object.order;
-            }
-            
-            for (STKStickerObject *stickerObject in object.stickers) {
-                STKSticker *sticker = [weakSelf stickerModelWithID:stickerObject.stickerID context:weakSelf.backgroundContext];
-                sticker.stickerName = stickerObject.stickerName;
-                sticker.stickerID = stickerObject.stickerID;
-                sticker.stickerMessage = stickerObject.stickerMessage;
-                sticker.usedCount = stickerObject.usedCount;
-                if (sticker) {
-                    [stickerPack addStickersObject:sticker];
-                }
-            }
+            [weakSelf fillStickerPack:stickerPack withObject:object];
             
         }
         [weakSelf.backgroundContext save:nil];
     }];
 }
+
+
+- (void)saveDisabledStickerPack:(STKStickerPackObject *)stickerPack {
+
+    STKStickerPack *stickerModel = [self stickerModelFormStickerObject:stickerPack context:self.backgroundContext];
+    stickerModel.disabled = @(YES);
+
+    for (STKStickerObject *stickerObject in stickerPack.stickers) {
+        STKSticker *sticker = [self stickerModelWithID:stickerObject.stickerID context:self.backgroundContext];
+        sticker.stickerName = stickerObject.stickerName;
+        sticker.stickerID = stickerObject.stickerID;
+        sticker.stickerMessage = stickerObject.stickerMessage;
+        sticker.usedCount = stickerObject.usedCount;
+        if (sticker) {
+            [stickerModel addStickersObject:sticker];
+        }
+    }
+
+    [self.backgroundContext save:nil];
+}
+
+#pragma mark - Update
+
+- (void)updateStickerPack:(STKStickerPackObject *)stickerPackObject {
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@",STKStickerPackAttributes.packID, stickerPackObject.packID];
+    NSArray *packs = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.backgroundContext];
+    STKStickerPack *stickerPack = packs.firstObject;
+    if (stickerPack) {
+        [self fillStickerPack:stickerPack withObject:stickerPackObject];
+
+        NSError *error = nil;
+        [self.backgroundContext save:&error];
+        if (error) {
+            STKLog(@"Saving context error: %@", error.localizedDescription);
+        }
+    }
+
+}
+
+#pragma mark - Delete
 
 - (void)deleteStickerPacks:(NSArray *)stickerPacks {
     
@@ -113,33 +137,34 @@
 }
 
 
-- (void)saveDisabledStickerPack:(STKStickerPackObject *)stickerPack {
-    
-    STKStickerPack *stickerModel = [self stickerModelFormStickerObject:stickerPack context:self.backgroundContext];
-    stickerModel.disabled = @(YES);
-    
-    for (STKStickerObject *stickerObject in stickerPack.stickers) {
+#pragma mark - FillItems
+
+- (STKStickerPack*)fillStickerPack:(STKStickerPack *)stickerPack withObject:(STKStickerPackObject*)stickerPackObject {
+    stickerPack.artist = stickerPackObject.artist;
+    stickerPack.packName = stickerPackObject.packName;
+    stickerPack.packID = stickerPackObject.packID;
+    stickerPack.price = stickerPackObject.price;
+    stickerPack.packTitle = stickerPackObject.packTitle;
+    stickerPack.packDescription = stickerPackObject.packDescription;
+    stickerPack.isNew = stickerPackObject.isNew;
+    if (stickerPackObject.isNew == nil && stickerPack.isNew == nil) {
+        stickerPack.isNew = @YES;
+    }
+    if (stickerPackObject.order) {
+        stickerPack.order = stickerPackObject.order;
+    }
+
+    for (STKStickerObject *stickerObject in stickerPackObject.stickers) {
         STKSticker *sticker = [self stickerModelWithID:stickerObject.stickerID context:self.backgroundContext];
         sticker.stickerName = stickerObject.stickerName;
         sticker.stickerID = stickerObject.stickerID;
         sticker.stickerMessage = stickerObject.stickerMessage;
         sticker.usedCount = stickerObject.usedCount;
         if (sticker) {
-            [stickerModel addStickersObject:sticker];
+            [stickerPack addStickersObject:sticker];
         }
     }
-    
-    [self.backgroundContext save:nil];
-}
-
-- (void)markStickerPack:(STKStickerPackObject *)pack disabled:(BOOL)disabled {
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", STKStickerPackAttributes.packID, pack.packID];
-    STKStickerPack *stickerPack = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.mainContext].firstObject;
-    
-    stickerPack.disabled = @(disabled);
-    
-    [self.mainContext save:nil];
+    return stickerPack;
 }
 
 #pragma mark - NewItems
@@ -155,6 +180,7 @@
     stickerPack.packTitle = stickerPackObject.packTitle;
     stickerPack.packDescription = stickerPackObject.packDescription;
     stickerPack.disabled = stickerPackObject.disabled;
+    stickerPack.isNew = stickerPackObject.isNew;
     return stickerPack;
 }
 
@@ -170,6 +196,8 @@
     STKStickerPack *stickerPack = [STKStickerPack stk_objectWithUniqueAttribute:STKStickerPackAttributes.packID value:packID context:context];
     return stickerPack;
 }
+
+#pragma mark - Getters
 
 - (void)getStickerPacksIgnoringRecent:(void (^)(NSArray *))response {
     
@@ -195,7 +223,7 @@
 
 
 
-- (void) getStickerPacks:(void(^)(NSArray *stickerPacks))response {
+- (void)getStickerPacks:(void(^)(NSArray *stickerPacks))response {
     
     __weak typeof(self) weakSelf = self;
     
@@ -217,6 +245,20 @@
 
 }
 
+- (STKStickerPackObject *)getStickerPackWithPackName:(NSString *)packName {
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", STKStickerPackAttributes.packName, packName];
+
+    STKStickerPack *stickerPack = [[STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.mainContext] firstObject];
+    if (stickerPack) {
+        STKStickerPackObject *object = [[STKStickerPackObject alloc] initWithStickerPack:stickerPack];
+        return object;
+    } else {
+        return nil;
+    }
+}
+
+
 - (STKStickerPackObject*)recentStickerPack {
     
      __block STKStickerPackObject *object = nil;
@@ -235,6 +277,7 @@
             STKStickerPackObject *recentPack = [STKStickerPackObject new];
             recentPack.packName = @"Recent";
             recentPack.packTitle = @"Recent";
+            recentPack.isNew = @NO;
             NSMutableArray *stickerObjects = [NSMutableArray new];
             for (STKSticker *sticker in stickers) {
                 STKStickerObject *stickerObject = [[STKStickerObject alloc] initWithSticker:sticker];
@@ -251,6 +294,19 @@
 
     
     return object;
+}
+
+#pragma mark - Change
+
+
+- (void)markStickerPack:(STKStickerPackObject *)pack disabled:(BOOL)disabled {
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", STKStickerPackAttributes.packID, pack.packID];
+    STKStickerPack *stickerPack = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.mainContext].firstObject;
+
+    stickerPack.disabled = @(disabled);
+
+    [self.mainContext save:nil];
 }
 
 - (void)incrementUsedCountWithStickerID:(NSNumber *)stickerID {
@@ -273,6 +329,8 @@
     }];
 }
 
+#pragma mark - Checks
+
 - (BOOL)isStickerPackDownloaded:(NSString*)packName {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND (%K == NO OR %K == nil)", STKStickerPackAttributes.packName, packName, STKStickerPackAttributes.disabled, STKStickerPackAttributes.disabled];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:[STKStickerPack entityName]];
@@ -281,19 +339,6 @@
     NSInteger count = [self.mainContext countForFetchRequest:request error:nil];
     BOOL downloaded = count > 0;
     return downloaded;
-}
-
-- (STKStickerPackObject *)getStickerPackWithPackName:(NSString *)packName {
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", STKStickerPackAttributes.packName, packName];
-    
-    STKStickerPack *stickerPack = [[STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.mainContext] firstObject];
-    if (stickerPack) {
-        STKStickerPackObject *object = [[STKStickerPackObject alloc] initWithStickerPack:stickerPack];
-        return object;
-    } else {
-        return nil;
-    }
 }
 
 

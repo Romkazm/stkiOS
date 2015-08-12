@@ -28,8 +28,8 @@
     STKStickerHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STKStickerPanelHeaderCell" forIndexPath:indexPath];
     
     STKStickerPackObject *stickerPack = self.stickerPacksArray[indexPath.item];
-    
-    [cell configWithStickerPackName:stickerPack.packName placeholder:self.placeholderImage placeholderTintColor:self.placeholderHeadercolor];
+
+    [cell configWithStickerPack:stickerPack placeholder:self.placeholderImage placeholderTintColor:self.placeholderHeadercolor];
     
     return cell;
     
@@ -38,13 +38,15 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.didSelectRow(indexPath);
+    STKStickerPackObject *stickerPackObject = self.stickerPacksArray[indexPath.item];
+    self.didSelectRow(indexPath, stickerPackObject);
 }
 
 
 - (void)setStickerPacks:(NSArray *)stickerPacks {
     self.stickerPacksArray = stickerPacks;    
 }
+
 
 
 @end

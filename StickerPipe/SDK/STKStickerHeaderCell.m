@@ -10,11 +10,13 @@
 #import <DFImageManagerKit.h>
 #import "STKUtility.h"
 #import "UIImage+Tint.h"
+#import "STKStickerPackObject.h"
 
 @interface STKStickerHeaderCell()
 
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) DFImageTask *imageTask;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIView *dotView;
+@property (nonatomic, strong) DFImageTask *imageTask;
 
 @end
 
@@ -27,9 +29,14 @@
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 24.0, 24.0)];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.center = CGPointMake(self.contentView.bounds.size.width/2,self.contentView.bounds.size.height/2);
-        [self addSubview:self.imageView];
+        [self.contentView addSubview:self.imageView];
         
-        
+        self.dotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12.0, 12.0)];
+
+        self.dotView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+        self.dotView.layer.cornerRadius = 6.0;
+        self.dotView.backgroundColor = [UIColor redColor];
+        [self.contentView addSubview:self.dotView];
     }
     return self;
 }
@@ -47,16 +54,24 @@
     [self.imageTask cancel];
     self.imageTask = nil;
     self.imageView.image = nil;
+    self.dotView.hidden = NO;
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)configWithStickerPackName:(NSString *)name placeholder:(UIImage *)placeholder placeholderTintColor:(UIColor *)placeholderTintColor{
+- (void)configWithStickerPack:(STKStickerPackObject *)stickerPack placeholder:(UIImage *)placeholder placeholderTintColor:(UIColor *)placeholderTintColor{
     
-    if ([name isEqualToString:@"Recent"]) {
+    if ([stickerPack.packName isEqualToString:@"Recent"]) {
         self.imageView.image = [UIImage imageNamed:@"STKRecentIcon"];
+        self.dotView.hidden = YES;
     } else {
-        
-        NSURL *iconUrl = [STKUtility tabImageUrlForPackName:name];
+
+        if (stickerPack.isNew.boolValue) {
+            self.dotView.hidden = NO;
+        } else {
+            self.dotView.hidden = YES;
+        }
+
+        NSURL *iconUrl = [STKUtility tabImageUrlForPackName:stickerPack.packName];
         
         UIImage *resultPlaceholder = placeholder ? placeholder : [UIImage imageNamed:@"STKStikerTabPlaceholder"];
         
@@ -76,6 +91,7 @@
         
         __weak typeof(self) weakSelf = self;
         
+        //TODO:Refactoring
         self.imageTask =[[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
             
             if (image) {

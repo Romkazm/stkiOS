@@ -6,6 +6,7 @@
 const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.artist = @"artist",
 	.disabled = @"disabled",
+	.isNew = @"isNew",
 	.order = @"order",
 	.packDescription = @"packDescription",
 	.packID = @"packID",
@@ -49,6 +50,11 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"isNewValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isNew"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"orderValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"order"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -88,6 +94,26 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 
 - (void)setPrimitiveDisabledValue:(BOOL)value_ {
 	[self setPrimitiveDisabled:[NSNumber numberWithBool:value_]];
+}
+
+@dynamic isNew;
+
+- (BOOL)isNewValue {
+	NSNumber *result = [self isNew];
+	return [result boolValue];
+}
+
+- (void)setIsNewValue:(BOOL)value_ {
+	[self setIsNew:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsNewValue {
+	NSNumber *result = [self primitiveIsNew];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsNewValue:(BOOL)value_ {
+	[self setPrimitiveIsNew:[NSNumber numberWithBool:value_]];
 }
 
 @dynamic order;

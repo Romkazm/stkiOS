@@ -26,7 +26,6 @@
         self.packDescription = serverResponse[@"description"];
         NSMutableArray *stickersArray = [NSMutableArray array];
         NSArray *stickers = serverResponse[@"stickers"];
-        @autoreleasepool {
             for (NSDictionary *sticker in stickers) {
                 STKStickerObject *stickerObject = [[STKStickerObject alloc] init];
                 stickerObject.stickerID = sticker[@"id"];
@@ -35,7 +34,6 @@
                 stickerObject.stickerMessage = [NSString stringWithFormat:@"[[%@_%@]]", packName, stickerName];
                 [stickersArray addObject:stickerObject];
             }
-        }
 
         self.stickers = [NSArray arrayWithArray:stickersArray];
     }
@@ -54,12 +52,16 @@
         self.packDescription = stickerPack.packDescription;
         self.disabled = stickerPack.disabled;
         self.order = stickerPack.order;
+        self.isNew = stickerPack.isNew;
         NSMutableArray *stickersArray = [NSMutableArray array];
-        for (STKSticker *sticker in stickerPack.stickers) {
-            
-            STKStickerObject *stickerObject = [[STKStickerObject alloc] initWithSticker:sticker];
-            [stickersArray addObject:stickerObject];
+        @autoreleasepool {
+            for (STKSticker *sticker in stickerPack.stickers) {
+
+                STKStickerObject *stickerObject = [[STKStickerObject alloc] initWithSticker:sticker];
+                [stickersArray addObject:stickerObject];
+            }
         }
+
         self.stickers = [NSArray arrayWithArray:stickersArray];
     }
     return self;

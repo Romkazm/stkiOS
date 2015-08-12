@@ -6,6 +6,7 @@
 extern const struct STKStickerPackAttributes {
 	__unsafe_unretained NSString *artist;
 	__unsafe_unretained NSString *disabled;
+	__unsafe_unretained NSString *isNew;
 	__unsafe_unretained NSString *order;
 	__unsafe_unretained NSString *packDescription;
 	__unsafe_unretained NSString *packID;
@@ -40,6 +41,14 @@ extern const struct STKStickerPackRelationships {
 - (void)setDisabledValue:(BOOL)value_;
 
 //- (BOOL)validateDisabled:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* isNew;
+
+@property (atomic) BOOL isNewValue;
+- (BOOL)isNewValue;
+- (void)setIsNewValue:(BOOL)value_;
+
+//- (BOOL)validateIsNew:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* order;
 
@@ -108,6 +117,12 @@ extern const struct STKStickerPackRelationships {
 
 - (BOOL)primitiveDisabledValue;
 - (void)setPrimitiveDisabledValue:(BOOL)value_;
+
+- (NSNumber*)primitiveIsNew;
+- (void)setPrimitiveIsNew:(NSNumber*)value;
+
+- (BOOL)primitiveIsNewValue;
+- (void)setPrimitiveIsNewValue:(BOOL)value_;
 
 - (NSNumber*)primitiveOrder;
 - (void)setPrimitiveOrder:(NSNumber*)value;

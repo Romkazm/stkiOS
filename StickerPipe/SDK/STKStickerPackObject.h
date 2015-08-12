@@ -32,8 +32,10 @@
 
 @property (nonatomic, strong) NSString *packDescription;
 
+@property (nonatomic, strong) NSNumber *isNew;
+
 - (instancetype)initWithServerResponse:(NSDictionary*)serverResponse;
 
-- (instancetype)initWithStickerPack:(STKStickerPack*) stickerPack;
+- (instancetype)initWithStickerPack:(STKStickerPack*)stickerPack;
 
 @end
