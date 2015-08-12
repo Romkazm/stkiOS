@@ -31,6 +31,8 @@
 
 - (BOOL)isStickerPackDownloaded:(NSString*)packName;
 
++ (BOOL)hasNewStickerPacks;
+
 - (void)incrementUsedCountWithStickerID:(NSNumber*)stickerID;
 
 - (void)markStickerPack:(STKStickerPackObject*)pack disabled:(BOOL)disabled;

@@ -10,6 +10,7 @@
 #import "STKChatStickerCell.h"
 #import "STKStickerPipe.h"
 #import "STKPackDescriptionController.h"
+#import "STKShowStickerButton.h"
 
 @interface STKChatViewController() <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, STKStickerControllerDelegate, STKPackDescriptionControllerDelegate>
 
@@ -17,10 +18,9 @@
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
 @property (weak, nonatomic) IBOutlet UIView *textInputPanel;
 
-@property (weak, nonatomic) IBOutlet UIButton *changeInputViewButton;
+@property (weak, nonatomic) IBOutlet STKShowStickerButton *changeInputViewButton;
 
 @property (assign, nonatomic) BOOL isKeyboardShowed;
-
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;

@@ -61,6 +61,7 @@
 		6EF264651B3C0F830099A657 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EF264641B3C0F830099A657 /* Images.xcassets */; };
 		6EF264741B3C0F830099A657 /* StickerFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF264731B3C0F830099A657 /* StickerFactoryTests.m */; };
 		806D796EC2F2167C25C0B150 /* STKPurchaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */; };
+		806D79ABFC65132E5C402108 /* STKShowStickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 806D749D40E8611EB0FF05CA /* STKShowStickerButton.m */; };
 		DF71B99FAA77DDC25C0F577E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280EB363112837B81F052E19 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -187,7 +188,9 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 		6EF264721B3C0F830099A657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF264731B3C0F830099A657 /* StickerFactoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerFactoryTests.m; sourceTree = "<group>"; };
 		806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKPurchaseEntity.m; sourceTree = "<group>"; };
+		806D749D40E8611EB0FF05CA /* STKShowStickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKShowStickerButton.m; sourceTree = "<group>"; };
 		806D7A8AEE54902F6E8C3365 /* STKPurchaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKPurchaseEntity.h; sourceTree = "<group>"; };
+		806D7EF0BF486A7227F07BD2 /* STKShowStickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKShowStickerButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,7 @@ StickerPipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper
 				6EC5F86F1B42BA43004D04CA /* API */,
 				6EDC5ECA1B41305500EBB034 /* CoreDataService */,
 				806D7979E7EEC278B5A81B4B /* Purchases */,
+				806D79B7ABBFD345173B8FA6 /* Buttons */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -547,6 +551,15 @@ StickerPipeTests.xctest */,
 				806D718A2F9D82D37A49B055 /* STKPurchaseEntity.m */,
 			);
 			name = Purchases;
+			sourceTree = "<group>";
+		};
+		806D79B7ABBFD345173B8FA6 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				806D7EF0BF486A7227F07BD2 /* STKShowStickerButton.h */,
+				806D749D40E8611EB0FF05CA /* STKShowStickerButton.m */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -735,6 +748,7 @@ StickerPipeTests.xctest */;
 				6E5F5A461B5E37C40036214B /* STKStickersSeparator.m in Sources */,
 				6EDE15BD1B6F95120024B6DC /* STKStickersNotificationConstants.m in Sources */,
 				806D796EC2F2167C25C0B150 /* STKPurchaseEntity.m in Sources */,
+				806D79ABFC65132E5C402108 /* STKShowStickerButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

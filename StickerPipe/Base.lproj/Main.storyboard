@@ -40,7 +40,7 @@
                                             <outlet property="delegate" destination="klz-pk-6lW" id="T4Z-Ed-pT8"/>
                                         </connections>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMT-MU-Fai">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMT-MU-Fai" customClass="STKShowStickerButton">
                                         <rect key="frame" x="504" y="5" width="38" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="4nM-oR-pP5"/>

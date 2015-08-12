@@ -146,10 +146,16 @@
     stickerPack.price = stickerPackObject.price;
     stickerPack.packTitle = stickerPackObject.packTitle;
     stickerPack.packDescription = stickerPackObject.packDescription;
-    stickerPack.isNew = stickerPackObject.isNew;
-    if (stickerPackObject.isNew == nil && stickerPack.isNew == nil) {
+
+    if (stickerPack.isNew.boolValue == YES) {
+        if (stickerPackObject.isNew) {
+            stickerPack.isNew = stickerPackObject.isNew;
+        }
+    } else if (!stickerPack.isNew) {
         stickerPack.isNew = @YES;
     }
+
+
     if (stickerPackObject.order) {
         stickerPack.order = stickerPackObject.order;
     }
@@ -329,7 +335,15 @@
     }];
 }
 
-#pragma mark - Checks
+#pragma mark - Check
+
++ (BOOL)hasNewStickerPacks {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[STKStickerPack entityName]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", STKStickerPackAttributes.isNew, @YES];
+    request.predicate = predicate;
+    NSUInteger count = [[NSManagedObjectContext stk_defaultContext] countForFetchRequest:request error:nil];
+    return count > 0;
+}
 
 - (BOOL)isStickerPackDownloaded:(NSString*)packName {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND (%K == NO OR %K == nil)", STKStickerPackAttributes.packName, packName, STKStickerPackAttributes.disabled, STKStickerPackAttributes.disabled];

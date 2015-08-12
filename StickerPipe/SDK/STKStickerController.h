@@ -21,6 +21,7 @@
 - (UIViewController*)stickerControllerViewControllerForPresentingModalView;
 
 @optional
+
 - (void)stickerControllerDidChangePackStatus:(STKStickerController*)stickerController;
 
 @end
@@ -33,14 +34,16 @@
 
 @property (nonatomic, assign, readonly) BOOL isStickerViewShowed;
 
-@property (nonatomic, assign) UIColor *headerBackgroundColor;
+@property (nonatomic, strong) UIColor *headerBackgroundColor;
+
+//@property (nonatomic, strong) UIColor *stickersShopTintColor;
 
 
 - (void)reloadStickersView;
 
 - (BOOL)isStickerPackDownloaded:(NSString*)packMessage;
 
--(void)showPackInfoControllerWithStickerMessage:(NSString*)message;
+- (void)showPackInfoControllerWithStickerMessage:(NSString*)message;
 
 //Color settings. Default is light gray
 
