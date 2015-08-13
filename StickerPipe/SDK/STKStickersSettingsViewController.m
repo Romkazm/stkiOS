@@ -101,6 +101,7 @@
     STKPackDescriptionController *descriptionController = [[STKPackDescriptionController alloc] initWithNibName:@"STKPackDescriptionController" bundle:nil];
     descriptionController.stickerMessage = [stickerPack.stickers.firstObject stickerMessage];
     [self.navigationController pushViewController:descriptionController animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

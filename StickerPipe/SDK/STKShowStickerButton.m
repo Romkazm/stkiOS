@@ -6,10 +6,11 @@
 #import "STKShowStickerButton.h"
 #import "STKStickersCache.h"
 #import "STKStickersNotificationConstants.h"
+#import "STKBadgeView.h"
 
 @interface STKShowStickerButton()
 
-@property (nonatomic, strong) UIView *dotView;
+@property (nonatomic, strong) STKBadgeView *badgeView;
 
 @end
 
@@ -37,29 +38,28 @@
 
 - (void)storageUpdated:(NSNotification*)notification {
     if ([STKStickersCache hasNewStickerPacks]) {
-        self.dotView.hidden = NO;
+        self.badgeView.hidden = NO;
     } else {
-        self.dotView.hidden = YES;
+        self.badgeView.hidden = YES;
     }
 }
 
+
 - (void)initDotView {
-    
-    self.dotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 12.0, 12.0)];
-    self.dotView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
-    self.dotView.layer.cornerRadius = 6.0;
-    self.dotView.backgroundColor = [UIColor redColor];
-    [self addSubview:self.dotView];
+
+    self.badgeView = [[STKBadgeView alloc] initWithFrame:CGRectMake(0, 0, 10.0, 10.0)];
+    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+    [self addSubview:self.badgeView];
     if ([STKStickersCache hasNewStickerPacks]) {
-        self.dotView.hidden = NO;
+        self.badgeView.hidden = NO;
     } else {
-        self.dotView.hidden = YES;
+        self.badgeView.hidden = YES;
     }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.dotView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
 }
 
 

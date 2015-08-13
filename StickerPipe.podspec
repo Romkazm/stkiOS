@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name            = 'StickerPipe'
-  s.version         = '0.1.10'
+  s.version         = '0.1.11'
   s.platform        = :ios, '7.0'
   s.summary         = 'Easy stickers SDK for integration in messangers.'
   s.homepage        = "https://github.com/908Inc/stkiOS"
@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
   s.source_files    = "StickerPipe/SDK/*.{h,m}"
   s.framework       = 'CoreData'
   s.requires_arc    = true 
-  s.dependency       'SDWebImage', '~> 3.0'
+  s.dependency       'DFImageManager', '0.5.0'
   s.dependency       'AFNetworking', '~> 2.0'
   s.dependency        'GoogleAnalytics', '~> 3.0'
-  s.resources       = ['StickerPipe/SDK/Media.xcassets', 'StickerPipe/SDK/*.{xcdatamodeld}' ]
+  s.resources       = ['StickerPipe/SDK/*.xcassets', 'StickerPipe/SDK/*.{xcdatamodeld}', 'StickerPipe/SDK/*.xib' ]
 
 end
