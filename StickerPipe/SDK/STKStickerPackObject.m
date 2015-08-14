@@ -10,6 +10,7 @@
 #import "STKSticker.h"
 #import "STKStickerPack.h"
 #import "STKStickerObject.h"
+#import "STKUtility.h"
 
 @implementation STKStickerPackObject
 
@@ -19,6 +20,10 @@
     if (self) {
         self.artist = serverResponse[@"artist"];
         NSString *packName = serverResponse[@"pack_name"];
+        NSString *density = [STKUtility scaleString];
+        NSDictionary *banners = serverResponse[@"banners"];
+        self.bannerUrl = banners[density];
+        
         self.packName = packName;
         self.packTitle = serverResponse[@"title"];
         self.packID = serverResponse[@"pack_id"];
@@ -53,6 +58,7 @@
         self.disabled = stickerPack.disabled;
         self.order = stickerPack.order;
         self.isNew = stickerPack.isNew;
+        self.bannerUrl = stickerPack.bannerUrl;
         NSMutableArray *stickersArray = [NSMutableArray array];
         @autoreleasepool {
             for (STKSticker *sticker in stickerPack.stickers) {

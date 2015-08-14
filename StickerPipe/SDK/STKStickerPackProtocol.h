@@ -30,4 +30,6 @@
 
 @property (nonatomic, strong) NSNumber *isNew;
 
+@property (nonatomic, strong) NSString *bannerUrl;
+
 @end

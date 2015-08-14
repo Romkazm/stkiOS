@@ -27,6 +27,8 @@
 @property (nonatomic, strong) STKPurchaseEntity *purchaseEntity;
 @property (nonatomic, strong) SKProduct *product;
 @property (nonatomic, assign) BOOL needDisableDownloadButton;
+@property (nonatomic, weak) UIImageView *bannerImageView;
+@property (nonatomic, assign) CGRect cachedBannerImageViewFrame;
 
 @end
 
@@ -70,6 +72,20 @@
     }];
 }
 
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(BOOL)shouldAutorotate {
+    return YES;
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.cachedBannerImageViewFrame = self.bannerImageView.frame;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -92,6 +108,8 @@
         
         stickerHeader.artistLabel.text = self.stickerPack.artist;
         stickerHeader.packNameLabel.text = self.stickerPack.packTitle;
+        self.bannerImageView = stickerHeader.bannerImageView;
+        self.cachedBannerImageViewFrame = stickerHeader.bannerImageView.frame;
         
         if (self.stickerPack.price.integerValue == 0 && self.product) {
             [stickerHeader.priceLoadingIndicator stopAnimating];
@@ -118,6 +136,28 @@
         
         stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
         [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
+        if (self.stickerPack.bannerUrl) {
+            __weak typeof(self) weakSelf = self;
+            [stickerHeader removeConstraint:stickerHeader.topConstraint];
+            DFImageRequest *request = [DFImageRequest requestWithResource:[NSURL URLWithString:self.stickerPack.bannerUrl]
+                                                               targetSize:CGSizeZero
+                                                              contentMode:DFImageContentModeAspectFill
+                                                                  options:nil];
+            DFImageTask *task = [[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
+                if (image) {
+                    weakSelf.bannerImageView.image = image;
+                    [stickerHeader setNeedsLayout];
+                    [stickerHeader layoutIfNeeded];
+                    weakSelf.cachedBannerImageViewFrame = weakSelf.bannerImageView.frame;
+                }
+            }];
+            [task resume];
+
+        } else {
+            [stickerHeader.bannerImageView removeFromSuperview];
+            [stickerHeader setNeedsLayout];
+            [stickerHeader layoutIfNeeded];
+        }
         
         UIImage *defaultPlaceholder = [UIImage imageNamed:@"STKStickerPlaceholder"];
         defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultPlaceholderGrayColor]];
@@ -137,7 +177,13 @@
     stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
     [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
     [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
-
+    if (!self.stickerPack.bannerUrl) {
+        [stickerHeader.bannerImageView removeFromSuperview];
+        [stickerHeader setNeedsLayout];
+        [stickerHeader layoutIfNeeded];
+    } else {
+        [stickerHeader removeConstraint:stickerHeader.topConstraint];
+    }
     
     stickerHeader.bounds = CGRectMake(0, 0, collectionView.frame.size.width, 0);
     
@@ -154,6 +200,22 @@
 
 - (IBAction)closeAction:(UIButton*)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView.contentOffset.y < 0) {
+        CGFloat y = -scrollView.contentOffset.y;
+        self.bannerImageView.frame = CGRectMake(0, scrollView.contentOffset.y, self.cachedBannerImageViewFrame.size.width+y, self.cachedBannerImageViewFrame.size.height+y);
+        self.bannerImageView.center = CGPointMake(self.view.center.x, self.bannerImageView.center.y);
+    } else {
+        if (!CGRectEqualToRect(self.bannerImageView.frame, self.cachedBannerImageViewFrame)) {
+            self.bannerImageView.frame = self.cachedBannerImageViewFrame;
+        }
+    }
+    
 }
 
 #pragma mark - STKPackDescriptionHeaderDelegate

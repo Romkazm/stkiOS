@@ -173,6 +173,7 @@
 		6EB287D31B66731300E9A2A5 /* STKStickersEntityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKStickersEntityService.m; sourceTree = "<group>"; };
 		6EB3378E1B7CA6BA00B0C158 /* STKBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKBadgeView.h; sourceTree = "<group>"; };
 		6EB3378F1B7CA6BA00B0C158 /* STKBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKBadgeView.m; sourceTree = "<group>"; };
+		6EB337941B7CDAAC00B0C158 /* StickerModel 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "StickerModel 7.xcdatamodel"; sourceTree = "<group>"; };
 		6EDC5ECF1B41328000EBB034 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6EDE15BB1B6F95120024B6DC /* STKStickersNotificationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STKStickersNotificationConstants.h; sourceTree = "<group>"; };
 		6EDE15BC1B6F95120024B6DC /* STKStickersNotificationConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STKStickersNotificationConstants.m; sourceTree = "<group>"; };
@@ -978,6 +979,7 @@ StickerPipeTests.xctest */;
 		6E9012641B56941500A5FCAE /* StickerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6EB337941B7CDAAC00B0C158 /* StickerModel 7.xcdatamodel */,
 				6E19A0DE1B7B3216002DC75F /* StickerModel 6.xcdatamodel */,
 				6EA356321B72570300D540F7 /* StickerModel 5.xcdatamodel */,
 				6E310A441B6A5A1800FB75D0 /* StickerModel 4.xcdatamodel */,
@@ -985,7 +987,7 @@ StickerPipeTests.xctest */;
 				6E9012661B56941500A5FCAE /* StickerModel 3.xcdatamodel */,
 				6E9012671B56941500A5FCAE /* StickerModel.xcdatamodel */,
 			);
-			currentVersion = 6E19A0DE1B7B3216002DC75F /* StickerModel 6.xcdatamodel */;
+			currentVersion = 6EB337941B7CDAAC00B0C158 /* StickerModel 7.xcdatamodel */;
 			path = StickerModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

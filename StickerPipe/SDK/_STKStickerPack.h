@@ -5,6 +5,7 @@
 
 extern const struct STKStickerPackAttributes {
 	__unsafe_unretained NSString *artist;
+	__unsafe_unretained NSString *bannerUrl;
 	__unsafe_unretained NSString *disabled;
 	__unsafe_unretained NSString *isNew;
 	__unsafe_unretained NSString *order;
@@ -33,6 +34,10 @@ extern const struct STKStickerPackRelationships {
 @property (nonatomic, strong) NSString* artist;
 
 //- (BOOL)validateArtist:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* bannerUrl;
+
+//- (BOOL)validateBannerUrl:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* disabled;
 
@@ -111,6 +116,9 @@ extern const struct STKStickerPackRelationships {
 
 - (NSString*)primitiveArtist;
 - (void)setPrimitiveArtist:(NSString*)value;
+
+- (NSString*)primitiveBannerUrl;
+- (void)setPrimitiveBannerUrl:(NSString*)value;
 
 - (NSNumber*)primitiveDisabled;
 - (void)setPrimitiveDisabled:(NSNumber*)value;

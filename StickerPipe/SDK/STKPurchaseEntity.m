@@ -64,7 +64,7 @@
 - (void)savePurchaseRecord {
     NSError *error = nil;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.purchasedRecord];
-    BOOL success = [data writeToFile:[self purchaseRecordFilePath] options:NSDataWritingAtomic | NSDataWritingFileProtectionComplete error:&error];
+    [data writeToFile:[self purchaseRecordFilePath] options:NSDataWritingAtomic | NSDataWritingFileProtectionComplete error:&error];
 
 }
 

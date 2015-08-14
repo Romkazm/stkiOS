@@ -13,6 +13,9 @@ static NSString* const kRemoveTitle = @"Remove";
 
 @implementation STKPackDescriptionHeader
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+}
 
 - (IBAction)downloadButtonAction:(UIButton *)sender {
     

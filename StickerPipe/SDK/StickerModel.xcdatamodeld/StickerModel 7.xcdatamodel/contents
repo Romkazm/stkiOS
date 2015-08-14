@@ -8,6 +8,7 @@
         <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="STKSticker" representedClassName="STKSticker" syncable="YES">
+        <attribute name="stickerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="stickerMessage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stickerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="usedCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -15,6 +16,12 @@
     </entity>
     <entity name="STKStickerPack" representedClassName="STKStickerPack" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bannerUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isNew" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="packDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="packID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="packName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -22,7 +29,7 @@
     </entity>
     <elements>
         <element name="STKStatistic" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="STKSticker" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="STKStickerPack" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="STKSticker" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="STKStickerPack" positionX="0" positionY="0" width="128" height="210"/>
     </elements>
 </model>

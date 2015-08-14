@@ -27,5 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *priceLoadingIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 
 @end

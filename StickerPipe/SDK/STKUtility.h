@@ -20,6 +20,7 @@ extern NSString* const  STKUtilityAPIUrl;
 + (NSURL*)tabImageUrlForPackName:(NSString*) name;
 + (NSURL*)mainImageUrlForPackName:(NSString*) name;
 + (NSArray*)trimmedPackNameAndStickerNameWithMessage:(NSString*)message;
++ (NSString*)scaleString;
 
 //Colors
 + (UIColor*)defaultOrangeColor;

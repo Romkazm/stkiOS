@@ -5,6 +5,7 @@
 
 const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.artist = @"artist",
+	.bannerUrl = @"bannerUrl",
 	.disabled = @"disabled",
 	.isNew = @"isNew",
 	.order = @"order",
@@ -75,6 +76,8 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 }
 
 @dynamic artist;
+
+@dynamic bannerUrl;
 
 @dynamic disabled;
 

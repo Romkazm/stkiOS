@@ -75,7 +75,7 @@ NSString *const STKUtilityAPIUrl = @"https://api.stickerpipe.com/stk/";
     return url;
 }
 
-+ (NSString*) scaleString {
++ (NSString*)scaleString {
     
     NSInteger scale =  (NSInteger)[[UIScreen mainScreen]scale];
     

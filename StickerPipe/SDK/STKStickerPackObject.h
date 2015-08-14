@@ -34,6 +34,8 @@
 
 @property (nonatomic, strong) NSNumber *isNew;
 
+@property (nonatomic, strong) NSString *bannerUrl;
+
 - (instancetype)initWithServerResponse:(NSDictionary*)serverResponse;
 
 - (instancetype)initWithStickerPack:(STKStickerPack*)stickerPack;

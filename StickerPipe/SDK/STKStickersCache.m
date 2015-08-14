@@ -146,6 +146,7 @@
     stickerPack.price = stickerPackObject.price;
     stickerPack.packTitle = stickerPackObject.packTitle;
     stickerPack.packDescription = stickerPackObject.packDescription;
+    stickerPack.bannerUrl = stickerPackObject.bannerUrl;
 
     if (stickerPack.isNew.boolValue == YES) {
         if (stickerPackObject.isNew) {
@@ -187,6 +188,7 @@
     stickerPack.packDescription = stickerPackObject.packDescription;
     stickerPack.disabled = stickerPackObject.disabled;
     stickerPack.isNew = stickerPackObject.isNew;
+    stickerPack.bannerUrl = stickerPackObject.bannerUrl;
     return stickerPack;
 }
 
