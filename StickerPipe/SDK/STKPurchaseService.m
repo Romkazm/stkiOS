@@ -3,29 +3,30 @@
 // Copyright (c) 2015 908 Inc. All rights reserved.
 //
 
-#import "STKPurchaseEntity.h"
+#import "STKPurchaseService.h"
 #import <StoreKit/StoreKit.h>
 #import <DFImageManager/DFImageFetching.h>
 
-@interface STKPurchaseEntity() <SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface STKPurchaseService() <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 //TODO: FIX THIS HELL
 @property (nonatomic, copy) STKProductsBlock productsCompletionBlock;
 @property (nonatomic, copy) STKRestoreCompletionBlock restoreCompletionBlock;
 @property (nonatomic, copy) STKPurchaseCompletionBlock purchaseCompletionBlock;
 @property (nonatomic, strong) STKPurchaseFailureBlock purchaseFailureBlock;
+@property (nonatomic, strong) SKProductsRequest *productRequest;
 
 @property (nonatomic, strong) NSMutableDictionary *purchasedRecord;
 
 @end
 
-@implementation STKPurchaseEntity
+@implementation STKPurchaseService
 
 - (instancetype) shared {
-    static STKPurchaseEntity *entity = nil;
+    static STKPurchaseService *entity = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        entity = [[STKPurchaseEntity alloc] init];
+        entity = [[STKPurchaseService alloc] init];
     });
     
     return entity;
@@ -46,6 +47,7 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+    [self.productRequest cancel];
 }
 
 
@@ -106,10 +108,10 @@
 
 - (void)requestProductsWithIdentifiers:(NSSet *)identifiers completion:(STKProductsBlock)completion {
 
-    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:identifiers];
+    self.productRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:identifiers];
     self.productsCompletionBlock = completion;
-    productsRequest.delegate = self;
-    [productsRequest start];
+    self.productRequest.delegate = self;
+    [self.productRequest start];
 }
 
 

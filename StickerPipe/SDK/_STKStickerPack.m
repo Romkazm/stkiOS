@@ -14,6 +14,7 @@ const struct STKStickerPackAttributes STKStickerPackAttributes = {
 	.packName = @"packName",
 	.packTitle = @"packTitle",
 	.price = @"price",
+	.productID = @"productID",
 };
 
 const struct STKStickerPackRelationships STKStickerPackRelationships = {
@@ -184,6 +185,8 @@ const struct STKStickerPackRelationships STKStickerPackRelationships = {
 - (void)setPrimitivePriceValue:(float)value_ {
 	[self setPrimitivePrice:[NSNumber numberWithFloat:value_]];
 }
+
+@dynamic productID;
 
 @dynamic stickers;
 

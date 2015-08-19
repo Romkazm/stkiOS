@@ -16,15 +16,16 @@
 #import <StoreKit/StoreKit.h>
 #import "STKUtility.h"
 #import "UIImage+Tint.h"
-#import "STKPurchaseEntity.h"
+#import "STKPurchaseService.h"
+#import "STKOrientationNavigationController.h"
 
-@interface STKPackDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate>
+@interface STKPackDescriptionController()<UICollectionViewDataSource, UICollectionViewDelegate, STKPackDescriptionHeaderDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) STKStickersEntityService *service;
 @property (strong, nonatomic) STKStickerPackObject *stickerPack;
-@property (nonatomic, strong) STKPurchaseEntity *purchaseEntity;
+@property (nonatomic, strong) STKPurchaseService *purchaseEntity;
 @property (nonatomic, strong) SKProduct *product;
 @property (nonatomic, assign) BOOL needDisableDownloadButton;
 @property (nonatomic, weak) UIImageView *bannerImageView;
@@ -36,25 +37,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     [self.collectionView registerClass:[STKStickerViewCell class] forCellWithReuseIdentifier:@"STKStickerViewCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"STKPackDescriptionHeader" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"STKPackDescriptionHeader"];
     self.service = [STKStickersEntityService new];
 
-    self.purchaseEntity = [STKPurchaseEntity new];
-
-    __weak typeof(self) wself = self;
-
-    [self.purchaseEntity requestProductsWithIdentifiers:[NSSet setWithObject:@"com.stickerpipe.demo.stickerpacktest"] completion:^(NSArray *products, NSArray *invalidProductsIdentifier) {
-        wself.product = products.firstObject;
-        [wself.collectionView reloadData];
-    }];
+    self.purchaseEntity = [STKPurchaseService new];
 
     self.collectionView.hidden = YES;
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidesWhenStopped = YES;
     [self reloadStickerPack];
+}
+
+- (UIInterfaceOrientation)navigationControllerPreferredInterfaceOrientationForPresentation:(UINavigationController *)navigationController {
+    return UIInterfaceOrientationPortrait;
+}
+
+- (NSUInteger)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
+    
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void) reloadStickerPack {
@@ -63,6 +67,14 @@
 
     [self.service getPackWithMessage:self.stickerMessage completion:^(STKStickerPackObject *stickerPack, BOOL isDownloaded) {
         if (stickerPack) {
+            if (self.stickerPack.productID) {
+                [self.purchaseEntity requestProductsWithIdentifiers:[NSSet setWithObject:self.stickerPack.productID] completion:^(NSArray *products, NSArray *invalidProductsIdentifier) {
+                    weakSelf.product = products.firstObject;
+                    if (weakSelf.stickerPack) {
+                        [weakSelf.collectionView reloadData];
+                    }
+                }];
+            }
             weakSelf.stickerPack = stickerPack;
             weakSelf.collectionView.hidden = NO;
             [weakSelf.activityIndicator stopAnimating];
@@ -108,14 +120,19 @@
         
         stickerHeader.artistLabel.text = self.stickerPack.artist;
         stickerHeader.packNameLabel.text = self.stickerPack.packTitle;
+        [stickerHeader.packNameLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width / 2.0];
         self.bannerImageView = stickerHeader.bannerImageView;
         self.cachedBannerImageViewFrame = stickerHeader.bannerImageView.frame;
         
+        //TODO:Refactoring
         if (self.stickerPack.price.integerValue == 0 && self.product) {
             [stickerHeader.priceLoadingIndicator stopAnimating];
             stickerHeader.priceLabel.text = [NSString stringWithFormat:@"%@$", self.product.price];
         } else {
-            [stickerHeader.priceLoadingIndicator startAnimating];
+            if (self.stickerPack.productID) {
+                [stickerHeader.priceLoadingIndicator startAnimating];
+
+            }
             stickerHeader.priceLabel.text = nil;
         }
         [stickerHeader.statusButton setTitleColor:[UIColor colorWithRed:1 green:0.34 blue:0.13 alpha:1] forState:UIControlStateNormal];
@@ -130,11 +147,10 @@
         }
         stickerHeader.statusButton.enabled = !self.needDisableDownloadButton;
         
-        [stickerHeader.statusButton invalidateIntrinsicContentSize];
-        
         stickerHeader.delegate = self;
         
         stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
+        [stickerHeader.descriptionLabel invalidateIntrinsicContentSize];
         [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
         if (self.stickerPack.bannerUrl) {
             __weak typeof(self) weakSelf = self;
@@ -145,15 +161,17 @@
                                                                   options:nil];
             DFImageTask *task = [[DFImageManager sharedManager] imageTaskForRequest:request completion:^(UIImage *image, NSDictionary *info) {
                 if (image) {
+                    stickerHeader.bannerImageView.image = image;
                     weakSelf.bannerImageView.image = image;
                     [stickerHeader setNeedsLayout];
                     [stickerHeader layoutIfNeeded];
+                    [stickerHeader setNeedsUpdateConstraints];
                     weakSelf.cachedBannerImageViewFrame = weakSelf.bannerImageView.frame;
                 }
             }];
             [task resume];
 
-        } else {
+        } else if (self.stickerPack) {
             [stickerHeader.bannerImageView removeFromSuperview];
             [stickerHeader setNeedsLayout];
             [stickerHeader layoutIfNeeded];
@@ -163,6 +181,9 @@
         defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultPlaceholderGrayColor]];
         stickerHeader.packImageView.image = defaultPlaceholder;
         [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
+        [stickerHeader setNeedsLayout];
+        [stickerHeader layoutIfNeeded];
+        [stickerHeader setNeedsUpdateConstraints];
         
         return stickerHeader;
     }
@@ -174,21 +195,28 @@
     STKPackDescriptionHeader *stickerHeader = [[NSBundle mainBundle] loadNibNamed:@"STKPackDescriptionHeader" owner:self options:nil].firstObject;
     stickerHeader.artistLabel.text = self.stickerPack.artist;
     stickerHeader.packNameLabel.text = self.stickerPack.packTitle;
+    //TODO:Refactoring
+    [stickerHeader.packNameLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width / 2.0];
     stickerHeader.descriptionLabel.text = self.stickerPack.packDescription;
     [stickerHeader.descriptionLabel setPreferredMaxLayoutWidth:collectionView.frame.size.width];
+    
+    UIImage *defaultPlaceholder = [UIImage imageNamed:@"STKStickerPlaceholder"];
+    defaultPlaceholder = [defaultPlaceholder imageWithImageTintColor:[STKUtility defaultPlaceholderGrayColor]];
+    stickerHeader.packImageView.image = defaultPlaceholder;
     [stickerHeader.packImageView df_setImageWithResource:[STKUtility mainImageUrlForPackName:self.stickerPack.packName]];
-    if (!self.stickerPack.bannerUrl) {
+    if (self.stickerPack.bannerUrl) {
+        [stickerHeader removeConstraint:stickerHeader.topConstraint];
+    } else {
         [stickerHeader.bannerImageView removeFromSuperview];
         [stickerHeader setNeedsLayout];
         [stickerHeader layoutIfNeeded];
-    } else {
-        [stickerHeader removeConstraint:stickerHeader.topConstraint];
     }
     
     stickerHeader.bounds = CGRectMake(0, 0, collectionView.frame.size.width, 0);
     
     [stickerHeader setNeedsLayout];
     [stickerHeader layoutIfNeeded];
+    [stickerHeader setNeedsUpdateConstraints];
     
     CGSize size = [stickerHeader systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     
@@ -222,14 +250,14 @@
 
 - (void)packDescriptionHeader:(STKPackDescriptionHeader *)header didTapDownloadButton:(UIButton*)button {
     //TODO:FIX ME
-    if (self.product && self.stickerPack.disabled.boolValue == YES && ![self.purchaseEntity isPurchasedProductWithIdentifier:@"com.stickerpipe.demo.stickerpacktest"]) {
+    if (self.stickerPack.productID && self.stickerPack.disabled.boolValue == YES && ![self.purchaseEntity isPurchasedProductWithIdentifier:self.stickerPack.productID]) {
 
         self.needDisableDownloadButton = YES;
         [self.collectionView reloadData];
 
         __weak typeof(self) wself = self;
 
-        [self.purchaseEntity purchaseProductWithIdentifier:@"com.stickerpipe.demo.stickerpacktest" completion:^(SKPaymentTransaction *transaction) {
+        [self.purchaseEntity purchaseProductWithIdentifier:self.stickerPack.productID completion:^(SKPaymentTransaction *transaction) {
             //TODO: Buy product on server side
             [wself.service togglePackDisabling:self.stickerPack];
             wself.needDisableDownloadButton = NO;

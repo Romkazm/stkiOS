@@ -25,19 +25,19 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    CGFloat lineWidth = 1.0;
-    CGRect rectInsets = CGRectInset(self.bounds,lineWidth,lineWidth);
-    UIBezierPath *path =  [UIBezierPath bezierPathWithRoundedRect:rectInsets cornerRadius:CGRectGetHeight(rect) / 2.0];
+    CGFloat lineWidth = 1.5;
+    CGRect rectInsets = CGRectInset(rect,lineWidth,lineWidth);
+    UIBezierPath *path =  [UIBezierPath bezierPathWithRoundedRect:rectInsets cornerRadius:CGRectGetHeight(rectInsets) / 2.0];
     [[UIColor redColor] setFill];
     [path fill];
     path.lineWidth = lineWidth;
     [[UIColor whiteColor] setStroke];
     [path stroke];
     
-    CGFloat whiteDotWight = rect.size.width / 3.0;
-    CGFloat whiteDotHeight = rect.size.height / 3.0;
-    CGFloat whiteDotY = CGRectGetMidY(rect) - (whiteDotHeight / 2.0);
-    CGFloat whiteDotX = CGRectGetMidX(rect) - (whiteDotWight / 2.0);
+    CGFloat whiteDotWight = 3.0;
+    CGFloat whiteDotHeight = 3.0;
+    CGFloat whiteDotY = CGRectGetMidY(rectInsets) - (whiteDotHeight / 2.0);
+    CGFloat whiteDotX = CGRectGetMidX(rectInsets) - (whiteDotWight / 2.0);
     
     UIBezierPath *whiteDot = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(whiteDotX, whiteDotY, whiteDotWight, whiteDotHeight) cornerRadius:whiteDotHeight / 2.0];
     [[UIColor whiteColor] setFill];
@@ -45,6 +45,7 @@
     [path appendPath:whiteDot];
     
 }
+
 
 
 @end

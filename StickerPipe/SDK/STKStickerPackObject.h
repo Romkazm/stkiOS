@@ -36,6 +36,8 @@
 
 @property (nonatomic, strong) NSString *bannerUrl;
 
+@property (nonatomic, strong) NSString *productID;
+
 - (instancetype)initWithServerResponse:(NSDictionary*)serverResponse;
 
 - (instancetype)initWithStickerPack:(STKStickerPack*)stickerPack;

@@ -48,5 +48,11 @@
 }
 
 
+#pragma mark - Common
+
+- (STKStickerPackObject *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.stickerPacksArray[indexPath.item];
+}
+
 
 @end

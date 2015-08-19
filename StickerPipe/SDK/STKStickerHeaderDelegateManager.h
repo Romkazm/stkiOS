@@ -19,5 +19,6 @@
 
 
 - (void)setStickerPacks:(NSArray *)stickerPacks;
+- (STKStickerPackObject*)itemAtIndexPath:(NSIndexPath*)indexPath;
 
 @end

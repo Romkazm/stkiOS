@@ -8,6 +8,8 @@
 #import "STKStickersNotificationConstants.h"
 #import "STKBadgeView.h"
 
+static const CGFloat kBadgeViewPadding = 4.0;
+
 @interface STKShowStickerButton()
 
 @property (nonatomic, strong) STKBadgeView *badgeView;
@@ -47,8 +49,10 @@
 
 - (void)initDotView {
 
-    self.badgeView = [[STKBadgeView alloc] initWithFrame:CGRectMake(0, 0, 12.0, 12.0)];
-    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+    self.imageView.contentMode = UIViewContentModeCenter;
+    
+    self.badgeView = [[STKBadgeView alloc] initWithFrame:CGRectMake(0, 0, 14.0, 14.0)];
+    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame) - kBadgeViewPadding, CGRectGetMinY(self.imageView.frame) + kBadgeViewPadding);
     [self addSubview:self.badgeView];
     if ([STKStickersCache hasNewStickerPacks]) {
         self.badgeView.hidden = NO;
@@ -59,7 +63,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+    self.badgeView.center = CGPointMake(CGRectGetMaxX(self.imageView.frame) - 2.0, CGRectGetMinY(self.imageView.frame) + kBadgeViewPadding);;
 }
 
 

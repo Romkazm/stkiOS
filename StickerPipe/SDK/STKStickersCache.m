@@ -98,20 +98,23 @@
 #pragma mark - Update
 
 - (void)updateStickerPack:(STKStickerPackObject *)stickerPackObject {
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@",STKStickerPackAttributes.packID, stickerPackObject.packID];
-    NSArray *packs = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:self.backgroundContext];
-    STKStickerPack *stickerPack = packs.firstObject;
-    if (stickerPack) {
-        [self fillStickerPack:stickerPack withObject:stickerPackObject];
-
-        NSError *error = nil;
-        [self.backgroundContext save:&error];
-        if (error) {
-            STKLog(@"Saving context error: %@", error.localizedDescription);
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.backgroundContext performBlock:^{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@",STKStickerPackAttributes.packID, stickerPackObject.packID];
+        NSArray *packs = [STKStickerPack stk_findWithPredicate:predicate sortDescriptors:nil fetchLimit:1 context:weakSelf.backgroundContext];
+        STKStickerPack *stickerPack = packs.firstObject;
+        if (stickerPack) {
+            [weakSelf fillStickerPack:stickerPack withObject:stickerPackObject];
+            
+            NSError *error = nil;
+            [weakSelf.backgroundContext save:&error];
+            if (error) {
+                STKLog(@"Saving context error: %@", error.localizedDescription);
+            }
         }
-    }
-
+    }];
 }
 
 #pragma mark - Delete
@@ -147,6 +150,7 @@
     stickerPack.packTitle = stickerPackObject.packTitle;
     stickerPack.packDescription = stickerPackObject.packDescription;
     stickerPack.bannerUrl = stickerPackObject.bannerUrl;
+    stickerPack.productID = stickerPackObject.productID;
 
     if (stickerPack.isNew.boolValue == YES) {
         if (stickerPackObject.isNew) {
@@ -189,6 +193,7 @@
     stickerPack.disabled = stickerPackObject.disabled;
     stickerPack.isNew = stickerPackObject.isNew;
     stickerPack.bannerUrl = stickerPackObject.bannerUrl;
+    stickerPack.productID = stickerPackObject.productID;
     return stickerPack;
 }
 

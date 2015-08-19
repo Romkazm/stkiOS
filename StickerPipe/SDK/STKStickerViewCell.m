@@ -27,7 +27,7 @@
     if (self) {
         self.stickerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 80.0, 80.0)];
         self.stickerImageView.center = CGPointMake(self.contentView.bounds.size.width/2,self.contentView.bounds.size.height/2);
-        self.stickerImageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.stickerImageView.contentMode = UIViewContentModeRedraw;
         [self addSubview:self.stickerImageView];
     }
     return self;
@@ -52,7 +52,8 @@
     
     UIImage *coloredPlaceholder = [resultPlaceholder imageWithImageTintColor:colorForPlaceholder];
     
-    NSURL *stickerUrl = [STKUtility imageUrlForStickerPanelWithMessage:stickerMessage];
+//    NSURL *stickerUrl = [STKUtility imageUrlForStickerPanelWithMessage:stickerMessage];
+    NSURL *stickerUrl = [STKUtility imageUrlForStikerMessage:stickerMessage];
     
     DFImageRequestOptions *options = [DFImageRequestOptions new];
     options.priority = DFImageRequestPriorityNormal;

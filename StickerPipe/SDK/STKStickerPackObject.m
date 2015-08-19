@@ -29,6 +29,7 @@
         self.packID = serverResponse[@"pack_id"];
         self.price = serverResponse[@"price"];
         self.packDescription = serverResponse[@"description"];
+        self.productID = serverResponse[@"product_id"];
         NSMutableArray *stickersArray = [NSMutableArray array];
         NSArray *stickers = serverResponse[@"stickers"];
             for (NSDictionary *sticker in stickers) {
@@ -59,6 +60,7 @@
         self.order = stickerPack.order;
         self.isNew = stickerPack.isNew;
         self.bannerUrl = stickerPack.bannerUrl;
+        self.productID = stickerPack.productID;
         NSMutableArray *stickersArray = [NSMutableArray array];
         @autoreleasepool {
             for (STKSticker *sticker in stickerPack.stickers) {

@@ -19,14 +19,15 @@
 #import "STKStickersSettingsViewController.h"
 #import "STKPackDescriptionController.h"
 #import "STKStickerPackObject.h"
+#import "STKOrientationNavigationController.h"
 
 //SIZES
 static const CGFloat kStickerHeaderItemHeight = 44.0;
 static const CGFloat kStickerHeaderItemWidth = 44.0;
 
-static const CGFloat stickerSeparatorHeight = 1.0;
-static const CGFloat stickersSectionPaddingTopBottom = 12.0;
-static const CGFloat stickersSectionPaddingRightLeft = 16.0;
+static const CGFloat kStickerSeparatorHeight = 1.0;
+static const CGFloat kStickersSectionPaddingTopBottom = 12.0;
+static const CGFloat kStickersSectionPaddingRightLeft = 16.0;
 
 @interface STKStickerController() <STKPackDescriptionControllerDelegate>
 
@@ -85,8 +86,8 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     self.stickersFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.stickersFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.stickersFlowLayout.itemSize = CGSizeMake(80.0, 80.0);
-    self.stickersFlowLayout.sectionInset = UIEdgeInsetsMake(stickersSectionPaddingTopBottom, stickersSectionPaddingRightLeft, stickersSectionPaddingTopBottom, stickersSectionPaddingRightLeft);
-    self.stickersFlowLayout.footerReferenceSize = CGSizeMake(0, stickerSeparatorHeight);
+    self.stickersFlowLayout.sectionInset = UIEdgeInsetsMake(kStickersSectionPaddingTopBottom, kStickersSectionPaddingRightLeft, kStickersSectionPaddingTopBottom, kStickersSectionPaddingRightLeft);
+    self.stickersFlowLayout.footerReferenceSize = CGSizeMake(0, kStickerSeparatorHeight);
     
     self.stickersDelegateManager = [STKStickerDelegateManager new];
     
@@ -149,10 +150,12 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
         if (stickerPack.isNew.boolValue) {
             stickerPack.isNew = @NO;
             [weakSelf.stickersService updateStickerPackInCache:stickerPack];
-            [weakSelf reloadStickersHeader];
+            [weakSelf reloadHeaderItemAtIndexPath:indexPath];
         }
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:0 inSection:indexPath.item];
-        [weakSelf.stickersCollectionView scrollToItemAtIndexPath:newIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+        CGRect layoutRect = [weakSelf.stickersCollectionView layoutAttributesForItemAtIndexPath:newIndexPath].frame;
+        
+        [weakSelf.stickersCollectionView setContentOffset:CGPointMake(weakSelf.stickersCollectionView.contentOffset.x, layoutRect.origin.y  - kStickersSectionPaddingTopBottom) animated:YES];
         weakSelf.stickersDelegateManager.currentDisplayedSection = indexPath.item;
 
     }];
@@ -226,7 +229,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     
     STKStickersSettingsViewController *vc = [[STKStickersSettingsViewController alloc] initWithNibName:@"STKStickersSettingsViewController" bundle:nil];
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    STKOrientationNavigationController *navigationController = [[STKOrientationNavigationController alloc] initWithRootViewController:vc];
     
     UIViewController *presenter = [self.delegate stickerControllerViewControllerForPresentingModalView];
     
@@ -240,12 +243,24 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     [self reloadStickers];
 }
 
+- (void)reloadHeaderItemAtIndexPath:(NSIndexPath*)indexPath {
+    __weak typeof(self) wself = self;
+
+    [self.stickersService getStickerPacksWithType:nil completion:^(NSArray *stickerPacks) {
+        [wself.stickersHeaderDelegateManager setStickerPacks:stickerPacks];
+        [wself.stickersHeaderCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+               [wself.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 - (void)reloadStickersHeader {
     __weak  typeof(self) wself = self;
 
     [self.stickersService getStickerPacksWithType:nil completion:^(NSArray *stickerPacks) {
         [wself.stickersHeaderDelegateManager setStickerPacks:stickerPacks];
-        [wself.stickersHeaderCollectionView reloadData];
+        [wself.stickersHeaderCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:0]]];
         NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForItem:wself.stickersDelegateManager.currentDisplayedSection inSection:0];
         [wself.stickersHeaderCollectionView selectItemAtIndexPath:selectedIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     } failure:nil];
@@ -267,10 +282,20 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
     }];
 }
 
+
+#pragma mark - Selection
+
+
 - (void)setPackSelectedAtIndex:(NSInteger)index {
     if ([self.stickersHeaderCollectionView numberOfItemsInSection:0] - 1 >= index) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        
+
+        STKStickerPackObject *stickerPack = [self.stickersHeaderDelegateManager itemAtIndexPath:indexPath];
+        if (stickerPack.isNew.boolValue) {
+            stickerPack.isNew = @NO;
+            [self.stickersService updateStickerPackInCache:stickerPack];
+            [self reloadHeaderItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+        }
         [self.stickersHeaderCollectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     }
 
@@ -278,7 +303,7 @@ static const CGFloat stickersSectionPaddingRightLeft = 16.0;
 
 #pragma mark - STKPackDescriptionControllerDelegate
 
-- (void) packDescriptionControllerDidChangePakcStatus:(STKPackDescriptionController*)controller {
+- (void)packDescriptionControllerDidChangePakcStatus:(STKPackDescriptionController*)controller {
     if ([self.delegate respondsToSelector:@selector(stickerControllerDidChangePackStatus:)]) {
         [self.delegate stickerControllerDidChangePackStatus:self];
     }

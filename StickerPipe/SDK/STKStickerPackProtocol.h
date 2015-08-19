@@ -32,4 +32,6 @@
 
 @property (nonatomic, strong) NSString *bannerUrl;
 
+@property (nonatomic, strong) NSString *productID;
+
 @end

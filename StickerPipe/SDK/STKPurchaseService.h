@@ -12,7 +12,7 @@ typedef void (^STKPurchaseCompletionBlock)(SKPaymentTransaction *transaction);
 typedef void (^STKRestoreCompletionBlock)(SKPaymentTransaction *transaction);
 typedef void (^STKPurchaseFailureBlock)(NSError *error);
 
-@interface STKPurchaseEntity : NSObject
+@interface STKPurchaseService : NSObject
 
 
 - (BOOL)isPurchasedProductWithIdentifier:(NSString *)identifier;

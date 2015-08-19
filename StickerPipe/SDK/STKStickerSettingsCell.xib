@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STKStickerSettingsCell"/>
@@ -21,9 +22,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PackTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cs6-kP-Jei">
-                        <rect key="frame" x="76" y="16" width="70" height="20"/>
+                        <rect key="frame" x="76" y="16" width="224" height="20"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PackDescription" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hib-Xu-sHi">
@@ -37,6 +38,7 @@
                     <constraint firstItem="Hib-Xu-sHi" firstAttribute="top" secondItem="Cs6-kP-Jei" secondAttribute="bottom" constant="8" id="5fK-Q8-k48"/>
                     <constraint firstItem="Cs6-kP-Jei" firstAttribute="top" secondItem="XJM-2A-jnd" secondAttribute="top" constant="8" id="Iu8-n6-5AM"/>
                     <constraint firstItem="Hib-Xu-sHi" firstAttribute="leading" secondItem="XJM-2A-jnd" secondAttribute="trailing" constant="8" id="Orm-wL-GuH"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Cs6-kP-Jei" secondAttribute="trailing" constant="12" id="ZMR-Gv-QBj"/>
                     <constraint firstItem="Cs6-kP-Jei" firstAttribute="leading" secondItem="XJM-2A-jnd" secondAttribute="trailing" constant="8" id="ecL-D7-U9x"/>
                     <constraint firstItem="XJM-2A-jnd" firstAttribute="leading" secondItem="KIK-Ct-fAs" secondAttribute="leading" constant="8" id="iiZ-oR-0zE"/>
                     <constraint firstAttribute="centerY" secondItem="XJM-2A-jnd" secondAttribute="centerY" id="wEU-4x-XSr"/>
