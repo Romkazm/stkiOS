@@ -30,6 +30,8 @@
 @property (nonatomic, assign) BOOL needDisableDownloadButton;
 @property (nonatomic, weak) UIImageView *bannerImageView;
 @property (nonatomic, assign) CGRect cachedBannerImageViewFrame;
+@property (strong, nonatomic) STKStickerViewCell *selectedStickerCell;
+@property (strong, nonatomic) NSTimer *stickerTimer;
 
 @end
 
@@ -96,6 +98,17 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.cachedBannerImageViewFrame = self.bannerImageView.frame;
+}
+
+- (void) closeSelectedSticker {
+    
+    [[self.collectionView viewWithTag:77] removeFromSuperview];
+    [UIView animateWithDuration:0.2f animations:^{
+        self.selectedStickerCell.transform = CGAffineTransformScale(self.selectedStickerCell.transform, 0.8f, 0.8f);
+    } completion:^(BOOL finished) {
+        self.selectedStickerCell = nil;
+    }];
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -224,6 +237,16 @@
     
 }
 
+- (void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (cell == self.selectedStickerCell) {
+    
+        [self closeSelectedSticker];
+    
+    }
+
+}
+
 #pragma mark - Actions
 
 - (IBAction)closeAction:(UIButton*)sender {
@@ -276,4 +299,97 @@
 
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    STKStickerViewCell *stickerCell = (STKStickerViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    
+    if (!self.selectedStickerCell) {
+        
+        self.selectedStickerCell = stickerCell;
+        
+        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1) inSection:0];
+        CGFloat firstCellTop = [self.collectionView layoutAttributesForItemAtIndexPath:firstIndexPath].frame.origin.y;
+        CGFloat lastCellBottom = CGRectGetMaxY([self.collectionView layoutAttributesForItemAtIndexPath:lastIndexPath].frame);
+        CGRect whiteViewFrame = CGRectMake(0, firstCellTop, self.collectionView.bounds.size.width, lastCellBottom - firstCellTop);
+        
+        UIView *whiteView = [[UIView alloc] initWithFrame:whiteViewFrame];
+        whiteView.tag = 77;
+        [whiteView setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
+        whiteView.userInteractionEnabled = NO;
+        [self.collectionView addSubview:whiteView];
+        [self.collectionView bringSubviewToFront:stickerCell];
+        
+        [UIView animateWithDuration:0.2f animations:^{
+            stickerCell.transform = CGAffineTransformScale(stickerCell.transform, 1.25f, 1.25f);
+        }];
+    
+        self.stickerTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(closeSelectedSticker) userInfo:nil repeats:NO];
+        
+    } else if (self.selectedStickerCell == stickerCell) {
+        
+        [self closeSelectedSticker];
+        
+        [self.stickerTimer invalidate];
+        self.stickerTimer = nil;
+        
+    } else {
+        
+        [collectionView bringSubviewToFront:[self.collectionView viewWithTag:77]];
+        [collectionView bringSubviewToFront:stickerCell];
+        
+        [UIView animateWithDuration:0.2f animations:^{
+            self.selectedStickerCell.transform = CGAffineTransformScale(self.selectedStickerCell.transform, 0.8f, 0.8f);
+            stickerCell.transform = CGAffineTransformScale(stickerCell.transform, 1.25f, 1.25f);
+        } completion:^(BOOL finished) {
+            self.selectedStickerCell = stickerCell;
+        }];
+        
+        [self.stickerTimer invalidate];
+        self.stickerTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(closeSelectedSticker) userInfo:nil repeats:NO];
+        
+    }
+    
+
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
