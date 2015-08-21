@@ -30,8 +30,9 @@
 @property (nonatomic, assign) BOOL needDisableDownloadButton;
 @property (nonatomic, weak) UIImageView *bannerImageView;
 @property (nonatomic, assign) CGRect cachedBannerImageViewFrame;
-@property (strong, nonatomic) STKStickerViewCell *selectedStickerCell;
+@property (weak, nonatomic) STKStickerViewCell *selectedStickerCell;
 @property (strong, nonatomic) NSTimer *stickerTimer;
+@property (strong, nonatomic) UIView *whiteView;
 
 @end
 
@@ -101,14 +102,89 @@
 }
 
 - (void) closeSelectedSticker {
+
+    [self selectNewCell:nil oldCell:self.selectedStickerCell];
     
-    [[self.collectionView viewWithTag:77] removeFromSuperview];
-    [UIView animateWithDuration:0.2f animations:^{
-        self.selectedStickerCell.transform = CGAffineTransformScale(self.selectedStickerCell.transform, 0.8f, 0.8f);
-    } completion:^(BOOL finished) {
-        self.selectedStickerCell = nil;
-    }];
+}
+
+- (CGRect) frameWithStickerCells {
+
+    NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1) inSection:0];
+    CGFloat firstCellTop = [self.collectionView layoutAttributesForItemAtIndexPath:firstIndexPath].frame.origin.y;
+    CGFloat lastCellBottom = CGRectGetMaxY([self.collectionView layoutAttributesForItemAtIndexPath:lastIndexPath].frame);
+    CGRect frame = CGRectMake(0, firstCellTop, self.collectionView.bounds.size.width, lastCellBottom - firstCellTop);
     
+    return frame;
+
+}
+
+- (void) initWhiteView {
+    
+    self.whiteView = [[UIView alloc] initWithFrame:[self frameWithStickerCells]];
+    [self.whiteView setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
+    self.whiteView.userInteractionEnabled = NO;
+    
+}
+
+- (void) selectNewCell:(STKStickerViewCell *)newCell oldCell:(STKStickerViewCell *)oldCell {
+
+    if (!oldCell) {
+    
+        [self initWhiteView];
+    
+    }
+    
+    [self.collectionView addSubview:self.whiteView];
+    
+    if (newCell) {
+    
+        [self.collectionView bringSubviewToFront:newCell];
+    
+    } else {
+    
+        [self.whiteView removeFromSuperview];
+        
+    }
+    
+    if (oldCell) {
+    
+        [self zoomSticker:oldCell WithFactor:0.8f];
+    
+    }
+    if (newCell) {
+    
+        [self zoomSticker:newCell WithFactor:1.25f];
+    
+    }
+    
+    self.selectedStickerCell = newCell;
+
+    [self.stickerTimer invalidate];
+    if (newCell) {
+    
+        self.stickerTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(closeSelectedSticker) userInfo:nil repeats:NO];
+    
+    }
+
+}
+
+- (void) zoomSticker:(STKStickerViewCell *)stickerCell WithFactor:(CGFloat)factor {
+    
+    for (UIView *subview in [stickerCell subviews]) {
+    
+        if ([subview isKindOfClass:[UIImageView class]]) {
+        
+            [UIView animateWithDuration:0.2 animations:^{
+                subview.transform = CGAffineTransformScale(subview.transform, factor, factor);
+            }];
+            
+            return;
+        
+        }
+    
+    }
+
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -303,56 +379,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    STKStickerViewCell *stickerCell = (STKStickerViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    __weak STKStickerViewCell *stickerCell = (STKStickerViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+
+    if (stickerCell == self.selectedStickerCell) {
     
+        [self selectNewCell:nil oldCell:stickerCell];
     
-    if (!self.selectedStickerCell) {
-        
-        self.selectedStickerCell = stickerCell;
-        
-        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:([self.collectionView numberOfItemsInSection:0] - 1) inSection:0];
-        CGFloat firstCellTop = [self.collectionView layoutAttributesForItemAtIndexPath:firstIndexPath].frame.origin.y;
-        CGFloat lastCellBottom = CGRectGetMaxY([self.collectionView layoutAttributesForItemAtIndexPath:lastIndexPath].frame);
-        CGRect whiteViewFrame = CGRectMake(0, firstCellTop, self.collectionView.bounds.size.width, lastCellBottom - firstCellTop);
-        
-        UIView *whiteView = [[UIView alloc] initWithFrame:whiteViewFrame];
-        whiteView.tag = 77;
-        [whiteView setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
-        whiteView.userInteractionEnabled = NO;
-        [self.collectionView addSubview:whiteView];
-        [self.collectionView bringSubviewToFront:stickerCell];
-        
-        [UIView animateWithDuration:0.2f animations:^{
-            stickerCell.transform = CGAffineTransformScale(stickerCell.transform, 1.25f, 1.25f);
-        }];
-    
-        self.stickerTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(closeSelectedSticker) userInfo:nil repeats:NO];
-        
-    } else if (self.selectedStickerCell == stickerCell) {
-        
-        [self closeSelectedSticker];
-        
-        [self.stickerTimer invalidate];
-        self.stickerTimer = nil;
-        
     } else {
-        
-        [collectionView bringSubviewToFront:[self.collectionView viewWithTag:77]];
-        [collectionView bringSubviewToFront:stickerCell];
-        
-        [UIView animateWithDuration:0.2f animations:^{
-            self.selectedStickerCell.transform = CGAffineTransformScale(self.selectedStickerCell.transform, 0.8f, 0.8f);
-            stickerCell.transform = CGAffineTransformScale(stickerCell.transform, 1.25f, 1.25f);
-        } completion:^(BOOL finished) {
-            self.selectedStickerCell = stickerCell;
-        }];
-        
-        [self.stickerTimer invalidate];
-        self.stickerTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(closeSelectedSticker) userInfo:nil repeats:NO];
-        
-    }
     
+        [self selectNewCell:stickerCell oldCell:self.selectedStickerCell];
+    
+    }
 
 }
 
